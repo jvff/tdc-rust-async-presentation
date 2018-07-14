@@ -4,3 +4,6 @@ version = "0.1.0"
 authors = ["Janito Vaqueiro Ferreira Filho <janito.vff@gmail.com>"]
 
 [dependencies]
+
+[build-dependencies]
+comrak = "0.2"
