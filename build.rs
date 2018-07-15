@@ -1,9 +1,9 @@
-extern crate comrak;
+extern crate presentrs;
 
 use std::fs;
 use std::path::PathBuf;
 
-use comrak::{markdown_to_html, ComrakOptions};
+use presentrs::Notes;
 
 fn main() {
     let static_dir = PathBuf::from("static");
@@ -18,14 +18,8 @@ fn main() {
         ));
     }
 
-    let notes_input = fs::read_to_string("notes.md")
-        .expect("Failed to read notes.md input file");
-    let notes_output =
-        markdown_to_html(&notes_input, &ComrakOptions::default());
-    let notes_output_file = static_dir.join("notes.html");
-
-    fs::write(&notes_output_file, &notes_output).expect(&format!(
-        "Failed to write {} output file",
-        notes_output_file.canonicalize().unwrap_or(notes_output_file).display(),
-    ));
+    Notes::from_markdown("notes.md")
+        .expect("Failed to read notes")
+        .generate_html()
+        .expect("Failed to generate notes file");
 }

@@ -3,7 +3,23 @@ name = "tdc-async-rust"
 version = "0.1.0"
 authors = ["Janito Vaqueiro Ferreira Filho <janito.vff@gmail.com>"]
 
+[[bin]]
+name = "client"
+path = "src/client.rs"
+required-features = ["client"]
+
+[[bin]]
+name = "server"
+path = "src/server.rs"
+required-features = ["server"]
+
+[features]
+client = ["presentrs/client", "yew"]
+server = ["presentrs/server"]
+
 [dependencies]
+presentrs = { path = "/tmp/presentrs" }
+yew = { git = "https://github.com/DenisKolodin/yew", optional = true }
 
 [build-dependencies]
-comrak = "0.2"
+presentrs = { path = "/tmp/presentrs", features = ["server"] }
