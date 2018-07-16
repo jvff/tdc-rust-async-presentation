@@ -6,7 +6,7 @@ use std::path::PathBuf;
 use presentrs::Notes;
 
 fn main() {
-    let static_dir = PathBuf::from("static");
+    let static_dir = PathBuf::from("../static");
 
     if !static_dir.is_dir() {
         fs::create_dir(&static_dir).expect(&format!(
@@ -18,8 +18,10 @@ fn main() {
         ));
     }
 
-    Notes::from_markdown("notes.md")
+    Notes::from_markdown("../notes.md")
         .expect("Failed to read notes")
-        .generate_html()
+        .animate_steps()
+        .expect("Failed to animate slide steps")
+        .generate_html(static_dir)
         .expect("Failed to generate notes file");
 }
