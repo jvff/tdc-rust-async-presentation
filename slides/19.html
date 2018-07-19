@@ -5,7 +5,7 @@
     type Item;
     type Error;
 
-    fn poll_next(&amp;mut self) -&gt; Result&lt;Async&lt;Option&lt;Self::Item&gt;&gt;, Self::Error&gt;;
+    fn poll(&amp;mut self) -&gt; Result&lt;Async&lt;Option&lt;Self::Item&gt;&gt;, Self::Error&gt;;
 }
 </code></pre>
 
