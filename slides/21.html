@@ -2,224 +2,203 @@
     <h1>Canais assíncronos</h1>
 
     <ul>
-        <li class="slide-step-1">Uma outra funcionalidade útil em <code>futures</code> é a criação de canais de
+        <li data-slide-steps="1-">Uma outra funcionalidade útil em <code>futures</code> é a criação de canais de
         comunicação entre tarefas</li>
-        <li class="slide-step-2">Muito útil para começar tarefas assíncronas separadas para possibilitar que
+        <li data-slide-steps="2-">Muito útil para começar tarefas assíncronas separadas para possibilitar que
         cada uma seja executada em um <em>thread</em> separado</li>
     </ul>
 
 	<svg style="width: 20%" viewBox="0 0 1000 250">
 		<defs>
 			<g id="arrow-head">
-				<path d="M-20 -20 L0 0 L-20 20"/>
+				<path d="M-20 -20 L0 0 L-20 20"></path>
 			</g>
 			<g id="mini-arrow-head">
-				<path d="M-8 -8 L0 0 L-8 8"/>
+				<path d="M-8 -8 L0 0 L-8 8"></path>
 			</g>
             <g id="thread">
-                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"/>
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"></path>
             </g>
             <g id="task">
-                <rect x="-25" y="-25" width="50" height="50"/>
+                <rect x="-25" y="-25" width="50" height="50"></rect>
             </g>
             <g id="future">
-                <circle cx="0" cy="0" r="10"/>
+                <circle cx="0" cy="0" r="10"></circle>
             </g>
             <g id="sender">
-                <path d="M0 0 l-15 -15 h-30 v30 h30 z"/>
+                <path d="M0 0 l-15 -15 h-30 v30 h30 z"></path>
             </g>
             <g id="receiver">
-                <path d="M0 0 l-15 -15 h40 v30 h-40 z"/>
+                <path d="M0 0 l-15 -15 h40 v30 h-40 z"></path>
             </g>
             <g id="stream">
-                <circle cx="0" cy="0" r="10"/>
+                <circle cx="0" cy="0" r="10"></circle>
                 <g style="stroke: none; fill: black">
-                    <circle cx="9" cy="10" r="2"/>
-                    <circle cx="15" cy="10" r="2"/>
-                    <circle cx="21" cy="10" r="2"/>
+                    <circle cx="9" cy="10" r="2"></circle>
+                    <circle cx="15" cy="10" r="2"></circle>
+                    <circle cx="21" cy="10" r="2"></circle>
                 </g>
             </g>
             <g id="sink">
-                <circle cx="0" cy="0" r="10"/>
+                <circle cx="0" cy="0" r="10"></circle>
                 <g style="stroke: none; fill: black">
-                    <circle cx="-9" cy="-10" r="2"/>
-                    <circle cx="-15" cy="-10" r="2"/>
-                    <circle cx="-21" cy="-10" r="2"/>
+                    <circle cx="-9" cy="-10" r="2"></circle>
+                    <circle cx="-15" cy="-10" r="2"></circle>
+                    <circle cx="-21" cy="-10" r="2"></circle>
                 </g>
             </g>
             <g id="user">
-                <circle cx="0" cy="-100" r="20"/>
-                <line x1="-20" y1="0" x2="0" y2="-60"/>
-                <line x1="20" y1="0" x2="0" y2="-60"/>
-                <line x1="0" y1="-80" x2="0" y2="20"/>
-                <line x1="0" y1="20" x2="-20" y2="100"/>
-                <line x1="0" y1="20" x2="20" y2="100"/>
+                <circle cx="0" cy="-100" r="20"></circle>
+                <line x1="-20" y1="0" x2="0" y2="-60"></line>
+                <line x1="20" y1="0" x2="0" y2="-60"></line>
+                <line x1="0" y1="-80" x2="0" y2="20"></line>
+                <line x1="0" y1="20" x2="-20" y2="100"></line>
+                <line x1="0" y1="20" x2="20" y2="100"></line>
             </g>
             <g id="ok">
-                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"/>
+                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
             </g>
             <g id="fail">
                 <g style="stroke: red; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"/>
-                    <path d="M10 -10 L -10 10"/>
+                    <path d="M-10 -10 L 10 10"></path>
+                    <path d="M10 -10 L -10 10"></path>
                 </g>
             </g>
             <g id="pending">
                 <circle cx="0" cy="0" r="10" style="stroke: none; fill: orange">
-            </g>
+            </circle></g>
             <g id="item">
-                <circle cx="0" cy="-10" r="3" style="fill: brown; stroke: none"/>
-                <line x1="0" y1="10" x2="0" y2="-5" style="stroke: brown; stroke-width: 5"/>
+                <circle cx="0" cy="-10" r="3" style="fill: brown; stroke: none"></circle>
+                <line x1="0" y1="10" x2="0" y2="-5" style="stroke: brown; stroke-width: 5"></line>
             </g>
             <g id="items">
-                <circle cx="0" cy="-10" r="3" style="fill: brown; stroke: none"/>
-                <line x1="0" y1="10" x2="0" y2="-5" style="stroke: brown; stroke-width: 5"/>
+                <circle cx="0" cy="-10" r="3" style="fill: brown; stroke: none"></circle>
+                <line x1="0" y1="10" x2="0" y2="-5" style="stroke: brown; stroke-width: 5"></line>
                 <g style="stroke: none; fill: brown">
-                    <circle cx="6" cy="10" r="2"/>
-                    <circle cx="12" cy="10" r="2"/>
-                    <circle cx="18" cy="10" r="2"/>
+                    <circle cx="6" cy="10" r="2"></circle>
+                    <circle cx="12" cy="10" r="2"></circle>
+                    <circle cx="18" cy="10" r="2"></circle>
                 </g>
             </g>
             <g id="hide-item">
-                <rect x="-5" y="-15" width="10" height="30" style="stroke: none; fill: white"/>
+                <rect x="-5" y="-15" width="10" height="30" style="stroke: none; fill: white"></rect>
             </g>
             <g id="hide-call">
-                <rect style="stroke: none; fill: white" x="-55" y="-10" width="60" height="20"/>
+                <rect style="stroke: none; fill: white" x="-55" y="-10" width="60" height="20"></rect>
             </g>
             <g id="hide-result">
-                <rect x="-20" y="-20" width="40" height="40" style="fill: white; stroke: none"/>
+                <rect x="-20" y="-20" width="40" height="40" style="fill: white; stroke: none"></rect>
             </g>
             <g id="hide-task">
-                <rect style="stroke: none; fill: white" x="-30" y="-30" width="60" height="60"/>
+                <rect style="stroke: none; fill: white" x="-30" y="-30" width="60" height="60"></rect>
             </g>
             <g id="hide-sender">
-                <rect style="stroke: none; fill: white" x="-50" y="-20" width="55" height="40"/>
+                <rect style="stroke: none; fill: white" x="-50" y="-20" width="55" height="40"></rect>
             </g>
             <g id="hide-receiver">
-                <rect style="stroke: none; fill: white" x="-20" y="-20" width="55" height="40"/>
+                <rect style="stroke: none; fill: white" x="-20" y="-20" width="55" height="40"></rect>
             </g>
 		</defs>
 
-        <g
-            transform="translate(100, 00)"
-            style="fill: none; stroke: black; stroke-width: 3"
-            >
-            <g class="slide-step-1">
-                <use xlink:href="#task" x="30" y="50"/>
-                <use xlink:href="#sender" x="100" y="50"/>
-                <use xlink:href="#receiver" x="100" y="50"/>
-                <use xlink:href="#task" x="150" y="50"/>
+        <g transform="translate(100, 00)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="1-">
+                <use xlink:href="#task" x="30" y="50"></use>
+                <use xlink:href="#sender" x="100" y="50"></use>
+                <use xlink:href="#receiver" x="100" y="50"></use>
+                <use xlink:href="#task" x="150" y="50"></use>
             </g>
-            <g class="slide-step-2">
-                <use xlink:href="#hide-task" x="30" y="50"/>
-                <use xlink:href="#hide-sender" x="100" y="50"/>
-                <use xlink:href="#hide-receiver" x="100" y="50"/>
-                <use xlink:href="#hide-task" x="150" y="50"/>
+            <g data-slide-steps="2-">
+                <use xlink:href="#hide-task" x="30" y="50"></use>
+                <use xlink:href="#hide-sender" x="100" y="50"></use>
+                <use xlink:href="#hide-receiver" x="100" y="50"></use>
+                <use xlink:href="#hide-task" x="150" y="50"></use>
 
-                <use xlink:href="#task" x="0" y="50"/>
-                <use xlink:href="#sender" x="70" y="50"/>
-                <use xlink:href="#receiver" x="130" y="50"/>
-                <use xlink:href="#task" x="180" y="50"/>
+                <use xlink:href="#task" x="0" y="50"></use>
+                <use xlink:href="#sender" x="70" y="50"></use>
+                <use xlink:href="#receiver" x="130" y="50"></use>
+                <use xlink:href="#task" x="180" y="50"></use>
 
-                <use xlink:href="#thread" x="0" y="80"/>
-                <use xlink:href="#thread" x="180" y="80"/>
+                <use xlink:href="#thread" x="0" y="80"></use>
+                <use xlink:href="#thread" x="180" y="80"></use>
             </g>
         </g>
     </svg>
 
     <ul>
-        <li class="slide-step-3"><code>oneshot</code> permite enviar um único ítem de uma tarefa a outra
+        <li data-slide-steps="3-"><code>oneshot</code> permite enviar um único ítem de uma tarefa a outra
             <ul>
-                <li class="slide-step-4">O <code>oneshot::Receiver</code> implementa <code>Future</code> para receber esse ítem</li>
+                <li data-slide-steps="4-">O <code>oneshot::Receiver</code> implementa <code>Future</code> para receber esse ítem</li>
             </ul>
         </li>
     </ul>
 
 	<svg style="width: 20%" viewBox="0 0 1000 100">
-        <g
-            transform="translate(140, 00)"
-            style="fill: none; stroke: black; stroke-width: 3"
-            >
-            <g class="slide-step-3">
-                <use xlink:href="#sender" x="80" y="50"/>
-                <use xlink:href="#receiver" x="120" y="50"/>
+        <g transform="translate(140, 00)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="3-">
+                <use xlink:href="#sender" x="80" y="50"></use>
+                <use xlink:href="#receiver" x="120" y="50"></use>
             </g>
-            <g class="slide-step-4">
-                <use xlink:href="#hide-receiver" x="120" y="50"/>
-                <use xlink:href="#future" x="140" y="50"/>
+            <g data-slide-steps="4-">
+                <use xlink:href="#hide-receiver" x="120" y="50"></use>
+                <use xlink:href="#future" x="140" y="50"></use>
             </g>
-            <g class="slide-step-5">
-                <use xlink:href="#item" x="-50" y="50"/>
-                <g
-                    style="stroke-width: 4"
-                    transform="translate(20,50)"
-                    >
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
-                    <line x1="0" y1="0" x2="-50" y2="0"/>
+            <g data-slide-steps="5-">
+                <use xlink:href="#item" x="-50" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(20,50)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
             </g>
-            <g class="slide-step-6">
-                <use xlink:href="#hide-item" x="-50" y="50"/>
-                <use xlink:href="#hide-call" x="20" y="50"/>
-                <use xlink:href="#hide-sender" x="80" y="50"/>
-                <g
-                    style="stroke-width: 4"
-                    transform="translate(210,50)"
-                    >
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
-                    <line x1="0" y1="0" x2="-50" y2="0"/>
+            <g data-slide-steps="6-">
+                <use xlink:href="#hide-item" x="-50" y="50"></use>
+                <use xlink:href="#hide-call" x="20" y="50"></use>
+                <use xlink:href="#hide-sender" x="80" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(210,50)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
-                <use xlink:href="#item" x="230" y="50"/>
+                <use xlink:href="#item" x="230" y="50"></use>
             </g>
         </g>
     </svg>
 
     <ul>
-        <li class="slide-step-7"><code>mpsc</code> permite enviar vários ítens, sendo que várias podem receber mas
+        <li data-slide-steps="7-"><code>mpsc</code> permite enviar vários ítens, sendo que várias podem receber mas
         somente uma pode receber
             <ul>
-                <li class="slide-step-8">O <code>mpsc::Sender</code> implementa <code>Sink</code></li>
-                <li class="slide-step-9">O <code>mpsc::Receiver</code> implementa <code>Stream</code></li>
+                <li data-slide-steps="8-">O <code>mpsc::Sender</code> implementa <code>Sink</code></li>
+                <li data-slide-steps="9-">O <code>mpsc::Receiver</code> implementa <code>Stream</code></li>
             </ul>
         </li>
     </ul>
 
 	<svg style="width: 20%" viewBox="0 0 1000 100">
-        <g
-            transform="translate(140, 00)"
-            style="fill: none; stroke: black; stroke-width: 3"
-            >
-            <g class="slide-step-7">
-                <use xlink:href="#sender" x="80" y="50"/>
-                <use xlink:href="#receiver" x="120" y="50"/>
+        <g transform="translate(140, 00)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="7-">
+                <use xlink:href="#sender" x="80" y="50"></use>
+                <use xlink:href="#receiver" x="120" y="50"></use>
             </g>
-            <g class="slide-step-8">
-                <use xlink:href="#hide-sender" x="80" y="50"/>
-                <use xlink:href="#sink" x="60" y="50"/>
+            <g data-slide-steps="8-">
+                <use xlink:href="#hide-sender" x="80" y="50"></use>
+                <use xlink:href="#sink" x="60" y="50"></use>
             </g>
-            <g class="slide-step-9">
-                <use xlink:href="#hide-receiver" x="120" y="50"/>
-                <use xlink:href="#stream" x="140" y="50"/>
+            <g data-slide-steps="9-">
+                <use xlink:href="#hide-receiver" x="120" y="50"></use>
+                <use xlink:href="#stream" x="140" y="50"></use>
             </g>
-            <g class="slide-step-10">
-                <use xlink:href="#items" x="-60" y="50"/>
-                <g
-                    style="stroke-width: 4"
-                    transform="translate(20,50)"
-                    >
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
-                    <line x1="0" y1="0" x2="-50" y2="0"/>
+            <g data-slide-steps="10-">
+                <use xlink:href="#items" x="-60" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(20,50)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
             </g>
-            <g class="slide-step-11">
-                <g
-                    style="stroke-width: 4"
-                    transform="translate(220,50)"
-                    >
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
-                    <line x1="0" y1="0" x2="-50" y2="0"/>
+            <g data-slide-steps="11-">
+                <g style="stroke-width: 4" transform="translate(220,50)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
-                <use xlink:href="#items" x="240" y="50"/>
+                <use xlink:href="#items" x="240" y="50"></use>
             </g>
         </g>
     </svg>

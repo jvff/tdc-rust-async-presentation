@@ -2,18 +2,18 @@
     <h1>Tarefas mais claras</h1>
 
     <ul>
-        <li class="slide-step-1">Struct <code>futures::task::Context</code>
+        <li data-slide-steps="1-">Struct <code>futures::task::Context</code>
             <ul>
-                <li class="slide-step-2">Representa o contexto de uma tarefa</li>
-                <li class="slide-step-3"><code>Context::executor() -&gt; &amp;mut Executor</code> dá acesso ao executador da tarefa</li>
-                <li class="slide-step-4"><code>Context::spawn(...)</code> agenda uma operação no executador</li>
-                <li class="slide-step-5"><code>Context::waker() -&gt; &amp;Waker</code> dá acesso ao mecanismo para acordar a tarefa</li>
+                <li data-slide-steps="2-">Representa o contexto de uma tarefa</li>
+                <li data-slide-steps="3-"><code>Context::executor() -&gt; &amp;mut Executor</code> dá acesso ao executador da tarefa</li>
+                <li data-slide-steps="4-"><code>Context::spawn(...)</code> agenda uma operação no executador</li>
+                <li data-slide-steps="5-"><code>Context::waker() -&gt; &amp;Waker</code> dá acesso ao mecanismo para acordar a tarefa</li>
             </ul>
         </li>
-        <li class="slide-step-6">Struct <code>futures::task::Waker</code>
+        <li data-slide-steps="6-">Struct <code>futures::task::Waker</code>
             <ul>
-                <li class="slide-step-7"><code>Waker::wake()</code></li>
-                <li class="slide-step-8">Substitui <code>Task::notify()</code></li>
+                <li data-slide-steps="7-"><code>Waker::wake()</code></li>
+                <li data-slide-steps="8-">Substitui <code>Task::notify()</code></li>
             </ul>
         </li>
     </ul>
