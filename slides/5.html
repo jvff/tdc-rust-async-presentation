@@ -1,0 +1,117 @@
+<div>
+    <h1>Execução das tarefas</h1>
+
+	<svg style="width: 20%" viewBox="0 0 1000 700">
+		<defs>
+			<g id="arrow-head">
+				<path d="M-20 -20 L0 0 L-20 20"/>
+			</g>
+            <g id="cpu">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-12.5" y="-12.5" width="25" height="25"/>
+
+                    <line x1="-16" y1="0" x2="-20" y2="0"/>
+                    <line x1="-16" y1="-12.5" x2="-20" y2="-12.5"/>
+                    <line x1="-16" y1="-6.25" x2="-20" y2="-6.25"/>
+                    <line x1="-16" y1="12.5" x2="-20" y2="12.5"/>
+                    <line x1="-16" y1="6.25" x2="-20" y2="6.25"/>
+
+                    <line x1="16" y1="0" x2="20" y2="0"/>
+                    <line x1="16" y1="-12.5" x2="20" y2="-12.5"/>
+                    <line x1="16" y1="-6.25" x2="20" y2="-6.25"/>
+                    <line x1="16" y1="12.5" x2="20" y2="12.5"/>
+                    <line x1="16" y1="6.25" x2="20" y2="6.25"/>
+
+                    <line x1="0" y1="16" x2="0" y2="20"/>
+                    <line x1="-12.5" y1="16" x2="-12.5" y2="20"/>
+                    <line x1="-6.25" y1="16" x2="-6.25" y2="20"/>
+                    <line x1="12.5" y1="16" x2="12.5" y2="20"/>
+                    <line x1="6.25" y1="16" x2="6.25" y2="20"/>
+
+                    <line x1="0" y1="-16" x2="0" y2="-20"/>
+                    <line x1="-12.5" y1="-16" x2="-12.5" y2="-20"/>
+                    <line x1="-6.25" y1="-16" x2="-6.25" y2="-20"/>
+                    <line x1="12.5" y1="-16" x2="12.5" y2="-20"/>
+                    <line x1="6.25" y1="-16" x2="6.25" y2="-20"/>
+                </g>
+            </g>
+            <g id="ram">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-25" y="-12.5" width="50" height="25"/>
+                    <line x1="-23" y1="18" x2="23" y2="18"/>
+                </g>
+
+                <g style="fill: black; stroke: none">
+                    <rect x="-23" y="-7.5" width="8" height="15"/>
+                    <rect x="-11" y="-7.5" width="8" height="15"/>
+                    <rect x="1" y="-7.5" width="8" height="15"/>
+                    <rect x="13" y="-7.5" width="8" height="15"/>
+                </g>
+            </g>
+            <g id="db">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <ellipse cx="0" cy="-10" rx="25" ry="10"/>
+                    <path d="M-25 -10 v 20 a 25 10 180 1 0 50 0 v -20"/>
+                </g>
+            </g>
+            <g id="net">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <circle cx="0" cy="0" r="25"/>
+                    <ellipse cx="0" cy="0" rx="10" ry="25"/>
+                    <line x1="-25" y1="0" x2="25" y2="0"/>
+                    <path d="M-17.7 17.7 L17.7 17.7"/>
+                    <path d="M-17.7 -17.7 L17.7 -17.7"/>
+                </g>
+            </g>
+		</defs>
+
+		<g
+			style="fill: none; stroke: black; stroke-width: 3"
+			transform="translate(100, 100)"
+			class="slide-step-1"
+			>
+			<rect x="0" y="0" width="70" height="70"/>
+			<rect x="140" y="0" width="70" height="70"/>
+			<rect x="280" y="0" width="70" height="70"/>
+			<rect x="420" y="0" width="70" height="70"/>
+			<rect x="560" y="0" width="70" height="70"/>
+		</g>
+        <g
+            style="fill: none; stroke: black; stroke-width: 3; stroke-dasharray: 6,4"
+            transform="translate(240, 135)"
+            class="slide-step-2"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-70" y2="0"/>
+        </g>
+        <g
+            style="fill: none; stroke: black; stroke-width: 3; stroke-dasharray: 6,4"
+            transform="translate(380, 135)"
+            class="slide-step-2"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-70" y2="0"/>
+        </g>
+        <g
+            style="fill: none; stroke: black; stroke-width: 3; stroke-dasharray: 6,4"
+            transform="translate(520, 135)"
+            class="slide-step-2"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-70" y2="0"/>
+        </g>
+        <g
+            style="fill: none; stroke: black; stroke-width: 3; stroke-dasharray: 6,4"
+            transform="translate(660, 135)"
+            class="slide-step-2"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-70" y2="0"/>
+        </g>
+        <use xlink:href="#cpu" class="slide-step-3" transform="translate(135,135)"/>
+        <use xlink:href="#ram" class="slide-step-4" transform="translate(275,135)"/>
+        <use xlink:href="#db" class="slide-step-5" transform="translate(415,135)"/>
+        <use xlink:href="#net" class="slide-step-6" transform="translate(555,135)"/>
+        <use xlink:href="#cpu" class="slide-step-7" transform="translate(695,135)"/>
+	</svg>
+</div>

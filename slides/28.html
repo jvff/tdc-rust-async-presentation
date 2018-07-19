@@ -1,0 +1,21 @@
+<div>
+    <h1>Operações de entrada e saída</h1>
+
+    <ul>
+        <li class="slide-step-1">Algumas funções facilitam a composição de operações, retornando <code>Future</code>s
+            <ul>
+                <li class="slide-step-2"><code>copy</code>: copia todos os dados de um leitor para um escritor</li>
+                <li class="slide-step-3"><code>flush</code>: envia todos os dados enfileirados</li>
+                <li class="slide-step-4"><code>read_exact</code>: lê um número determinado de bytes</li>
+                <li class="slide-step-5"><code>read_to_end</code>: lê todos os bytes de um leitor</li>
+                <li class="slide-step-6"><code>write_all</code>: escreve todos os bytes de um <em>buffer</em></li>
+                <li class="slide-step-7"><code>shutdown</code>: finaliza um escritor</li>
+            </ul>
+        </li>
+        <li class="slide-step-8">Uma função retorna um <code>Stream</code>
+            <ul>
+                <li class="slide-step-9"><code>lines</code>: lê linha por linha em forma de <code>String</code>s</li>
+            </ul>
+        </li>
+    </ul>
+</div>

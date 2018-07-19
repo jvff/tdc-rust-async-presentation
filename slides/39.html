@@ -1,0 +1,42 @@
+<div>
+    <h3>Envio em fluxo fica um pouco mais complexo</h3>
+
+    <ul>
+        <li class="slide-step-1">Mais métodos
+            <ul>
+                <li class="slide-step-2"><code>poll_ready</code> precisa ser chamado antes para verificar se o <code>Sink</code> está
+                pronto para começar a enviar um ítem</li>
+                <li class="slide-step-3"><code>start_send</code> enfileira o envio de um ítem</li>
+                <li class="slide-step-4">Mas o ítem só é enviado de fato quando <code>poll_flush</code> indicar que a operação
+                de enviar todos os ítens enfileirados estiver concluída</li>
+                <li class="slide-step-5"><code>poll_close</code> tenta enviar os ítens restantes e fechar o fluxo</li>
+            </ul>
+        </li>
+    </ul>
+
+<pre><code><span class="slide-step-1">pub trait Sink {
+    type SinkItem;
+    type SinkError;</span>
+
+    <span class="slide-step-2">fn poll_ready(
+        &amp;mut self, 
+        cx: &amp;mut Context
+    ) -&gt; Result&lt;Async&lt;()&gt;, Self::SinkError&gt;;</span>
+
+    <span class="slide-step-3">fn start_send(
+        &amp;mut self, 
+        item: Self::SinkItem
+    ) -&gt; Result&lt;(), Self::SinkError&gt;;</span>
+
+    <span class="slide-step-4">fn poll_flush(
+        &amp;mut self, 
+        cx: &amp;mut Context
+    ) -&gt; Result&lt;Async&lt;()&gt;, Self::SinkError&gt;;</span>
+
+    <span class="slide-step-5">fn poll_close(
+        &amp;mut self, 
+        cx: &amp;mut Context
+    ) -&gt; Result&lt;Async&lt;()&gt;, Self::SinkError&gt;;</span>
+<span class="slide-step-1">}</span>
+</code></pre>
+</div>

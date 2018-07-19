@@ -1,0 +1,52 @@
+<div>
+    <h1>Facilitando operações de leitura e escrita</h1>
+
+    <ul>
+        <li class="slide-step-1">E foram adicionados métodos genéricos para facilitar o uso das operações de
+        leitura e escrita</li>
+        <li class="slide-step-2">Todos transformam o tipo "primitivo" de leitura ou escrita assíncrona em uma
+        operação um pouco mais "alto nível" que implementa <code>Future</code></li>
+    </ul>
+
+<pre><code><span class="slide-step-3">pub trait AsyncReadExt: AsyncRead {</span>
+    <span class="slide-step-4">fn copy_into&lt;W&gt;(self, writer: W) -&gt; CopyInto&lt;Self, W&gt;
+    where
+        W: AsyncWrite,
+    { ... }</span>
+
+    <span class="slide-step-5">fn read&lt;T&gt;(self, buf: T) -&gt; Read&lt;Self, T&gt;
+    where
+        T: AsMut&lt;[u8]&gt;,
+    { ... }</span>
+
+    <span class="slide-step-6">fn read_exact&lt;T&gt;(self, buf: T) -&gt; ReadExact&lt;Self, T&gt;
+    where
+        T: AsMut&lt;[u8]&gt;,
+    { ... }</span>
+
+    <span class="slide-step-7">fn read_to_end(self, buf: Vec&lt;u8&gt;) -&gt; ReadToEnd&lt;Self&gt; { ... }</span>
+
+    <span class="slide-step-3">...
+}</span>
+
+<span class="slide-step-8">impl&lt;T&gt; AsyncReadExt for T where
+    T: AsyncRead + ?Sized 
+{ ... }<span>
+</code></pre>
+
+<pre><code><span class="slide-step-9">pub trait AsyncWriteExt: AsyncWrite {</span>
+    <span class="slide-step-10">fn flush(self) -&gt; Flush&lt;Self&gt; { ... }</span>
+
+    <span class="slide-step-11">fn close(self) -&gt; Close&lt;Self&gt; { ... }</span>
+
+    <span class="slide-step-12">fn write_all&lt;T&gt;(self, buf: T) -&gt; WriteAll&lt;Self, T&gt;
+    where
+        T: AsRef&lt;[u8]&gt;,
+    { ... }</span>
+<span class="slide-step-9">}</span>
+
+<span class="slide-step-13">impl&lt;T&gt; AsyncWriteExt for T where
+    T: AsyncWrite + ?Sized
+{ ... }</span>
+</code></pre>
+</div>

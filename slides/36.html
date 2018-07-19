@@ -1,0 +1,29 @@
+<div>
+    <h1>Contexto evidente</h1>
+
+<ul>
+    <li class="slide-step-1">Agora fica mais claro que uma operação assíncrona está diretamente associada ao contexto
+    de uma tarefa</li>
+</ul>
+
+<pre><code><span class="slide-step-2">pub trait Future {
+    type Item;
+    type Error;
+
+    fn poll(
+        &amp;mut self,</span> 
+        <span class="slide-step-3">cx: &amp;mut Context</span>
+    <span class="slide-step-2">) -&gt; Result&lt;Async&lt;Self::Item&gt;, Self::Error&gt;;
+}<span>
+</code></pre>
+
+<pre><code><span class="slide-step-4">pub trait Stream {
+    type Item;
+	type Error;
+
+	fn poll_next(
+		&amp;mut self, </span>
+		<span class="slide-step-5">cx: &amp;mut Context</span>
+	<span class="slide-step-4">) -&gt; Result&lt;Async&lt;Option&lt;Self::Item&gt;&gt;, Self::Error&gt;;
+}</span>
+</code></pre></div>

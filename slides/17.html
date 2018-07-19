@@ -1,0 +1,128 @@
+<div>
+    <h1>Fluxos</h1>
+    
+<pre><code>pub trait Stream {
+    type Item;
+	type Error;
+
+	fn poll_next(&amp;mut self) -&gt; Result&lt;Async&lt;Option&lt;Self::Item&gt;&gt;, Self::Error&gt;;
+}
+</code></pre>
+
+    <ul>
+        <li class="slide-step-1">Representação de operações que produzem vários ítens, um por vez</li>
+        <li class="slide-step-5">Pode falhar, mas isso <strong>não</strong> termina o fluxo</li>
+        <li class="slide-step-10">Retorna <em>nada</em> se acabar os ítens, mas isso <strong>não</strong> termina o fluxo</li>
+        <li class="slide-step-12">Versão assíncrona do <code>Iterator</code></li>
+    </ul>
+
+    <svg style="width: 20%" viewBox="0 0 1000 50">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"/>
+            </g>
+            <g id="mini-arrow-head">
+                <path d="M-8 -8 L0 0 L-8 8"/>
+            </g>
+            <g id="stream">
+                <circle cx="0" cy="0" r="10"/>
+                <g style="stroke: none; fill: black">
+                    <circle cx="9" cy="10" r="2"/>
+                    <circle cx="15" cy="10" r="2"/>
+                    <circle cx="21" cy="10" r="2"/>
+                </g>
+            </g>
+            <g id="ok">
+                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"/>
+            </g>
+            <g id="fail">
+                <g style="stroke: red; stroke-width: 5">
+                    <path d="M-10 -10 L 10 10"/>
+                    <path d="M10 -10 L -10 10"/>
+                </g>
+            </g>
+            <g id="result">
+                <g transform="translate(0,-10)">
+                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"/>
+                </g>
+                <g transform="translate(0,10)" style="stroke: red; stroke-width: 5">
+                    <path d="M-10 -10 L 10 10"/>
+                    <path d="M10 -10 L -10 10"/>
+                </g>
+            </g>
+            <g id="pending">
+                <circle cx="0" cy="0" r="10" style="stroke: none; fill: orange">
+            </g>
+            <g id="hide-result">
+                <rect x="-20" y="-20" width="40" height="40" style="fill: white; stroke: none"/>
+            </g>
+            <g id="transform">
+                <path d="M0 0 l -20 -20 v 10 h -30 v 20 h 30 v 10 z"/>
+            </g>
+            <g id="none">
+                <line x1="-10" y1="0" x2="10" y2="0" style="stroke: black; stroke-width: 5"/>
+            </g>
+            <g id="result2">
+                <g transform="translate(0,-10)">
+                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"/>
+                </g>
+                <g transform="translate(0,10)" style="stroke: blue; stroke-width: 5">
+                    <path d="M-10 -10 L 10 10"/>
+                    <path d="M10 -10 L -10 10"/>
+                </g>
+            </g>
+            <g id="equals">
+                <g style="stroke: gray; stroke-width: 10">
+                    <line x1="-20" y1="-10" x2="20" y2="-10"/>
+                    <line x1="-20" y1="10" x2="20" y2="10"/>
+                </g>
+            </g>
+        </defs>
+
+        <g
+            transform="translate(50, 0)"
+            style="fill: none; stroke: black; stroke-width: 3"
+            >
+            <g class="slide-step-1">
+                <use xlink:href="#stream" x="0" y="25"/>
+            </g>
+            <g class="slide-step-2">
+                <g
+                    style="stroke-width: 4"
+                    transform="translate(80,25)"
+                    >
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
+                    <line x1="0" y1="0" x2="-50" y2="0"/>
+                </g>
+                <use xlink:href="#ok" x="110" y="25"/>
+            </g>
+            <g class="slide-step-3">
+                <use xlink:href="#ok" x="140" y="25"/>
+            </g>
+            <g class="slide-step-4">
+                <use xlink:href="#ok" x="170" y="25"/>
+            </g>
+            <g class="slide-step-5">
+                <use xlink:href="#fail" x="200" y="25"/>
+            </g>
+            <g class="slide-step-6">
+                <use xlink:href="#ok" x="230" y="25"/>
+            </g>
+            <g class="slide-step-7">
+                <use xlink:href="#fail" x="260" y="25"/>
+            </g>
+            <g class="slide-step-8">
+                <use xlink:href="#fail" x="290" y="25"/>
+            </g>
+            <g class="slide-step-9">
+                <use xlink:href="#ok" x="320" y="25"/>
+            </g>
+            <g class="slide-step-10">
+                <use xlink:href="#none" x="350" y="25"/>
+            </g>
+            <g class="slide-step-11">
+                <use xlink:href="#ok" x="380" y="25"/>
+            </g>
+        </g>
+    </svg>
+</div>

@@ -1,0 +1,143 @@
+<div>
+    <h1>Concorrência</h1>
+
+	<svg style="width: 20%" viewBox="0 0 1000 700">
+		<defs>
+			<g id="arrow-head">
+				<path d="M-20 -20 L0 0 L-20 20"/>
+			</g>
+            <g id="thread">
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"/>
+            </g>
+            <g id="cpu">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-12.5" y="-12.5" width="25" height="25"/>
+
+                    <line x1="-16" y1="0" x2="-20" y2="0"/>
+                    <line x1="-16" y1="-12.5" x2="-20" y2="-12.5"/>
+                    <line x1="-16" y1="-6.25" x2="-20" y2="-6.25"/>
+                    <line x1="-16" y1="12.5" x2="-20" y2="12.5"/>
+                    <line x1="-16" y1="6.25" x2="-20" y2="6.25"/>
+
+                    <line x1="16" y1="0" x2="20" y2="0"/>
+                    <line x1="16" y1="-12.5" x2="20" y2="-12.5"/>
+                    <line x1="16" y1="-6.25" x2="20" y2="-6.25"/>
+                    <line x1="16" y1="12.5" x2="20" y2="12.5"/>
+                    <line x1="16" y1="6.25" x2="20" y2="6.25"/>
+
+                    <line x1="0" y1="16" x2="0" y2="20"/>
+                    <line x1="-12.5" y1="16" x2="-12.5" y2="20"/>
+                    <line x1="-6.25" y1="16" x2="-6.25" y2="20"/>
+                    <line x1="12.5" y1="16" x2="12.5" y2="20"/>
+                    <line x1="6.25" y1="16" x2="6.25" y2="20"/>
+
+                    <line x1="0" y1="-16" x2="0" y2="-20"/>
+                    <line x1="-12.5" y1="-16" x2="-12.5" y2="-20"/>
+                    <line x1="-6.25" y1="-16" x2="-6.25" y2="-20"/>
+                    <line x1="12.5" y1="-16" x2="12.5" y2="-20"/>
+                    <line x1="6.25" y1="-16" x2="6.25" y2="-20"/>
+                </g>
+            </g>
+            <g id="ram">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-25" y="-12.5" width="50" height="25"/>
+                    <line x1="-23" y1="18" x2="23" y2="18"/>
+                </g>
+
+                <g style="fill: black; stroke: none">
+                    <rect x="-23" y="-7.5" width="8" height="15"/>
+                    <rect x="-11" y="-7.5" width="8" height="15"/>
+                    <rect x="1" y="-7.5" width="8" height="15"/>
+                    <rect x="13" y="-7.5" width="8" height="15"/>
+                </g>
+            </g>
+            <g id="db">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <ellipse cx="0" cy="-10" rx="25" ry="10"/>
+                    <path d="M-25 -10 v 20 a 25 10 180 1 0 50 0 v -20"/>
+                </g>
+            </g>
+            <g id="net">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <circle cx="0" cy="0" r="25"/>
+                    <ellipse cx="0" cy="0" rx="10" ry="25"/>
+                    <line x1="-25" y1="0" x2="25" y2="0"/>
+                    <path d="M-17.7 17.7 L17.7 17.7"/>
+                    <path d="M-17.7 -17.7 L17.7 -17.7"/>
+                </g>
+            </g>
+		</defs>
+
+        <g transform="translate(100, 100)">
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-1"
+                >
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#thread" x="100" y="20"/>
+                <use xlink:href="#thread" x="180" y="20"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-2"
+                >
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#cpu" x="10" y="200"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-3"
+                >
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#cpu" x="10" y="200"/>
+                <use xlink:href="#net" x="10" y="260"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-4"
+                >
+                <use xlink:href="#thread" x="20" y="20"/>
+                <rect style="stroke: none; fill: white" x="-20" y="180" width="70" height="50"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-5"
+                >
+                <use xlink:href="#thread" x="100" y="20"/>
+                <use xlink:href="#cpu" x="90" y="200"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-6"
+                >
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#cpu" x="10" y="200"/>
+                <rect style="stroke: none; fill: white" x="70" y="0" width="50" height="170"/>
+                <rect style="stroke: none; fill: white" x="60" y="180" width="70" height="50"/>
+                <use xlink:href="#thread" style="stroke: red" x="100" y="20"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-7"
+                >
+                <rect style="stroke: none; fill: white" x="-20" y="230" width="70" height="70"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-8"
+                >
+                <rect style="stroke: none; fill: white" x="-10" y="0" width="50" height="170"/>
+                <use xlink:href="#cpu" x="10" y="200"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-9"
+                >
+                <rect style="stroke: none; fill: white" x="-20" y="180" width="70" height="50"/>
+                <rect style="stroke: none; fill: white" x="60" y="180" width="70" height="50"/>
+                <use xlink:href="#cpu" x="90" y="200"/>
+                <use xlink:href="#thread" x="100" y="20"/>
+            </g>
+        </g>
+	</svg>
+</div>

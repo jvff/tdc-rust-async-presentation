@@ -1,0 +1,123 @@
+<div>
+    <h1>Introdução</h1>
+
+    <ul>
+        <li class="slide-step-1"><em class="slide-step-1">Crate</em> para programação assíncrona</li>
+        <li class="slide-step-2">Oferece primitivas para representar a programação assíncrona
+            <ul class="slide-step-3">
+                <li class="slide-step-3">Operação</li>
+                <li class="slide-step-4">Tarefa</li>
+                <li class="slide-step-5">Executador</li>
+            </ul>
+        </li>
+    </ul>
+
+	<svg style="width: 20%" viewBox="0 0 1000 200">
+		<defs>
+			<g id="arrow-head">
+				<path d="M-20 -20 L0 0 L-20 20"/>
+			</g>
+			<g id="mini-arrow-head">
+				<path d="M-8 -8 L0 0 L-8 8"/>
+			</g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"/>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"/>
+            </g>
+            <g id="executor">
+                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"/>
+            </g>
+		</defs>
+
+        <g
+            transform="translate(100, 50)"
+            style="fill: none; stroke: black; stroke-width: 3"
+            class="slide-step-1"
+            >
+            <use xlink:href="#future" class="slide-step-3" x="20" y="20"/>
+            <use xlink:href="#task" class="slide-step-4" x="120" y="20"/>
+            <use xlink:href="#executor" class="slide-step-5" x="250" y="20"/>
+        </g>
+    </svg>
+
+    <ul>
+        <li class="slide-step-6">Oferece ferramentas para juntar operações</li>
+        <li class="slide-step-7">Formando novas operações</li>
+        <li class="slide-step-8">Para serem usadas em uma tarefa</li>
+        <li class="slide-step-9">Que será executada por executador</li>
+    </ul>
+
+	<svg style="width: 20%" viewBox="0 0 1000 500">
+		<defs>
+			<g id="arrow-head">
+				<path d="M-20 -20 L0 0 L-20 20"/>
+			</g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"/>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"/>
+            </g>
+            <g id="executor">
+                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"/>
+            </g>
+		</defs>
+
+        <g
+            transform="translate(100, 50)"
+            style="fill: none; stroke: black; stroke-width: 3"
+            class="slide-step-1"
+            >
+            <g class="slide-step-6">
+                <use xlink:href="#future" x="20" y="20"/>
+                <use xlink:href="#future" x="-20" y="60"/>
+                <use xlink:href="#future" x="60" y="60"/>
+                <use xlink:href="#future" x="20" y="100"/>
+
+                <g
+                    style="stroke: green"
+                    transform="translate(-10,50),rotate(135)"
+                    >
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
+                    <line x1="0" y1="0" x2="-30" y2="0"/>
+                </g>
+                <g
+                    style="stroke: green"
+                    transform="translate(50,50),rotate(45)"
+                    >
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
+                    <line x1="0" y1="0" x2="-30" y2="0"/>
+                </g>
+                <g
+                    style="stroke: blue"
+                    transform="translate(30,90),rotate(135)"
+                    >
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
+                    <line x1="0" y1="0" x2="-30" y2="0"/>
+                </g>
+                <g
+                    style="stroke: red"
+                    transform="translate(10,90),rotate(45)"
+                    >
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"/>
+                    <line x1="0" y1="0" x2="-30" y2="0"/>
+                </g>
+            </g>
+            <g class="slide-step-7">
+                <circle class="slide-step-7" cx="20" cy="60" r="70"/>
+                <g
+                    style="stroke: gray; stroke-width: 10"
+                    transform="translate(230,60)"
+                    >
+                    <use xlink:href="#arrow-head" x="0" y="0"/>
+                    <line x1="0" y1="0" x2="-100" y2="0"/>
+                </g>
+                <use xlink:href="#future" x="320" y="60"/>
+            </g>
+            <use xlink:href="#task" class="slide-step-8" x="320" y="60"/>
+            <use xlink:href="#executor" class="slide-step-9" x="320" y="60"/>
+        </g>
+    </svg>
+</div>

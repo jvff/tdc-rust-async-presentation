@@ -1,0 +1,91 @@
+<div>
+    <h1>Relação entre as tarefas</h1>
+
+	<svg style="width: 20%" viewBox="0 0 1000 700">
+		<defs>
+			<g id="arrow-head">
+				<path d="M-20 -20 L0 0 L-20 20"/>
+			</g>
+		</defs>
+
+		<g
+			style="fill: none; stroke: black; stroke-width: 3"
+			transform="translate(100, 100)"
+			class="slide-step-1"
+			>
+			<rect x="0" y="0" width="70" height="70"/>
+			<rect x="0" y="140" width="70" height="70"/>
+			<rect x="140" y="0" width="70" height="70"/>
+			<rect x="140" y="140" width="70" height="70"/>
+			<rect x="280" y="0" width="70" height="70"/>
+			<rect x="280" y="140" width="70" height="70"/>
+			<rect x="420" y="0" width="70" height="70"/>
+			<rect x="420" y="140" width="70" height="70"/>
+		</g>
+		<g
+			style="fill: none; stroke: black; stroke-width: 3; stroke-dasharray: 5,5;"
+			transform="translate(100, 100)"
+			class="slide-step-2"
+			>
+            <line x1="70" y1="35" x2="140" y2="35"/>
+            <line x1="70" y1="175" x2="140" y2="175"/>
+            <line x1="210" y1="35" x2="280" y2="35"/>
+            <line x1="210" y1="175" x2="280" y2="175"/>
+            <line x1="350" y1="35" x2="420" y2="35"/>
+            <line x1="350" y1="175" x2="420" y2="175"/>
+
+            <line x1="35" y1="70" x2="35" y2="140"/>
+            <line x1="175" y1="70" x2="175" y2="140"/>
+            <line x1="315" y1="70" x2="315" y2="140"/>
+            <line x1="455" y1="70" x2="455" y2="140"/>
+		</g>
+        <g
+            style="fill: none; stroke: green; stroke-width: 10"
+            transform="translate(250, 135)"
+            class="slide-step-3"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-90" y2="0"/>
+        </g>
+        <g
+            style="fill: none; stroke: green; stroke-width: 10"
+            transform="translate(135, 250),rotate(90)"
+            class="slide-step-3"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-90" y2="0"/>
+        </g>
+        <g
+            style="fill: none; stroke: blue; stroke-width: 10"
+            transform="translate(250, 275)"
+            class="slide-step-4"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-90" y2="0"/>
+        </g>
+        <g
+            style="fill: none; stroke: blue; stroke-width: 10"
+            transform="translate(275, 250),rotate(90)"
+            class="slide-step-4"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-90" y2="0"/>
+        </g>
+        <g
+            style="fill: none; stroke: blue; stroke-width: 10"
+            transform="translate(440, 275),rotate(180)"
+            class="slide-step-5"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-90" y2="0"/>
+        </g>
+        <g
+            style="fill: none; stroke: red; stroke-width: 10"
+            transform="translate(390, 275)"
+            class="slide-step-5"
+            >
+            <use xlink:href="#arrow-head"/>
+            <line x1="0" y1="0" x2="-90" y2="0"/>
+        </g>
+	</svg>
+</div>

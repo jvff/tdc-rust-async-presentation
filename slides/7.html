@@ -1,0 +1,208 @@
+<div>
+    <h1 class="slide-7">Troca de contexto</h1>
+
+	<svg style="width: 20%" viewBox="0 0 1000 700">
+		<defs>
+			<g id="arrow-head">
+				<path d="M-20 -20 L0 0 L-20 20"/>
+			</g>
+            <g id="thread">
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"/>
+            </g>
+            <g id="cpu">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-12.5" y="-12.5" width="25" height="25"/>
+
+                    <line x1="-16" y1="0" x2="-20" y2="0"/>
+                    <line x1="-16" y1="-12.5" x2="-20" y2="-12.5"/>
+                    <line x1="-16" y1="-6.25" x2="-20" y2="-6.25"/>
+                    <line x1="-16" y1="12.5" x2="-20" y2="12.5"/>
+                    <line x1="-16" y1="6.25" x2="-20" y2="6.25"/>
+
+                    <line x1="16" y1="0" x2="20" y2="0"/>
+                    <line x1="16" y1="-12.5" x2="20" y2="-12.5"/>
+                    <line x1="16" y1="-6.25" x2="20" y2="-6.25"/>
+                    <line x1="16" y1="12.5" x2="20" y2="12.5"/>
+                    <line x1="16" y1="6.25" x2="20" y2="6.25"/>
+
+                    <line x1="0" y1="16" x2="0" y2="20"/>
+                    <line x1="-12.5" y1="16" x2="-12.5" y2="20"/>
+                    <line x1="-6.25" y1="16" x2="-6.25" y2="20"/>
+                    <line x1="12.5" y1="16" x2="12.5" y2="20"/>
+                    <line x1="6.25" y1="16" x2="6.25" y2="20"/>
+
+                    <line x1="0" y1="-16" x2="0" y2="-20"/>
+                    <line x1="-12.5" y1="-16" x2="-12.5" y2="-20"/>
+                    <line x1="-6.25" y1="-16" x2="-6.25" y2="-20"/>
+                    <line x1="12.5" y1="-16" x2="12.5" y2="-20"/>
+                    <line x1="6.25" y1="-16" x2="6.25" y2="-20"/>
+                </g>
+            </g>
+            <g id="context">
+                <circle style="stroke: none" cx="0" cy="0" r="10"/>
+            </g>
+		</defs>
+
+        <g transform="translate(100, 100)">
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-1"
+                >
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#thread" x="180" y="20"/>
+            </g>
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-2"
+                >
+                <use xlink:href="#cpu" x="10" y="200"/>
+            </g>
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-3"
+                >
+                <use xlink:href="#context" style="fill: green" x="-10" y="240"/>
+                <use xlink:href="#context" style="fill: red" x="10" y="240"/>
+                <use xlink:href="#context" style="fill: blue" x="30" y="240"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-4"
+                >
+                <use xlink:href="#thread" x="20" y="20"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-5"
+                >
+                <rect style="fill: white; stroke: none" x="-20" y="0" width="60" height="175"/>
+                <use xlink:href="#thread" x="20" y="20"/>
+            </g>
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-6"
+                >
+                <rect style="fill: white; stroke: none" x="-25" y="225" width="70" height="30"/>
+                <use xlink:href="#context" style="fill: green" x="25" y="50"/>
+                <use xlink:href="#context" style="fill: red" x="10" y="240"/>
+                <use xlink:href="#context" style="fill: blue" x="30" y="240"/>
+            </g>
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-7"
+                >
+                <rect style="fill: white; stroke: none" x="-25" y="225" width="70" height="30"/>
+                <use xlink:href="#context" style="fill: green" x="25" y="50"/>
+                <use xlink:href="#context" style="fill: red" x="25" y="90"/>
+                <use xlink:href="#context" style="fill: blue" x="30" y="240"/>
+            </g>
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-8"
+                >
+                <rect style="fill: white; stroke: none" x="-25" y="225" width="70" height="30"/>
+                <use xlink:href="#context" style="fill: green" x="25" y="50"/>
+                <use xlink:href="#context" style="fill: red" x="25" y="90"/>
+                <use xlink:href="#context" style="fill: blue" x="25" y="130"/>
+            </g>
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-9"
+                >
+                <use xlink:href="#cpu" x="170" y="200"/>
+                <rect style="stroke: none; fill: white" x="-20" y="177" width="60" height="45"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-10"
+                >
+                <rect style="fill: white; stroke: none" x="140" y="0" width="60" height="175"/>
+                <use xlink:href="#thread" x="180" y="20"/>
+                <use xlink:href="#context" style="fill: green" x="150" y="240"/>
+                <use xlink:href="#context" style="fill: red" x="170" y="240"/>
+                <use xlink:href="#context" style="fill: blue" x="190" y="240"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-11"
+                >
+                <rect style="fill: white; stroke: none" x="140" y="0" width="60" height="175"/>
+                <use xlink:href="#thread" x="180" y="20"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-12"
+                >
+                <rect style="fill: white; stroke: none" x="135" y="225" width="70" height="30"/>
+                <use xlink:href="#context" style="fill: green" x="185" y="50"/>
+                <use xlink:href="#context" style="fill: red" x="170" y="240"/>
+                <use xlink:href="#context" style="fill: blue" x="190" y="240"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-13"
+                >
+                <rect style="fill: white; stroke: none" x="135" y="225" width="70" height="30"/>
+                <use xlink:href="#context" style="fill: green" x="185" y="50"/>
+                <use xlink:href="#context" style="fill: red" x="185" y="90"/>
+                <use xlink:href="#context" style="fill: blue" x="190" y="240"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-14"
+                >
+                <rect style="fill: white; stroke: none" x="135" y="225" width="70" height="30"/>
+                <use xlink:href="#context" style="fill: green" x="185" y="50"/>
+                <use xlink:href="#context" style="fill: red" x="185" y="90"/>
+                <use xlink:href="#context" style="fill: blue" x="185" y="130"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-15"
+                >
+                <use xlink:href="#cpu" x="10" y="200"/>
+                <rect style="stroke: none; fill: white" x="140" y="177" width="60" height="45"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-16"
+                >
+                <rect style="fill: white; stroke: none" x="-20" y="0" width="60" height="175"/>
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#context" style="fill: green" x="-10" y="240"/>
+                <use xlink:href="#context" style="fill: red" x="25" y="90"/>
+                <use xlink:href="#context" style="fill: blue" x="25" y="130"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-17"
+                >
+                <rect style="fill: white; stroke: none" x="-20" y="0" width="60" height="175"/>
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#context" style="fill: green" x="-10" y="240"/>
+                <use xlink:href="#context" style="fill: red" x="10" y="240"/>
+                <use xlink:href="#context" style="fill: blue" x="25" y="130"/>
+            </g>
+            <g
+                style="fill: none; stroke: red; stroke-width: 3"
+                class="slide-step-18"
+                >
+                <rect style="fill: white; stroke: none" x="-20" y="0" width="60" height="175"/>
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#context" style="fill: green" x="-10" y="240"/>
+                <use xlink:href="#context" style="fill: red" x="10" y="240"/>
+                <use xlink:href="#context" style="fill: blue" x="30" y="240"/>
+            </g>
+            <g
+                style="fill: none; stroke: green; stroke-width: 3"
+                class="slide-step-19"
+                >
+                <rect style="fill: white; stroke: none" x="-20" y="0" width="60" height="175"/>
+                <use xlink:href="#thread" x="20" y="20"/>
+                <use xlink:href="#context" style="fill: green" x="-10" y="240"/>
+                <use xlink:href="#context" style="fill: red" x="10" y="240"/>
+                <use xlink:href="#context" style="fill: blue" x="30" y="240"/>
+            </g>
+        </g>
+	</svg>
+</div>

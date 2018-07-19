@@ -1,0 +1,21 @@
+<div>
+    <h1>Separação dos métodos de composição de operações</h1>
+
+    <ul>
+        <li class="slide-step-1">A <em>trait</em> <code>Future</code> ficou mais simples</li>
+        <li class="slide-step-2">Fica mais consolidada, mudando pouco (ou nada) entre versões</li>
+        <li class="slide-step-3">Os métodos de composição foram movidas para uma nova <em>trait</em> <code>FutureExt</code>
+            <ul>
+                <li class="slide-step-4"><code>map</code></li>
+                <li class="slide-step-5"><code>map_err</code></li>
+                <li class="slide-step-6"><code>and_then</code></li>
+                <li class="slide-step-7"><code>or_else</code></li>
+                <li class="slide-step-8"><code>then</code></li>
+                <li class="slide-step-9"><code>flatten</code></li>
+                <li class="slide-step-10">etc.</li>
+            </ul>
+        </li>
+        <li class="slide-step-11">Novos métodos podem ser adicionados sem alterar a <em>trait</em> <code>Future</code></li>
+        <li class="slide-step-12">A <em>trait</em> só é usada se uma composição for necessária</li>
+    </ul>
+</div>

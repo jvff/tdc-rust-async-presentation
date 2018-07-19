@@ -1,0 +1,118 @@
+<div>
+    <h1 class="slide-8">Uso de um número limitado de <em class="slide-8">threads</em></h1>
+
+	<svg style="width: 20%" viewBox="0 0 1000 700">
+		<defs>
+			<g id="arrow-head">
+				<path d="M-20 -20 L0 0 L-20 20"/>
+			</g>
+            <g id="thread">
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"/>
+            </g>
+            <g id="cpu">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-12.5" y="-12.5" width="25" height="25"/>
+
+                    <line x1="-16" y1="0" x2="-20" y2="0"/>
+                    <line x1="-16" y1="-12.5" x2="-20" y2="-12.5"/>
+                    <line x1="-16" y1="-6.25" x2="-20" y2="-6.25"/>
+                    <line x1="-16" y1="12.5" x2="-20" y2="12.5"/>
+                    <line x1="-16" y1="6.25" x2="-20" y2="6.25"/>
+
+                    <line x1="16" y1="0" x2="20" y2="0"/>
+                    <line x1="16" y1="-12.5" x2="20" y2="-12.5"/>
+                    <line x1="16" y1="-6.25" x2="20" y2="-6.25"/>
+                    <line x1="16" y1="12.5" x2="20" y2="12.5"/>
+                    <line x1="16" y1="6.25" x2="20" y2="6.25"/>
+
+                    <line x1="0" y1="16" x2="0" y2="20"/>
+                    <line x1="-12.5" y1="16" x2="-12.5" y2="20"/>
+                    <line x1="-6.25" y1="16" x2="-6.25" y2="20"/>
+                    <line x1="12.5" y1="16" x2="12.5" y2="20"/>
+                    <line x1="6.25" y1="16" x2="6.25" y2="20"/>
+
+                    <line x1="0" y1="-16" x2="0" y2="-20"/>
+                    <line x1="-12.5" y1="-16" x2="-12.5" y2="-20"/>
+                    <line x1="-6.25" y1="-16" x2="-6.25" y2="-20"/>
+                    <line x1="12.5" y1="-16" x2="12.5" y2="-20"/>
+                    <line x1="6.25" y1="-16" x2="6.25" y2="-20"/>
+                </g>
+            </g>
+            <g id="db">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <ellipse cx="0" cy="-10" rx="25" ry="10"/>
+                    <path d="M-25 -10 v 20 a 25 10 180 1 0 50 0 v -20"/>
+                </g>
+            </g>
+            <g id="net">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <circle cx="0" cy="0" r="25"/>
+                    <ellipse cx="0" cy="0" rx="10" ry="25"/>
+                    <line x1="-25" y1="0" x2="25" y2="0"/>
+                    <path d="M-17.7 17.7 L17.7 17.7"/>
+                    <path d="M-17.7 -17.7 L17.7 -17.7"/>
+                </g>
+            </g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"/>
+            </g>
+            <g id="context">
+                <circle style="stroke: none" cx="0" cy="0" r="10"/>
+            </g>
+            <g id="etcetera">
+                <circle style="stroke: none; fill: black" cx="-10" cy="0" r="3"/>
+                <circle style="stroke: none; fill: black" cx="0" cy="0" r="3"/>
+                <circle style="stroke: none; fill: black" cx="10" cy="0" r="3"/>
+            </g>
+		</defs>
+
+        <g transform="translate(100, 100)">
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-1"
+                >
+                <use xlink:href="#task" x="20" y="20"/>
+                <use xlink:href="#task" x="100" y="20"/>
+                <use xlink:href="#etcetera" x="180" y="20"/>
+                <use xlink:href="#task" x="260" y="20"/>
+
+                <use xlink:href="#thread" x="20" y="60"/>
+                <use xlink:href="#thread" x="100" y="60"/>
+                <use xlink:href="#etcetera" x="180" y="120"/>
+                <use xlink:href="#thread" x="260" y="60"/>
+            </g>
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-2"
+                >
+                <rect style="stroke: none; fill: white" x="-20" y="-20" width="350" height="250"/>
+                <use xlink:href="#task" x="80" y="20"/>
+                <use xlink:href="#etcetera" x="80" y="60"/>
+                <use xlink:href="#task" x="80" y="100"/>
+
+                <use xlink:href="#thread" x="80" y="140"/>
+
+                <use xlink:href="#task" x="260" y="20"/>
+                <use xlink:href="#etcetera" x="260" y="60"/>
+                <use xlink:href="#task" x="260" y="100"/>
+
+                <use xlink:href="#thread" x="260" y="140"/>
+            </g>
+            <g
+                style="fill: none; stroke: gray; stroke-width: 3"
+                transform="translate(0,140),rotate(90)"
+                class="slide-step-3"
+                >
+                <use xlink:href="#arrow-head" x="0" y="0"/>
+                <line x1="0" y1="0" x2="-150" y2="0"/>
+            </g>
+            <g
+                style="fill: none; stroke: black; stroke-width: 3"
+                class="slide-step-4"
+                >
+                <use xlink:href="#db" transform="scale(0.8)" x="100" y="25"/>
+                <use xlink:href="#net" transform="scale(0.8)" x="100" y="125"/>
+            </g>
+        </g>
+    </svg>
+</div>
