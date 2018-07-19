@@ -1,7 +1,7 @@
 extern crate presentrs;
 
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use presentrs::{Notes, Slides};
 
@@ -18,8 +18,9 @@ fn main() {
     notes.animate_steps().expect("Failed to animate slide steps");
     notes.generate_html(static_dir).expect("Failed to generate notes file");
 
-    let slides = Slides::from_notes(&notes).expect("Failed to generate slides");
+    let mut slides = Slides::from_notes(&notes).expect("Failed to generate slides");
 
+    slides.load_from("../slides").expect("Failed to load slides");
     slides.write_to(slides_dir).expect("Failed to write slides");
 }
 
