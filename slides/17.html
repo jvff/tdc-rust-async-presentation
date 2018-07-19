@@ -277,15 +277,4 @@
             </g>
         </g>
     </svg>
-
-    <p data-slide-steps="18-">O tipo do erro deve ser o mesmo para as duas operações</p>
-
-<pre data-slide-steps="19-"><code>operacao1
-    .map_err(|erro1| NovoErro::from(erro1))
-    .join(
-        operacao2
-            .map_err(|erro2| NovoErro::from(erro2))
-    )
-</code></pre>
-
 </div>

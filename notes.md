@@ -152,9 +152,11 @@ pub trait Executor<F: Future<Item = (), Error = ()>> {
   `Future`s juntados terminar ou falhar
 - `join`: retorna um `Future` que só terminará quando os dois `Future`s juntados
   terminarem ou quando um deles falhar
-  - O tipo do erro deve ser o mesmo para as duas operações
-    - `map_err` pode ser utilizado para igualar os tipos
-  - `join3`, `join4`, `join5`
+
+### Compondo operações simultâneas
+
+- O tipo do erro deve ser o mesmo para as duas operações
+  - `map_err` pode ser utilizado para igualar os tipos
 
 ### Fluxos
 
