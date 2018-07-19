@@ -1,5 +1,5 @@
 <div>
-    <h1>Entrada e saída assíncrona</h1>
+    <h1>Entrada assíncrona</h1>
 
     <ul>
         <li data-slide-steps="1-"><code>tokio::io</code> oferece ferramentas para leitura e escrita assíncrona</li>
@@ -9,19 +9,6 @@
                 <li data-slide-steps="4-">Para implementar <code>AsyncRead</code>, basta implementar <code>Read</code> e se a operação de
                 leitura for bloquear, precisa agendar para a tarefa ser acordada quando a
                 operação estiver pronta e retornar <code>Async::NotReady</code></li>
-            </ul>
-        </li>
-        <li data-slide-steps="5-"><code>AsyncWrite</code> é o equivalente assíncrono do <code>Write</code>
-            <ul>
-                <li data-slide-steps="6-"><code>poll_write</code> tenta enfileirar dados a serem escritos</li>
-                <li data-slide-steps="7-"><code>poll_flush</code> tenta enviar dados enfileirados</li>
-                <li data-slide-steps="8-"><code>shutdown</code> tenta enviar dados enfileirados e depois fechar a escrita</li>
-                <li data-slide-steps="9-">Para implementar <code>AsyncWrite</code>, basta implementar <code>Write</code> de forma análoga ao
-                <code>AsyncRead</code>
-                    <ul>
-                        <li data-slide-steps="10-"><code>shutdown</code> precisa ser implementado</li>
-                    </ul>
-                </li>
             </ul>
         </li>
     </ul>
@@ -43,37 +30,5 @@ impl Read for MyRead {
 }
 
 impl AsyncRead for MyRead {}</span>
-
-
-
-<span data-slide-steps="5-"><code>pub trait AsyncWrite: Write {</code></span><code>
-    <span data-slide-steps="6-">fn poll_write(&amp;mut self, buf: &amp;[u8]) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }
-
-    <span data-slide-steps="7-">fn poll_flush(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; { ... }
-
-    <span data-slide-steps="8-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;
-<span data-slide-steps="5-">}</span>
-
-<span data-slide-steps="9-">// Implementando AsyncWrite para MyWrite
-impl Write for MyWrite {
-    fn write(&amp;mut self, buf &amp;[u8]) -&gt; Result&lt;usize, tokio::io::Error&gt; {
-        // Se for bloquear, precisa preparar a tarefa para ser acordada quando
-        // for possível enviar mais dados, e depois retornar:
-
-        Err(ErrorKind::WouldBlock.into())
-    }
-
-    fn flush(&amp;mut self) -&gt; Result&lt;(), tokio::io::Error&gt; {
-        // Mesma necessidade aqui
-
-        Err(ErrorKind::WouldBlock.into())
-    }
-}
-
-impl AsyncWrite for MyWrite {</span>
-    <span data-slide-steps="10-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; {
-        Ok(Async::Ready(()))
-    }</span>
-<span data-slide-steps="9-">}</span>
-</span></span></span></code></code></pre><code>
-</code></div>
+</code></pre>
+</div>

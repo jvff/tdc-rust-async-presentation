@@ -1,21 +1,50 @@
 <div>
-    <h1>Operações de entrada e saída</h1>
+    <h1>Saída assíncrona</h1>
 
     <ul>
-        <li data-slide-steps="1-">Algumas funções facilitam a composição de operações, retornando <code>Future</code>s
+        <li data-slide-steps="1-"><code>AsyncWrite</code> é o equivalente assíncrono do <code>Write</code>
             <ul>
-                <li data-slide-steps="2-"><code>copy</code>: copia todos os dados de um leitor para um escritor</li>
-                <li data-slide-steps="3-"><code>flush</code>: envia todos os dados enfileirados</li>
-                <li data-slide-steps="4-"><code>read_exact</code>: lê um número determinado de bytes</li>
-                <li data-slide-steps="5-"><code>read_to_end</code>: lê todos os bytes de um leitor</li>
-                <li data-slide-steps="6-"><code>write_all</code>: escreve todos os bytes de um <em>buffer</em></li>
-                <li data-slide-steps="7-"><code>shutdown</code>: finaliza um escritor</li>
-            </ul>
-        </li>
-        <li data-slide-steps="8-">Uma função retorna um <code>Stream</code>
-            <ul>
-                <li data-slide-steps="9-"><code>lines</code>: lê linha por linha em forma de <code>String</code>s</li>
+                <li data-slide-steps="2-"><code>poll_write</code> tenta enfileirar dados a serem escritos</li>
+                <li data-slide-steps="3-"><code>poll_flush</code> tenta enviar dados enfileirados</li>
+                <li data-slide-steps="4-"><code>shutdown</code> tenta enviar dados enfileirados e depois fechar a escrita</li>
+                <li data-slide-steps="5-">Para implementar <code>AsyncWrite</code>, basta implementar <code>Write</code> de forma análoga ao
+                <code>AsyncRead</code>
+                    <ul>
+                        <li data-slide-steps="6-"><code>shutdown</code> precisa ser implementado</li>
+                    </ul>
+                </li>
             </ul>
         </li>
     </ul>
+
+<pre><code><span data-slide-steps="1-">pub trait AsyncWrite: Write {</span>
+    <span data-slide-steps="2-">fn poll_write(&amp;mut self, buf: &amp;[u8]) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
+
+    <span data-slide-steps="3-">fn poll_flush(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; { ... }</span>
+
+    <span data-slide-steps="4-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
+<span data-slide-steps="1-">}</span>
+
+<span data-slide-steps="5-">// Implementando AsyncWrite para MyWrite
+impl Write for MyWrite {
+    fn write(&amp;mut self, buf &amp;[u8]) -&gt; Result&lt;usize, tokio::io::Error&gt; {
+        // Se for bloquear, precisa preparar a tarefa para ser acordada quando
+        // for possível enviar mais dados, e depois retornar:
+
+        Err(ErrorKind::WouldBlock.into())
+    }
+
+    fn flush(&amp;mut self) -&gt; Result&lt;(), tokio::io::Error&gt; {
+        // Mesma necessidade aqui
+
+        Err(ErrorKind::WouldBlock.into())
+    }
+}
+
+impl AsyncWrite for MyWrite {</span>
+    <span data-slide-steps="6-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; {
+        Ok(Async::Ready(()))
+    }</span>
+<span data-slide-steps="5-">}</span>
+</code></pre>
 </div>

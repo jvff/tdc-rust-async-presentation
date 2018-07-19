@@ -288,7 +288,7 @@ pub trait Sink {
   - Poderia ser implementado como `future.select(Delay::new(instante))`, mas sem
     precisar lidar com um resultado duplo
 
-### Entrada e saída assíncrona
+### Entrada assíncrona
 
 - `tokio::io` oferece ferramentas para leitura e escrita assíncrona
 - `AsyncRead` é o equivalente assíncrono do `Read`
@@ -296,6 +296,9 @@ pub trait Sink {
   - Para implementar `AsyncRead`, basta implementar `Read` e se a operação de
     leitura for bloquear, precisa agendar para a tarefa ser acordada quando a
     operação estiver pronta e retornar `Async::NotReady`
+
+### Saída assíncrona
+
 - `AsyncWrite` é o equivalente assíncrono do `Write`
   - `poll_write` tenta enfileirar dados a serem escritos
   - `poll_flush` tenta enviar dados enfileirados
@@ -303,45 +306,6 @@ pub trait Sink {
   - Para implementar `AsyncWrite`, basta implementar `Write` de forma análoga ao
     `AsyncRead`
     - `shutdown` precisa ser implementado
-
-```
-pub trait AsyncRead: Read {
-    unsafe fn prepare_uninitialized_buffer(&self, buf: &mut [u8]) -> bool { ... }
-
-	fn poll_read(&mut self, buf: &mut [u8]) -> Result<Async<usize>, Error> { ... }
-
-	fn read_buf<B>(&mut self, buf: &mut B) -> Result<Async<usize>, Error>
-	where
-		B: BufMut,
-	{ ... }
-
-	fn framed<T>(self, codec: T) -> Framed<Self, T>
-	where
-		Self: AsyncWrite,
-		T: Decoder + Encoder,
-	{ ... }
-
-	fn split(self) -> (ReadHalf<Self>, WriteHalf<Self>)
-	where
-		Self: AsyncWrite,
-	{ ... }
-}
-```
-
-```
-pub trait AsyncWrite: Write {
-    fn shutdown(&mut self) -> Result<Async<()>, Error>;
-
-	fn poll_write(&mut self, buf: &[u8]) -> Result<Async<usize>, Error> { ... }
-
-	fn poll_flush(&mut self) -> Result<Async<()>, Error> { ... }
-
-	fn write_buf<B>(&mut self, buf: &mut B) -> Result<Async<usize>, Error>
-	where
-		B: Buf,
-	{ ... }
-}
-```
 
 ### Operações de entrada e saída
 
