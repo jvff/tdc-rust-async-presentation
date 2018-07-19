@@ -6,19 +6,20 @@ use std::path::{Path, PathBuf};
 use presentrs::{Notes, Slides};
 
 fn main() {
-    let static_dir = PathBuf::from("../static");
-    let slides_dir = static_dir.join("slides");
+    let output_dir = PathBuf::from("../target/deploy/static");
+    let slides_dir = output_dir.join("slides");
 
     let mut notes =
         Notes::from_markdown("../notes.md").expect("Failed to read notes");
 
-    create_dir(&static_dir);
+    create_dir(&output_dir);
     create_dir(&slides_dir);
 
     notes.animate_steps().expect("Failed to animate slide steps");
-    notes.generate_html(static_dir).expect("Failed to generate notes file");
+    notes.generate_html(output_dir).expect("Failed to generate notes file");
 
-    let mut slides = Slides::from_notes(&notes).expect("Failed to generate slides");
+    let mut slides =
+        Slides::from_notes(&notes).expect("Failed to generate slides");
 
     slides.load_from("../slides").expect("Failed to load slides");
     slides.write_to(slides_dir).expect("Failed to write slides");

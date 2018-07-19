@@ -1,0 +1,52 @@
+#slide code {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#slide svg {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#slide h1 {
+    text-align: center;
+}
+
+#slide h2 {
+    text-align: center;
+}
+
+#slide h3 {
+    text-align: center;
+}
+
+#slide div.cover {
+    position: relative;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+svg .inactive-in-slide-step {
+    visibility: hidden;
+}
+
+svg .active-in-slide-step {
+    visibility: visible;
+}
+
+code span.inactive-in-slide-step {
+    color: gray;
+}
+
+code span.active-in-slide-step {
+    color: black;
+}
+
+li.inactive-in-slide-step {
+    visibility: hidden;
+}
+
+li.active-in-slide-step {
+    visibility: visible;
+}

@@ -6,9 +6,9 @@ run: all
 	target/debug/server
 	
 client:
-	rm -f static/*.js static/*.wasm
 	cargo web deploy -p client
-	cp target/deploy/*.js target/deploy/*.wasm static
+	cp -a static/* target/deploy/
+	cp -a slides target/deploy/
 
 server:
 	cargo build -p server
