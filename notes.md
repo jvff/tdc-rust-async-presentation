@@ -4,7 +4,8 @@
 
 ### Tarefas em um programa
 
-- Programas podem ser organizados como sendo compostos por várias tarefas
+- Existem várias formas de organizar um programa
+- Uma delas é como sendo composto por várias tarefas
   - Uma tarefa é executada ao ser solicitada por um usuário
   - Outra tarefa é executada periodicamente
   - E outra é executada toda vez que um evento externo ocorre
@@ -13,18 +14,20 @@
 
 ### Relação entre as tarefas
 
+- Com um programa organizado em tarefas
 - As tarefas tem relações entre si
-- Algumas só podem ser executadas após outras
 - Algumas dependem da execução de outras
-- Outras não precisam ser executadas se outra tiver executada
-- No entanto, há também um nível de independência entre si
+- Algumas podem ser executadas em paralelo, terminando em momentos diferentes
+- Outras não precisam ou não podem ser executadas se outra tiver executada
 
 ### Execução das tarefas
 
-- O jeito mais simples de executar as tarefas é uma por uma
+- Como executar as tarefas
+- O jeito mais simples uma por uma
 - Esse não é o modo mais eficiente
 - Diferentes tarefas usam recursos diferentes
 - Recursos diferentes tem latência diferentes
+  - Processador
   - Memória
   - Disco rígido
   - Rede de comunicação
@@ -260,6 +263,15 @@ pub trait Sink {
   - Existe uma *crate* principal com o objetivo de centralizar as
     funcionalidades comuns
 
+### Executador
+
+- Responsável por avançar `Future`s chamando `poll` quando a tarefa receber um 
+  evento
+- Por padrão, uma *thread* com um executador é criado para cada núcleo do
+  processador
+  - `tokio_executor::DefaultExecutor::current()` pode ser usado para se obter um
+    acesso ao executador padrão
+
 ### Laço de eventos
 
 - Chamado `Reactor`
@@ -271,15 +283,6 @@ pub trait Sink {
     - Abrir uma conexão de rede
     - Acessar um arquivo
     - Configurar um temporizador
-
-### Executador
-
-- Responsável por avançar `Future`s chamando `poll` quando a tarefa receber um 
-  evento
-- Por padrão, uma *thread* com um executador é criado para cada núcleo do
-  processador
-  - `tokio_executor::DefaultExecutor::current()` pode ser usado para se obter um
-    acesso ao executador padrão
 
 ### Temporizador
 
@@ -508,14 +511,13 @@ pub trait Stream {
 
 - Struct `futures::task::Context`
   - Representa o contexto de uma tarefa
-  - `Context::waker() -> &Waker` dá acesso ao mecanismo para acordar a tarefa
   - `Context::executor() -> &mut Executor` dá acesso ao executador da tarefa
   - `Context::spawn(...)` agenda uma operação no executador
+  - `Context::waker() -> &Waker` dá acesso ao mecanismo para acordar a tarefa
 - Struct `futures::task::Waker`
-  - Permite acordar uma determinada tarefa, para indicar que uma operação
-    associada a este `Waker` está pronta
-  - `Waker::wake()`
-  - Substitui `Task`
+  - `Waker::wake()` permite acordar uma determinada tarefa, para indicar que uma
+	operação associada a este `Waker` está pronta
+  - Substitui `Task::notify()`
 
 ### Algumas mudanças de nomes
 
