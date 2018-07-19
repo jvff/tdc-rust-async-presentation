@@ -6,7 +6,7 @@ use std::path::{Path, PathBuf};
 use presentrs::{Notes, Slides};
 
 fn main() {
-    let output_dir = PathBuf::from("../target/deploy/static");
+    let output_dir = PathBuf::from("../target/deploy");
     let slides_dir = output_dir.join("slides");
 
     let mut notes =
