@@ -325,12 +325,15 @@ pub trait Sink {
   e as saídas padrão de forma assíncrona
 - Precisa tomar cuidado para usá-los de forma concorrente
 
-### Encodificação e decodificação
+### Encodificação
 
 - A *crate* `tokio-codec` auxilia na conversão de leitores e escritores em
   fluxos.
 - A *trait* `Encoder` possibilita especificar como transformar bytes lidos em
   ítens de `Stream`
+
+### Decodificação
+
 - A *trait* `Decoder` possibilita especificar como transformar ítens de um
   `Sink` em bytes a serem escritos
   - Somente o método `decode` precisa ser especificado
@@ -338,42 +341,6 @@ pub trait Sink {
     possibilita gerar um último ítem especial se necessário
 - O método `Decoder::framed` ou `AsyncRead::framed` transforma um canal
   assíncrono em um fluxo assíncrono usando a codificação especificada
-
-```
-pub trait Encoder {
-    type Item;
-	type Error: From<std::io::Error>;
-
-	fn encode(
-		&mut self, 
-		item: Self::Item, 
-		dst: &mut BytesMut
-	) -> Result<(), Self::Error>;
-}
-```
-
-```
-pub trait Decoder {
-    type Item;
-	type Error: From<Error>;
-
-	fn decode(
-		&mut self, 
-		src: &mut BytesMut
-	) -> Result<Option<Self::Item>, Self::Error>;
-
-	fn decode_eof(
-		&mut self, 
-		buf: &mut BytesMut
-	) -> Result<Option<Self::Item>, Self::Error> { ... }
-
-	fn framed<T>(self, io: T) -> Framed<T, Self>
-		where
-		Self: Encoder,
-		T: AsyncRead + AsyncWrite,
-	{ ... }
-}
-```
 
 ### Manipulando arquivos
 
