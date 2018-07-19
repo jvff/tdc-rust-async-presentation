@@ -1,16 +1,25 @@
 <div>
-    <h1>Executador</h1>
+    <h1>Laço de eventos</h1>
 
     <ul>
-        <li data-slide-steps="2-">Responsável por avançar <code>Future</code>s chamando <code>poll</code> quando a tarefa receber um
-        evento</li>
-        <li data-slide-steps="11-">Cada executador roda em uma <em>thread</em> separada</li>
-        <li data-slide-steps="12-">Por padrão, um executador é criado para cada núcleo do processador </li>
-        <li data-slide-steps="13-"><code>tokio_executor::DefaultExecutor::current()</code> pode ser usado para se obter um
-        acesso ao executador padrão</li>
+        <li data-slide-steps="1-">Chamado <code>Reactor</code></li>
+        <li data-slide-steps="2-">Registro de todas as operações assíncronas em andamento</li>
+        <li data-slide-steps="3-">Responsável por aguardar por eventos e acordar tarefas com base neles</li>
+        <li data-slide-steps="4-">Pode ser acessado através de um <code>Handle</code>, necessário para registrar novas
+        operações de baixo nível
+            <ul>
+                <li data-slide-steps="5-">Exemplos
+                    <ul>
+                        <li data-slide-steps="6-">Abrir uma conexão de rede</li>
+                        <li data-slide-steps="7-">Acessar um arquivo</li>
+                        <li data-slide-steps="8-">Configurar um temporizador</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
     </ul>
 
-    <svg viewBox="-100 0 1000 600">
+    <svg viewBox="-100 -150 1000 600">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -23,9 +32,6 @@
             </g>
             <g id="future">
                 <circle cx="0" cy="0" r="10"></circle>
-            </g>
-            <g id="ok">
-                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
             </g>
             <g id="task">
                 <rect x="-25" y="-25" width="50" height="50"></rect>
@@ -118,77 +124,122 @@
             <g id="hide-event-loop">
                 <rect style="stroke: none; fill: white" x="-70" y="-50" width="120" height="100"></rect>
             </g>
-            <g id="etcetera">
-                <circle style="stroke: none; fill: black" cx="-10" cy="0" r="3"></circle>
-                <circle style="stroke: none; fill: black" cx="0" cy="0" r="3"></circle>
-                <circle style="stroke: none; fill: black" cx="10" cy="0" r="3"></circle>
-            </g>
         </defs>
 
         <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
             <g data-slide-steps="1-">
-                <use xlink:href="#executor" x="0" y="50"></use>
+                <use xlink:href="#event-loop" x="0" y="50"></use>
             </g>
             <g data-slide-steps="2-">
-                <use xlink:href="#task" x="0" y="50"></use>
-                <use xlink:href="#future" x="0" y="50"></use>
+                <use xlink:href="#thread" x="0" y="120"></use>
             </g>
             <g data-slide-steps="3-">
-                <use xlink:href="#hide-task" x="0" y="50"></use>
-                <use xlink:href="#task" x="0" y="50"></use>
-                <g style="fill: orange">
-                    <use xlink:href="#future" x="0" y="50"></use>
-                </g>
+                <use xlink:href="#executor" x="200" y="50"></use>
+                <use xlink:href="#thread" x="200" y="120"></use>
+                <use xlink:href="#executor" x="300" y="50"></use>
+                <use xlink:href="#thread" x="300" y="120"></use>
             </g>
             <g data-slide-steps="4-">
-                <use xlink:href="#hide-task" x="0" y="50"></use>
-                <use xlink:href="#task" x="0" y="50"></use>
-                <use xlink:href="#future" x="0" y="50"></use>
+                <use xlink:href="#hide-thread" x="0" y="120"></use>
+                <use xlink:href="#hide-thread" x="200" y="120"></use>
+                <use xlink:href="#hide-thread" x="300" y="120"></use>
+
+                <g style="stroke: red">
+                    <use xlink:href="#thread" x="0" y="120"></use>
+                    <use xlink:href="#thread" x="200" y="120"></use>
+                    <use xlink:href="#thread" x="300" y="120"></use>
+                </g>
             </g>
             <g data-slide-steps="5-">
-                <use xlink:href="#hide-task" x="0" y="50"></use>
-                <use xlink:href="#task" x="0" y="50"></use>
-                <g style="fill: orange">
-                    <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke: blue">
+                    <use xlink:href="#task" x="200" y="50"></use>
+                    <use xlink:href="#future" x="200" y="50"></use>
+                </g>
+                <use xlink:href="#hide-thread" x="200" y="120"></use>
+                <g style="stroke: green">
+                    <use xlink:href="#thread" x="200" y="120"></use>
                 </g>
             </g>
             <g data-slide-steps="6-">
-                <use xlink:href="#hide-task" x="0" y="50"></use>
-                <use xlink:href="#task" x="0" y="50"></use>
-                <use xlink:href="#future" x="0" y="50"></use>
+                <use xlink:href="#hide-future" x="200" y="50"></use>
+                <g style="stroke: blue; fill: orange">
+                    <use xlink:href="#future" x="200" y="50"></use>
+                </g>
             </g>
             <g data-slide-steps="7-">
-                <use xlink:href="#hide-task" x="0" y="50"></use>
-                <use xlink:href="#task" x="0" y="50"></use>
-                <g style="fill: orange">
-                    <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke: none; fill: blue">
+                    <use xlink:href="#token" x="-50" y="50"></use>
                 </g>
             </g>
             <g data-slide-steps="8-">
-                <use xlink:href="#hide-task" x="0" y="50"></use>
-                <use xlink:href="#task" x="0" y="50"></use>
-                <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke: none; fill: blue">
+                    <use xlink:href="#token" x="-50" y="35"></use>
+                </g>
             </g>
             <g data-slide-steps="9-">
-                <use xlink:href="#hide-task" x="0" y="50"></use>
-                <use xlink:href="#task" x="0" y="50"></use>
-                <use xlink:href="#ok" x="-5" y="50"></use>
+                <use xlink:href="#hide-task" x="200" y="50"></use>
+                <g style="stroke: blue">
+                    <use xlink:href="#task" x="-50" y="-100"></use>
+                    <use xlink:href="#future" x="-50" y="-100"></use>
+                </g>
             </g>
             <g data-slide-steps="10-">
-                <use xlink:href="#hide-task" x="0" y="50"></use>
+                <use xlink:href="#hide-thread" x="200" y="120"></use>
+                <g style="stroke: red">
+                    <use xlink:href="#thread" x="200" y="120"></use>
+                </g>
             </g>
             <g data-slide-steps="11-">
-                <use xlink:href="#thread" x="0" y="120"></use>
+                <g transform="translate(-35,35)" style="stroke: green; stroke-width: 4">
+                    <use xlink:href="#small-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-10" y2="0"></line>
+                </g>
             </g>
             <g data-slide-steps="12-">
-                <use xlink:href="#executor" x="100" y="50"></use>
-                <use xlink:href="#thread" x="100" y="120"></use>
+                <use xlink:href="#hide-thread" x="0" y="120"></use>
+                <g style="stroke: green">
+                    <use xlink:href="#thread" x="0" y="120"></use>
+                </g>
+            </g>
+            <g data-slide-steps="13-">
+                <use xlink:href="#hide-task" x="-50" y="-100"></use>
+                <g style="stroke: blue">
+                    <use xlink:href="#task" x="175" y="-100"></use>
+                    <use xlink:href="#future" x="175" y="-100"></use>
+                </g>
+            </g>
+            <g data-slide-steps="14-">
+                <use xlink:href="#hide-event-loop" x="0" y="50"></use>
+                <use xlink:href="#event-loop" x="0" y="50"></use>
+            </g>
+            <g data-slide-steps="15-">
+                <use xlink:href="#hide-thread" x="0" y="120"></use>
+                <g style="stroke: red">
+                    <use xlink:href="#thread" x="0" y="120"></use>
+                </g>
+            </g>
+            <g data-slide-steps="16-">
+                <use xlink:href="#hide-task" x="175" y="-100"></use>
+                <g style="stroke: blue">
+                    <use xlink:href="#task" x="200" y="50"></use>
+                    <use xlink:href="#future" x="200" y="50"></use>
+                </g>
 
-                <use xlink:href="#etcetera" x="200" y="50"></use>
-                <use xlink:href="#etcetera" x="200" y="190"></use>
-
-                <use xlink:href="#executor" x="300" y="50"></use>
-                <use xlink:href="#thread" x="300" y="120"></use>
+                <use xlink:href="#hide-thread" x="200" y="120"></use>
+                <g style="stroke: green">
+                    <use xlink:href="#thread" x="200" y="120"></use>
+                </g>
+            </g>
+            <g data-slide-steps="17-">
+                <use xlink:href="#hide-future" x="200" y="50"></use>
+                <g style="stroke: blue; fill: orange">
+                    <use xlink:href="#future" x="200" y="50"></use>
+                </g>
+            </g>
+            <g data-slide-steps="18-">
+                <g style="stroke: none; fill: blue">
+                    <use xlink:href="#token" x="-50" y="50"></use>
+                </g>
             </g>
         </g>
     </svg>

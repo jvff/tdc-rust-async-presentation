@@ -119,28 +119,15 @@ pub trait Executor<F: Future<Item = (), Error = ()>> {
     - **Precisa** se preparar para acordar a tarefa quando um recurso necessário
       se tornar disponível
     - Retorna `Async::NotReady` indicando que a tarefa pode pausar
+
+### Implementando operações
+
 - Na maioria dos casos não é preciso implementar um `Future` manualmente
 - Mesmo se necessário, geralmente é feito compondo outros `Future`s
   - Basta tomar o cuidade de retornar `Async::NotReady` se e **somente se** pelo
     menos um dos `Future`s usados internamente também tiver retornado
     `Async::NotReady`
     - (ou seja, algum `Future` interno se preparou para acordar a tarefa)
-
-```
-pub trait Future {
-    type Item;
-    type Error;
-
-    fn poll(&mut self) -> Result<Async<Self::Item>, Self::Error>;
-}
-```
-
-``` 
-pub enum Async<T> {
-    Ready(T),
-    NotReady,
-}
-```
 
 ### Compondo uma operação atrás de outra
 

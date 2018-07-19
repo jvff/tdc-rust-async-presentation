@@ -37,15 +37,6 @@
                 </li>
             </ul>
         </li>
-        <li data-slide-steps="12-">Na maioria dos casos não é preciso implementar um <code>Future</code> manualmente</li>
-        <li data-slide-steps="13-">Mesmo se necessário, geralmente é feito compondo outros <code>Future</code>s
-            <ul>
-                <li data-slide-steps="14-">Basta tomar o cuidado</li>
-                <li data-slide-steps="15-">Retornar <code>Async::NotReady</code> se e <strong>somente se</strong> pelo
-                menos um dos <code>Future</code>s usados internamente também tiver retornado <code>Async::NotReady</code></li>
-                <li data-slide-steps="16-">Ou seja, algum <code>Future</code> interno se preparou para acordar a tarefa</li>
-            </ul>
-        </li>
     </ul>
 
     <svg viewBox="0 -30 1000 300">
@@ -143,4 +134,4 @@
             </g>
         </g>
     </svg>
-</li></ul></div>
+</div>
