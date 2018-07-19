@@ -329,19 +329,19 @@ pub trait Sink {
 
 - A *crate* `tokio-codec` auxilia na conversão de leitores e escritores em
   fluxos.
-- A *trait* `Encoder` possibilita especificar como transformar bytes lidos em
-  ítens de `Stream`
-
-### Decodificação
-
-- A *trait* `Decoder` possibilita especificar como transformar ítens de um
+- A *trait* `Encoder` possibilita especificar como transformar ítens de um
   `Sink` em bytes a serem escritos
 
 ### Decodificação
 
-  - Somente o método `decode` precisa ser especificado
-  - O `decode_eof` é chamado quando não há mais bytes a serem lidos, então
-    possibilita gerar um último ítem especial se necessário
+- A *trait* `Decoder` possibilita especificar como transformar bytes lidos em
+  ítens de um `Stream`
+
+### Decodificação
+
+- Somente o método `decode` precisa ser especificado
+- O `decode_eof` é chamado quando não há mais bytes a serem lidos, então
+  possibilita gerar um último ítem especial se necessário
 - O método `Decoder::framed` ou `AsyncRead::framed` transforma um canal
   assíncrono em um fluxo assíncrono usando a codificação especificada
 
