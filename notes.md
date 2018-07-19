@@ -279,25 +279,14 @@ pub trait Sink {
 - `Delay` é um `Future` que termina em um determinado instante
 - `Interval` é um `Stream` que produz um ítem por vez a um intervalo de tempo
   determinado
+
+### Limitar tempo de uma operação
+
 - `Deadline` é um `Future` que junto `Delay` com outro `Future`, para garantir
   que a operação termine antes de um determinado instante
   - Seria equivalente a um *timeout*
   - Poderia ser implementado como `future.select(Delay::new(instante))`, mas sem
     precisar lidar com um resultado duplo
-
-```
-let operacao_com_timeout = operacao
-	.select(Delay::new(instante))
-	.and_then(|resultado| match resultado {
-		Ok(Either::Left((item, _))) => Ok(item),
-		Err(Either::Left((erro, _))) => Err(erro),
-
-		Ok(Either::Right((_, _))) => Err(Erro::Timeout)
-		Err(Either::Right((_, _))) => Err(Erro::Timeout),
-	});
-
-tokio::run(operacao_com_timeout)
-```
 
 ### Entrada e saída assíncrona
 

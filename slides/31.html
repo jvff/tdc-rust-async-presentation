@@ -1,16 +1,21 @@
 <div>
-    <h1>Entrada e saída padrão</h1>
+    <h1>Operações de entrada e saída</h1>
 
     <ul>
-        <li class="slide-29 slide-step-1">As funções <code>tokio::io::stdout</code>, <code>stdin</code> e <code>stderr</code> permite utilizar a entrada
-        e as saídas padrão de forma assíncrona</li>
-        <li class="slide-29 slide-step-2">Precisa tomar cuidado para usá-los de forma concorrente</li>
+        <li data-slide-steps="1-">Algumas funções facilitam a composição de operações, retornando <code>Future</code>s
+            <ul>
+                <li data-slide-steps="2-"><code>copy</code>: copia todos os dados de um leitor para um escritor</li>
+                <li data-slide-steps="3-"><code>flush</code>: envia todos os dados enfileirados</li>
+                <li data-slide-steps="4-"><code>read_exact</code>: lê um número determinado de bytes</li>
+                <li data-slide-steps="5-"><code>read_to_end</code>: lê todos os bytes de um leitor</li>
+                <li data-slide-steps="6-"><code>write_all</code>: escreve todos os bytes de um <em>buffer</em></li>
+                <li data-slide-steps="7-"><code>shutdown</code>: finaliza um escritor</li>
+            </ul>
+        </li>
+        <li data-slide-steps="8-">Uma função retorna um <code>Stream</code>
+            <ul>
+                <li data-slide-steps="9-"><code>lines</code>: lê linha por linha em forma de <code>String</code>s</li>
+            </ul>
+        </li>
     </ul>
-
-    <svg style="width: 10%" viewBox="-50 -50 500 400">
-        <rect x="0" y="0" width="400" height="300" style="stroke: black; stroke-width: 8; fill: gray"></rect>
-        <rect x="0" y="20" width="400" height="280" style="stroke: none; fill: black"></rect>
-        <path d="M 30 50 l 30 30 l -30 30" style="stroke: lightgray; stroke-width: 7"></path>
-        <line x1="80" y1="110" x2="140" y2="110" style="stroke: lightgray; stroke-width: 7"></line>
-    </svg>
 </div>

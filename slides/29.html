@@ -1,79 +1,232 @@
 <div>
-    <h1>Entrada e saída assíncrona</h1>
+    <h1>Limitar tempo de uma operação</h1>
 
     <ul>
-        <li data-slide-steps="1-"><code>tokio::io</code> oferece ferramentas para leitura e escrita assíncrona</li>
-        <li data-slide-steps="2-"><code>AsyncRead</code> é o equivalente assíncrono do <code>Read</code>
+        <li data-slide-steps="1-"><code>Deadline</code> é um <code>Future</code> que junto <code>Delay</code> com outro <code>Future</code>, para garantir
+        que a operação termine antes de um determinado instante
             <ul>
-                <li data-slide-steps="3-"><code>poll_read</code> é o método usado para ler de forma assíncrona</li>
-                <li data-slide-steps="4-">Para implementar <code>AsyncRead</code>, basta implementar <code>Read</code> e se a operação de
-                leitura for bloquear, precisa agendar para a tarefa ser acordada quando a
-                operação estiver pronta e retornar <code>Async::NotReady</code></li>
-            </ul>
-        </li>
-        <li data-slide-steps="5-"><code>AsyncWrite</code> é o equivalente assíncrono do <code>Write</code>
-            <ul>
-                <li data-slide-steps="6-"><code>poll_write</code> tenta enfileirar dados a serem escritos</li>
-                <li data-slide-steps="7-"><code>poll_flush</code> tenta enviar dados enfileirados</li>
-                <li data-slide-steps="8-"><code>shutdown</code> tenta enviar dados enfileirados e depois fechar a escrita</li>
-                <li data-slide-steps="9-">Para implementar <code>AsyncWrite</code>, basta implementar <code>Write</code> de forma análoga ao
-                <code>AsyncRead</code>
-                    <ul>
-                        <li data-slide-steps="10-"><code>shutdown</code> precisa ser implementado</li>
-                    </ul>
-                </li>
+                <li data-slide-steps="8-">Equivalente a um <em>timeout</em></li>
+                <li data-slide-steps="9-">Poderia ser implementado como <code>future.select(Delay::new(instante))</code></li>
             </ul>
         </li>
     </ul>
 
-<pre><code><span data-slide-steps="2-">pub trait AsyncRead: Read {</span>
-    <span data-slide-steps="3-">fn poll_read(&amp;mut self, buf: &amp;mut [u8]) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
+    <svg viewBox="-100 0 1000 200">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
+            </g>
+            <g id="small-arrow-head">
+                <path d="M-10 -10 L0 0 L-10 10"></path>
+            </g>
+            <g id="mini-arrow-head">
+                <path d="M-8 -8 L0 0 L-8 8"></path>
+            </g>
+            <g id="thread">
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"></path>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"></circle>
+            </g>
+            <g id="stream">
+                <circle cx="0" cy="0" r="10"></circle>
+                <g style="stroke: none; fill: black">
+                    <circle cx="9" cy="10" r="2"></circle>
+                    <circle cx="15" cy="10" r="2"></circle>
+                    <circle cx="21" cy="10" r="2"></circle>
+                </g>
+            </g>
+            <g id="nothing">
+                <path d="M-5 -10 A 15 15 30 0 0 -5 10"></path>
+                <path d="M5 -10 A 15 15 30 0 1 5 10"></path>
+            </g>
+            <g id="item">
+                <circle cx="0" cy="-10" r="3" style="fill: brown; stroke: none"></circle>
+                <line x1="0" y1="10" x2="0" y2="-5" style="stroke: brown; stroke-width: 5"></line>
+            </g>
+            <g id="fail">
+                <g style="stroke: red; stroke-width: 5">
+                    <path d="M-10 -10 L 10 10"></path>
+                    <path d="M10 -10 L -10 10"></path>
+                </g>
+            </g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"></rect>
+            </g>
+            <g id="token">
+                <circle cx="0" cy="0" r="5"></circle>
+            </g>
+            <g id="event-loop">
+                <circle cx="0" cy="0" r="30"></circle>
+                <g style="stroke: none; fill: white">
+                    <circle cx="26" cy="15" r="5"></circle>
+                </g>
+                <g style="stroke: none; fill: white">
+                    <circle cx="-26" cy="15" r="5"></circle>
+                </g>
+                <g style="stroke: none; fill: white">
+                    <circle cx="0" cy="-30" r="5"></circle>
+                </g>
+                <g transform="translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+                <g transform="rotate(120),translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+                <g transform="rotate(240),translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+            </g>
+            <g id="executor">
+                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"></rect>
+            </g>
+            <g id="timer">
+                <circle cx="0" cy="0" r="15"></circle>
+                <line x1="0" y1="0" x2="0" y2="-12"></line>
+            </g>
+            <g id="clock">
+                <circle cx="0" cy="0" r="25"></circle>
+                <line x1="0" y1="0" x2="0" y2="-20"></line>
+                <line x1="0" y1="0" x2="10" y2="-10"></line>
+            </g>
+            <g id="cpu">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-12.5" y="-12.5" width="25" height="25"></rect>
 
-    <span class="slide-step2">...</span>
-<span data-slide-steps="2-">}</span>
+                    <line x1="-16" y1="0" x2="-20" y2="0"></line>
+                    <line x1="-16" y1="-12.5" x2="-20" y2="-12.5"></line>
+                    <line x1="-16" y1="-6.25" x2="-20" y2="-6.25"></line>
+                    <line x1="-16" y1="12.5" x2="-20" y2="12.5"></line>
+                    <line x1="-16" y1="6.25" x2="-20" y2="6.25"></line>
 
-<span data-slide-steps="4-">// Implementando AsyncRead para MyRead
-impl Read for MyRead {
-    fn read(&amp;mut self, buf &amp;mut [u8]) -&gt; Result&lt;usize, tokio::io::Error&gt; {
-        // Se for bloquear, precisa preparar a tarefa para ser acordada quando
-        // mais dados estiverem disponíveis, e depois retornar:
+                    <line x1="16" y1="0" x2="20" y2="0"></line>
+                    <line x1="16" y1="-12.5" x2="20" y2="-12.5"></line>
+                    <line x1="16" y1="-6.25" x2="20" y2="-6.25"></line>
+                    <line x1="16" y1="12.5" x2="20" y2="12.5"></line>
+                    <line x1="16" y1="6.25" x2="20" y2="6.25"></line>
 
-        Err(ErrorKind::WouldBlock.into())
-    }
-}
+                    <line x1="0" y1="16" x2="0" y2="20"></line>
+                    <line x1="-12.5" y1="16" x2="-12.5" y2="20"></line>
+                    <line x1="-6.25" y1="16" x2="-6.25" y2="20"></line>
+                    <line x1="12.5" y1="16" x2="12.5" y2="20"></line>
+                    <line x1="6.25" y1="16" x2="6.25" y2="20"></line>
 
-impl AsyncRead for MyRead {}</span>
+                    <line x1="0" y1="-16" x2="0" y2="-20"></line>
+                    <line x1="-12.5" y1="-16" x2="-12.5" y2="-20"></line>
+                    <line x1="-6.25" y1="-16" x2="-6.25" y2="-20"></line>
+                    <line x1="12.5" y1="-16" x2="12.5" y2="-20"></line>
+                    <line x1="6.25" y1="-16" x2="6.25" y2="-20"></line>
+                </g>
+            </g>
+            <g id="db">
+                <g style="fill: none; stroke-width: 3">
+                    <ellipse cx="0" cy="-10" rx="25" ry="10"></ellipse>
+                    <path d="M-25 -10 v 20 a 25 10 180 1 0 50 0 v -20"></path>
+                </g>
+            </g>
+            <g id="net">
+                <g style="fill: none; stroke-width: 3">
+                    <circle cx="0" cy="0" r="25"></circle>
+                    <ellipse cx="0" cy="0" rx="10" ry="25"></ellipse>
+                    <line x1="-25" y1="0" x2="25" y2="0"></line>
+                    <path d="M-17.7 17.7 L17.7 17.7"></path>
+                    <path d="M-17.7 -17.7 L17.7 -17.7"></path>
+                </g>
+            </g>
+            <g id="hide-thread">
+                <rect style="stroke: none; fill: white" x="-40" y="-5" width="60" height="150"></rect>
+            </g>
+            <g id="hide-task">
+                <rect style="stroke: none; fill: white" x="-30" y="-30" width="60" height="60"></rect>
+            </g>
+            <g id="hide-future">
+                <circle cx="0" cy="0" r="15" style="stroke: none; fill: white"></circle>
+            </g>
+            <g id="hide-event-loop">
+                <rect style="stroke: none; fill: white" x="-70" y="-50" width="120" height="100"></rect>
+            </g>
+            <g id="etcetera">
+                <circle style="stroke: none; fill: black" cx="-10" cy="0" r="3"></circle>
+                <circle style="stroke: none; fill: black" cx="0" cy="0" r="3"></circle>
+                <circle style="stroke: none; fill: black" cx="10" cy="0" r="3"></circle>
+            </g>
+            <g id="equals">
+                <g style="stroke: gray; stroke-width: 10">
+                    <line x1="-20" y1="-10" x2="20" y2="-10"></line>
+                    <line x1="-20" y1="10" x2="20" y2="10"></line>
+                </g>
+            </g>
+        </defs>
 
+        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="2-">
+                <use xlink:href="#future" x="0" y="25"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(80,25)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#item" x="110" y="25"></use>
+            </g>
+            <g data-slide-steps="3-">
+                <g style="stroke-width: 4" transform="translate(200,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#item" x="230" y="38"></use>
+            </g>
 
+            <g data-slide-steps="4-">
+                <use xlink:href="#equals" x="440" y="38"></use>
+                <use xlink:href="#future" x="520" y="38"></use>
+                <g style="stroke-width: 4" transform="translate(600,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#item" x="630" y="38"></use>
+            </g>
+        </g>
 
-<span data-slide-steps="5-"><code>pub trait AsyncWrite: Write {</code></span><code>
-    <span data-slide-steps="6-">fn poll_write(&amp;mut self, buf: &amp;[u8]) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }
+        <g transform="translate(50, 100)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="5-">
+                <use xlink:href="#future" x="0" y="25"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(80,50)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#nothing" x="110" y="50"></use>
+            </g>
+            <g data-slide-steps="6-">
+                <g style="stroke-width: 4" transform="translate(200,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#fail" x="230" y="38"></use>
+            </g>
 
-    <span data-slide-steps="7-">fn poll_flush(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; { ... }
+            <g data-slide-steps="7-">
+                <use xlink:href="#equals" x="440" y="38"></use>
+                <use xlink:href="#future" x="520" y="38"></use>
+                <g style="stroke-width: 4" transform="translate(600,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#fail" x="630" y="38"></use>
+            </g>
+        </g>
+    </svg>
 
-    <span data-slide-steps="8-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;
-<span data-slide-steps="5-">}</span>
+<pre data-slide-steps="10-"><code>let operacao_com_timeout = operacao
+    .select(Delay::new(instante))
+    .and_then(|resultado| match resultado {
+        Ok(Either::Left((item, _))) =&gt; Ok(item),
+        Err(Either::Left((erro, _))) =&gt; Err(erro),
 
-<span data-slide-steps="9-">// Implementando AsyncWrite para MyWrite
-impl Write for MyWrite {
-    fn write(&amp;mut self, buf &amp;[u8]) -&gt; Result&lt;usize, tokio::io::Error&gt; {
-        // Se for bloquear, precisa preparar a tarefa para ser acordada quando
-        // for possível enviar mais dados, e depois retornar:
+        Ok(Either::Right((_, _))) =&gt; Err(Erro::Timeout)
+        Err(Either::Right((_, _))) =&gt; Err(Erro::Timeout),
+    });
 
-        Err(ErrorKind::WouldBlock.into())
-    }
-
-    fn flush(&amp;mut self) -&gt; Result&lt;(), tokio::io::Error&gt; {
-        // Mesma necessidade aqui
-
-        Err(ErrorKind::WouldBlock.into())
-    }
-}
-
-impl AsyncWrite for MyWrite {</span>
-    <span data-slide-steps="10-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; {
-        Ok(Async::Ready(()))
-    }</span>
-<span data-slide-steps="9-">}</span>
-</span></span></span></code></code></pre><code>
-</code></div>
+tokio::run(operacao_com_timeout)
+</code></pre>
+</div>
