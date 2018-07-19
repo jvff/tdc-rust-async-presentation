@@ -19,11 +19,11 @@
 
 <pre><code><span data-slide-steps="4-">pub trait Stream {
     type Item;
-	type Error;
+    type Error;
 
-	fn poll_next(
-		&amp;mut self, </span>
-		<span data-slide-steps="5-">cx: &amp;mut Context</span>
-	<span data-slide-steps="4-">) -&gt; Result&lt;Async&lt;Option&lt;Self::Item&gt;&gt;, Self::Error&gt;;
+    fn poll_next(
+        &amp;mut self, </span>
+        <span data-slide-steps="5-">cx: &amp;mut Context</span>
+    <span data-slide-steps="4-">) -&gt; Result&lt;Async&lt;Option&lt;Self::Item&gt;&gt;, Self::Error&gt;;
 }</span>
 </code></pre></div>
