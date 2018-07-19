@@ -3,14 +3,6 @@
 
     <ul>
         <li data-slide-steps="1-"><code>tokio::io</code> oferece ferramentas para leitura e escrita assíncrona</li>
-        <li data-slide-steps="2-"><code>AsyncRead</code> é o equivalente assíncrono do <code>Read</code>
-            <ul>
-                <li data-slide-steps="3-"><code>poll_read</code> é o método usado para ler de forma assíncrona</li>
-                <li data-slide-steps="4-">Para implementar <code>AsyncRead</code>, basta implementar <code>Read</code> e se a operação de
-                leitura for bloquear, precisa agendar para a tarefa ser acordada quando a
-                operação estiver pronta e retornar <code>Async::NotReady</code></li>
-            </ul>
-        </li>
     </ul>
 
 <pre><code><span data-slide-steps="2-">pub trait AsyncRead: Read {</span>

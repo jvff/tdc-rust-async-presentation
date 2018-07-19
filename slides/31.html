@@ -1,22 +1,6 @@
 <div>
     <h1>Saída assíncrona</h1>
 
-    <ul>
-        <li data-slide-steps="1-"><code>AsyncWrite</code> é o equivalente assíncrono do <code>Write</code>
-            <ul>
-                <li data-slide-steps="2-"><code>poll_write</code> tenta enfileirar dados a serem escritos</li>
-                <li data-slide-steps="3-"><code>poll_flush</code> tenta enviar dados enfileirados</li>
-                <li data-slide-steps="4-"><code>shutdown</code> tenta enviar dados enfileirados e depois fechar a escrita</li>
-                <li data-slide-steps="5-">Para implementar <code>AsyncWrite</code>, basta implementar <code>Write</code> de forma análoga ao
-                <code>AsyncRead</code>
-                    <ul>
-                        <li data-slide-steps="6-"><code>shutdown</code> precisa ser implementado</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-
 <pre><code><span data-slide-steps="1-">pub trait AsyncWrite: Write {</span>
     <span data-slide-steps="2-">fn poll_write(&amp;mut self, buf: &amp;[u8]) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
 
