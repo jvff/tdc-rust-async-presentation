@@ -10,17 +10,8 @@
         <span data-slide-steps="5-">src: &amp;mut BytesMut</span>
     <span data-slide-steps="4-">) -&gt; Result&lt;</span><span data-slide-steps="6-">Option&lt;Self::Item&gt;</span><span data-slide-steps="4-">, Self::Error&gt;;</span>
 
-    <span data-slide-steps="7-">fn decode_eof(
-        &amp;mut self, 
-        buf: &amp;mut BytesMut
-    ) -&gt; Result&lt;Option&lt;Self::Item&gt;, Self::Error&gt; { ... }</span>
-
-    <span data-slide-steps="8-">fn framed&lt;T&gt;(self, io: T) -&gt; Framed&lt;T, Self&gt;
-        where
-        Self: Encoder,
-        T: AsyncRead + AsyncWrite,
-    { ... }</span>
-<span data-slide-steps="1-">}</span>
+    <span data-slide-steps="1-">...
+}</span>
 </code></pre>
 
     <svg viewBox="-200 100 1000 100">
@@ -211,12 +202,4 @@
             </g>
         </g>
     </svg>
-
-    <ul>
-        <li data-slide-steps="4-">Somente o método <code>decode</code> precisa ser especificado</li>
-        <li data-slide-steps="7-">O <code>decode_eof</code> é chamado quando não há mais bytes a serem lidos, então
-        possibilita gerar um último ítem especial se necessário</li>
-        <li data-slide-steps="8-">O método <code>Decoder::framed</code> ou <code>AsyncRead::framed</code> transforma um canal
-        assíncrono em um fluxo assíncrono usando a codificação especificada</li>
-    </ul>
 </div>

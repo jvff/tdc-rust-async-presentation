@@ -336,6 +336,9 @@ pub trait Sink {
 
 - A *trait* `Decoder` possibilita especificar como transformar ítens de um
   `Sink` em bytes a serem escritos
+
+### Decodificação
+
   - Somente o método `decode` precisa ser especificado
   - O `decode_eof` é chamado quando não há mais bytes a serem lidos, então
     possibilita gerar um último ítem especial se necessário

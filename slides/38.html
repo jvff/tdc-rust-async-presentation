@@ -1,3 +1,273 @@
 <div>
-    <h1>Futuro</h1>
+    <h1>Comunicação na rede</h1>
+
+    <ul>
+        <li data-slide-steps="1-"><code>tokio::net</code> oferece ferramentas para comunicação através da rede</li>
+    </ul>
+
+    <svg viewBox="-300 -50 1000 100">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
+            </g>
+            <g id="small-arrow-head">
+                <path d="M-10 -10 L0 0 L-10 10"></path>
+            </g>
+            <g id="mini-arrow-head">
+                <path d="M-8 -8 L0 0 L-8 8"></path>
+            </g>
+            <g id="thread">
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"></path>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"></circle>
+            </g>
+            <g id="stream">
+                <circle cx="0" cy="0" r="10"></circle>
+                <g style="stroke: none; fill: black">
+                    <circle cx="9" cy="10" r="2"></circle>
+                    <circle cx="15" cy="10" r="2"></circle>
+                    <circle cx="21" cy="10" r="2"></circle>
+                </g>
+            </g>
+            <g id="nothing">
+                <path d="M-5 -10 A 15 15 30 0 0 -5 10"></path>
+                <path d="M5 -10 A 15 15 30 0 1 5 10"></path>
+            </g>
+            <g id="item">
+                <circle cx="0" cy="-10" r="3" style="fill: brown; stroke: none"></circle>
+                <line x1="0" y1="10" x2="0" y2="-5" style="stroke: brown; stroke-width: 5"></line>
+            </g>
+            <g id="socket">
+                <path d="M-20 20 v -30 h 10 v -10 h 20 v 10 h 10 v 30 z" style="fill: none; stroke: black"></path>
+                <line x1="-10" y1="20" x2="-10" y2="12"></line>
+                <line x1="-5" y1="20" x2="-5" y2="12"></line>
+                <line x1="0" y1="20" x2="0" y2="12"></line>
+                <line x1="5" y1="20" x2="5" y2="12"></line>
+                <line x1="10" y1="20" x2="10" y2="12"></line>
+            </g>
+            <g id="udp">
+                <path d="M-20 20 v -30 h 10 v -10 h 20 v 10 h 10 v 30 z" style="fill: none; stroke: black"></path>
+                <line x1="-5" y1="20" x2="-5" y2="12"></line>
+                <line x1="5" y1="20" x2="5" y2="12"></line>
+            </g>
+            <g id="fail">
+                <g style="stroke: red; stroke-width: 5">
+                    <path d="M-10 -10 L 10 10"></path>
+                    <path d="M10 -10 L -10 10"></path>
+                </g>
+            </g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"></rect>
+            </g>
+            <g id="token">
+                <circle cx="0" cy="0" r="5"></circle>
+            </g>
+            <g id="event-loop">
+                <circle cx="0" cy="0" r="30"></circle>
+                <g style="stroke: none; fill: white">
+                    <circle cx="26" cy="15" r="5"></circle>
+                </g>
+                <g style="stroke: none; fill: white">
+                    <circle cx="-26" cy="15" r="5"></circle>
+                </g>
+                <g style="stroke: none; fill: white">
+                    <circle cx="0" cy="-30" r="5"></circle>
+                </g>
+                <g transform="translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+                <g transform="rotate(120),translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+                <g transform="rotate(240),translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+            </g>
+            <g id="executor">
+                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"></rect>
+            </g>
+            <g id="timer">
+                <circle cx="0" cy="0" r="15"></circle>
+                <line x1="0" y1="0" x2="0" y2="-12"></line>
+            </g>
+            <g id="clock">
+                <circle cx="0" cy="0" r="25"></circle>
+                <line x1="0" y1="0" x2="0" y2="-20"></line>
+                <line x1="0" y1="0" x2="10" y2="-10"></line>
+            </g>
+            <g id="cpu">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-12.5" y="-12.5" width="25" height="25"></rect>
+
+                    <line x1="-16" y1="0" x2="-20" y2="0"></line>
+                    <line x1="-16" y1="-12.5" x2="-20" y2="-12.5"></line>
+                    <line x1="-16" y1="-6.25" x2="-20" y2="-6.25"></line>
+                    <line x1="-16" y1="12.5" x2="-20" y2="12.5"></line>
+                    <line x1="-16" y1="6.25" x2="-20" y2="6.25"></line>
+
+                    <line x1="16" y1="0" x2="20" y2="0"></line>
+                    <line x1="16" y1="-12.5" x2="20" y2="-12.5"></line>
+                    <line x1="16" y1="-6.25" x2="20" y2="-6.25"></line>
+                    <line x1="16" y1="12.5" x2="20" y2="12.5"></line>
+                    <line x1="16" y1="6.25" x2="20" y2="6.25"></line>
+
+                    <line x1="0" y1="16" x2="0" y2="20"></line>
+                    <line x1="-12.5" y1="16" x2="-12.5" y2="20"></line>
+                    <line x1="-6.25" y1="16" x2="-6.25" y2="20"></line>
+                    <line x1="12.5" y1="16" x2="12.5" y2="20"></line>
+                    <line x1="6.25" y1="16" x2="6.25" y2="20"></line>
+
+                    <line x1="0" y1="-16" x2="0" y2="-20"></line>
+                    <line x1="-12.5" y1="-16" x2="-12.5" y2="-20"></line>
+                    <line x1="-6.25" y1="-16" x2="-6.25" y2="-20"></line>
+                    <line x1="12.5" y1="-16" x2="12.5" y2="-20"></line>
+                    <line x1="6.25" y1="-16" x2="6.25" y2="-20"></line>
+                </g>
+            </g>
+            <g id="db">
+                <g style="fill: none; stroke-width: 3">
+                    <ellipse cx="0" cy="-10" rx="25" ry="10"></ellipse>
+                    <path d="M-25 -10 v 20 a 25 10 180 1 0 50 0 v -20"></path>
+                </g>
+            </g>
+            <g id="net">
+                <g style="fill: none; stroke-width: 3">
+                    <circle cx="0" cy="0" r="25"></circle>
+                    <ellipse cx="0" cy="0" rx="10" ry="25"></ellipse>
+                    <line x1="-25" y1="0" x2="25" y2="0"></line>
+                    <path d="M-17.7 17.7 L17.7 17.7"></path>
+                    <path d="M-17.7 -17.7 L17.7 -17.7"></path>
+                </g>
+            </g>
+            <g id="hide-thread">
+                <rect style="stroke: none; fill: white" x="-40" y="-5" width="60" height="150"></rect>
+            </g>
+            <g id="hide-task">
+                <rect style="stroke: none; fill: white" x="-30" y="-30" width="60" height="60"></rect>
+            </g>
+            <g id="hide-future">
+                <circle cx="0" cy="0" r="15" style="stroke: none; fill: white"></circle>
+            </g>
+            <g id="hide-event-loop">
+                <rect style="stroke: none; fill: white" x="-70" y="-50" width="120" height="100"></rect>
+            </g>
+            <g id="etcetera">
+                <circle style="stroke: none; fill: black" cx="-10" cy="0" r="3"></circle>
+                <circle style="stroke: none; fill: black" cx="0" cy="0" r="3"></circle>
+                <circle style="stroke: none; fill: black" cx="10" cy="0" r="3"></circle>
+            </g>
+            <g id="equals">
+                <g style="stroke: gray; stroke-width: 10">
+                    <line x1="-20" y1="-10" x2="20" y2="-10"></line>
+                    <line x1="-20" y1="10" x2="20" y2="10"></line>
+                </g>
+            </g>
+            <g id="listener">
+                <path d="M-15 -25 V 25 H 15" style="stroke: black; stroke-width: 8"></path>
+            </g>
+        </defs>
+
+        <g transform="translate(0, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="1-">
+                <g transform="scale(1.5)">
+                    <use xlink:href="#net" x="0" y="0"></use>
+                </g>
+            </g>
+        </g>
+    </svg>
+
+    <ul>
+        <li data-slide-steps="2-"><code>TcpStream</code> possibilita comunicação através do protocolo TCP
+            <ul>
+                <li data-slide-steps="3-"><code>TcpStream::connect</code> retorna um <code>Future</code> que se resolverá quando a conexão
+                estiver estabelecida</li>
+                <li data-slide-steps="4-"><code>TcpStream</code> implementa <code>AsyncRead</code> e `AsyncWrite</li>
+            </ul>
+        </li>
+    </ul>
+
+    <svg viewBox="-300 -50 1000 100">
+        <g transform="translate(0, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="3-">
+                <use xlink:href="#future" x="0" y="0"></use>
+                <g style="stroke-width: 4" transform="translate(80,0)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#socket" x="120" y="0"></use>
+            </g>
+        </g>
+    </svg>
+
+    <ul>
+        <li data-slide-steps="5-"><code>TcpListener</code> pode ser usado para esparar conexões de clientes
+            <ul>
+                <li data-slide-steps="6-"><code>TcpListener::incoming</code> retorna um <code>Stream</code> de <code>TcpStream</code>s</li>
+            </ul>
+        </li>
+    </ul>
+
+    <svg viewBox="-300 -50 1000 100">
+        <g transform="translate(0, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="5-">
+                <use xlink:href="#future" x="0" y="0"></use>
+                <g style="stroke-width: 4" transform="translate(80,0)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#listener" x="120" y="0"></use>
+            </g>
+            <g data-slide-steps="6-">
+                <g style="stroke-width: 4" transform="translate(210,0)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#stream" x="240" y="0"></use>
+            </g>
+            <g data-slide-steps="7-">
+                <use xlink:href="#future" x="0" y="0"></use>
+                <g style="stroke-width: 4" transform="translate(330,0)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+            </g>
+            <g data-slide-steps="8-">
+                <use xlink:href="#socket" x="370" y="0"></use>
+            </g>
+            <g data-slide-steps="9-">
+                <use xlink:href="#socket" x="420" y="0"></use>
+            </g>
+            <g data-slide-steps="10-">
+                <use xlink:href="#socket" x="470" y="0"></use>
+            </g>
+            <g data-slide-steps="11-">
+                <use xlink:href="#etcetera" x="520" y="0"></use>
+            </g>
+        </g>
+    </svg>
+
+    <ul>
+        <li data-slide-steps="12-"><code>UdpSocket</code> pode ser usado para comunicação UDP</li>
+        <li data-slide-steps="13-"><code>UdpSocket::bind</code> se associa a um endereço e retorna um <code>UpdSocket</code>
+            <ul>
+                <li data-slide-steps="14-"><code>UdpSocket::send_dgram</code> retorna um <code>Future</code> que enviará um pacote de dados</li>
+                <li data-slide-steps="15-"><code>UdbSocket::recv_dgram</code> retorna um <code>Future</code> que resultará em um pacote de
+                dados recebido</li>
+            </ul>
+        </li>
+    </ul>
+
+    <svg viewBox="-300 -50 1000 100">
+        <g transform="translate(0, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="13-">
+                <use xlink:href="#future" x="0" y="0"></use>
+                <g style="stroke-width: 4" transform="translate(80,0)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#udp" x="120" y="0"></use>
+            </g>
+        </g>
+    </svg>
 </div>

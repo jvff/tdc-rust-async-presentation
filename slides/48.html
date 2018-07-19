@@ -1,45 +1,52 @@
 <div>
-    <h1>Macros</h1>
+    <h1>Facilitando operações de leitura e escrita</h1>
 
     <ul>
-        <li data-slide-steps="1-">A grande expectativa para o futuro da programação assíncrona em Rust é a
-        funcionalidade de <code>async/await</code></li>
-        <li data-slide-steps="2-">Um conjunto de mudanças na linguagem
-            <ul>
-                <li data-slide-steps="3-">Geradores</li>
-                <li data-slide-steps="4-">Representação de dados imóveis</li>
-                <li data-slide-steps="5-">Macros procedurais</li>
-            </ul>
-        </li>
-        <li data-slide-steps="6-">Resultará nas macros <code>async</code> e <code>await!</code>, que possibilitam escrever código mais
-        simples</li>
+        <li data-slide-steps="1-">E foram adicionados métodos genéricos para facilitar o uso das operações de
+        leitura e escrita</li>
+        <li data-slide-steps="2-">Todos transformam o tipo "primitivo" de leitura ou escrita assíncrona em uma
+        operação um pouco mais "alto nível" que implementa <code>Future</code></li>
     </ul>
 
-<pre><code><span data-slide-steps="7-">pub fn enviar_dado(dado: Dado) -&gt; impl Future&lt;Item = (), Error = Erro&gt; {</span>
-    <span data-slide-steps="8-">TcpStream::connect(ENDERECO_SERVIDOR)</span>
-        <span data-slide-steps="9-">.map_err(Erro::from)<span>
-        <span data-slide-steps="10-">.and_then(|tcp_stream| {</span>
-            <span data-slide-steps="11-">let fluxo  = tcp_stream.framed(Codificacao);</span>
-            <span data-slide-steps="12-">fluxo.send(dado)</span>
-                <span data-slide-steps="13-">.map_err(Erro::from)</span>
-                <span data-slide-steps="14-">.and_then(|fluxo| {</span>
-                    <span data-slide-steps="15-">io::shutdown(fluxo)</span>
-                        <span data-slide-steps="16-">.map_err(Erro::from)</span>
-                <span data-slide-steps="14-">})</span>
-            
-        <span data-slide-steps="10-">})</span>
-<span data-slide-steps="7-">}</span>
+<pre><code><span data-slide-steps="3-">pub trait AsyncReadExt: AsyncRead {</span>
+    <span data-slide-steps="4-">fn copy_into&lt;W&gt;(self, writer: W) -&gt; CopyInto&lt;Self, W&gt;
+    where
+        W: AsyncWrite,
+    { ... }</span>
+
+    <span data-slide-steps="5-">fn read&lt;T&gt;(self, buf: T) -&gt; Read&lt;Self, T&gt;
+    where
+        T: AsMut&lt;[u8]&gt;,
+    { ... }</span>
+
+    <span data-slide-steps="6-">fn read_exact&lt;T&gt;(self, buf: T) -&gt; ReadExact&lt;Self, T&gt;
+    where
+        T: AsMut&lt;[u8]&gt;,
+    { ... }</span>
+
+    <span data-slide-steps="7-">fn read_to_end(self, buf: Vec&lt;u8&gt;) -&gt; ReadToEnd&lt;Self&gt; { ... }</span>
+
+    <span data-slide-steps="3-">...
+}</span>
+
+<span data-slide-steps="8-">impl&lt;T&gt; AsyncReadExt for T where
+    T: AsyncRead + ?Sized 
+{ ... }<span>
 </span></span></code></pre>
 
-<pre><code><span data-slide-steps="17-">#[async]
-pub fn enviar_dado(dado: Dado) -&gt; Result&lt;(), Erro&gt; {</span>
-    <span data-slide-steps="18-">let tcp_stream = await!(TcpStream::connect(ENDERECO_SERVIDOR))?;</span>
-    <span data-slide-steps="19-">let fluxo = tcp_stream.framed(Codificacao);</span>
+<pre><code><span data-slide-steps="9-">pub trait AsyncWriteExt: AsyncWrite {</span>
+    <span data-slide-steps="10-">fn flush(self) -&gt; Flush&lt;Self&gt; { ... }</span>
 
-    <span data-slide-steps="20-">let fluxo = await!(fluxo.send(dado))?;</span>
-    <span data-slide-steps="21-">await!(io::shutdown(fluxo))?;</span>
+    <span data-slide-steps="11-">fn close(self) -&gt; Close&lt;Self&gt; { ... }</span>
 
-    <span data-slide-steps="22-">Ok(())</span>
-<span data-slide-steps="17-">}</span>
+    <span data-slide-steps="12-">fn write_all&lt;T&gt;(self, buf: T) -&gt; WriteAll&lt;Self, T&gt;
+    where
+        T: AsRef&lt;[u8]&gt;,
+    { ... }</span>
+<span data-slide-steps="9-">}</span>
+
+<span data-slide-steps="13-">impl&lt;T&gt; AsyncWriteExt for T where
+    T: AsyncWrite + ?Sized
+{ ... }</span>
 </code></pre>
 </div>
