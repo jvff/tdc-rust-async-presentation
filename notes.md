@@ -90,13 +90,6 @@
 	- `Sink`
 - Oferece ferramentas para facilitar a representação de uma operação complexa
 
-### Tarefa
-
-- Struct `futures::task::Task` permite acesso a uma tarefa
-  - Permite acordar a tarefa, para indicar que uma operação associada a ela está
-    pronta
-- `futures::task::current()` retorna a `Task` para acessar a tarefa atual
-
 ### Executador
 
 - Trait `futures::future::Executor`
@@ -111,6 +104,13 @@ pub trait Executor<F: Future<Item = (), Error = ()>> {
     fn execute(&self, future: F) -> Result<(), ExecuteError<F>>;
 }
 ```
+
+### Tarefa
+
+- Struct `futures::task::Task` permite acesso a uma tarefa
+  - Permite acordar a tarefa, para indicar que uma operação associada a ela está
+    pronta
+- `futures::task::current()` retorna a `Task` para acessar a tarefa atual
 
 ### Operação
 

@@ -1,17 +1,13 @@
 <div>
-    <h1>Tarefa</h1>
+    <h1>Executador</h1>
+
+<pre><code>pub trait Executor&lt;F: Future&lt;Item = (), Error = ()&gt;&gt; {
+    fn execute(&amp;self, future: F) -&gt; Result&lt;(), ExecuteError&lt;F&gt;&gt;;
+}
+</code></pre>
 
     <ul>
-        <li data-slide-steps="1-">Struct <code data-slide-steps="1-">futures::task::Task</code> permite acesso a uma tarefa
-        </li><li data-slide-steps="2-">Permite acordar a tarefa, para indicar que uma operação associada a ela está pronta
-            <ul>
-                <li data-slide-steps="3-">Uma tarefa contém pelo menos uma operação</li>
-                <li data-slide-steps="4-">A tarefa está parada esperando uma de suas operações</li>
-                <li data-slide-steps="5-">Quando uma operação está pronta</li>
-                <li data-slide-steps="6-"><code>Task::wake()</code> é usado para notificá-la</li>
-                <li data-slide-steps="7-">Um executador pode então executá-la</li>
-            </ul>
-        </li>
+        <li data-slide-steps="2-">Executa uma tarefa criada para uma operação</li>
     </ul>
 
     <svg viewBox="0 0 1000 200">
@@ -40,48 +36,71 @@
         </defs>
 
         <g transform="translate(100, 50)" style="fill: none; stroke: black; stroke-width: 3" data-slide-steps="1-">
-            <use xlink:href="#task" x="120" y="20" data-slide-steps="1-"></use>
-            <use xlink:href="#future" x="120" y="20" data-slide-steps="3-"></use>
-
-            <g style="stroke: red" data-slide-steps="4-">
-                <use xlink:href="#hide-task" x="120" y="20"></use>
-                <use xlink:href="#task" x="120" y="20"></use>
-                <use xlink:href="#future" x="120" y="20"></use>
+            <g data-slide-steps="2-">
+                <use xlink:href="#future" x="100" y="60"></use>
+                <g style="stroke: gray; stroke-width: 10" transform="translate(230,60)">
+                    <use xlink:href="#arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-100" y2="0"></line>
+                </g>
+                <use xlink:href="#executor" x="300" y="60"></use>
             </g>
-
-            <g data-slide-steps="5-">
-                <use xlink:href="#hide-task" x="120" y="20"></use>
-                <use xlink:href="#task" style="stroke: red" x="120" y="20"></use>
-                <use xlink:href="#future" style="stroke: green" x="120" y="20"></use>
+            <g style="stroke: red">
+                <use xlink:href="#task" x="300" y="60" data-slide-steps="3-"></use>
+                <use xlink:href="#future" x="300" y="60" data-slide-steps="4-"></use>
             </g>
-
-            <g data-slide-steps="6-">
-                <use xlink:href="#hide-task" x="120" y="20"></use>
-                <use xlink:href="#task" style="stroke: blue" x="120" y="20"></use>
-                <use xlink:href="#future" style="stroke: green" x="120" y="20"></use>
-            </g>
-
-            <g data-slide-steps="7-">
-                <use xlink:href="#hide-task" x="120" y="20"></use>
-                <use xlink:href="#executor" style="stroke: black" x="120" y="20"></use>
-                <use xlink:href="#task" style="stroke: green" x="120" y="20"></use>
-                <use xlink:href="#future" style="stroke: green" x="120" y="20"></use>
+            <g style="stroke: green" data-slide-steps="5-">
+                <use xlink:href="#hide-task" x="300" y="60"></use>
+                <use xlink:href="#task" x="300" y="60"></use>
+                <use xlink:href="#future" x="300" y="60"></use>
             </g>
         </g>
     </svg>
 
     <ul>
-        <li data-slide-steps="8-"><code>futures::task::current()</code> retorna a <code>Task</code> para acessar a tarefa atual</li>
+        <li data-slide-steps="6-">Pode conter outras tarefas enfileiradas</li>
     </ul>
 
     <svg viewBox="0 0 1000 200">
-        <g style="fill: none; stroke: black; stroke-width: 3" data-slide-steps="8-">
-            <use xlink:href="#thread" x="100" y="20"></use>
-            <g style="stroke: gray; stroke-width: 10" transform="translate(230,80)">
-                <use xlink:href="#arrow-head" x="0" y="0"></use>
-                <line x1="0" y1="0" x2="-100" y2="0"></line>
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
             </g>
-            <use xlink:href="#task" x="300" y="80"></use>
+            <g id="mini-arrow-head">
+                <path d="M-8 -8 L0 0 L-8 8"></path>
+            </g>
+            <g id="thread">
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"></path>
+            </g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"></rect>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"></circle>
+            </g>
+            <g id="executor">
+                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"></rect>
+            </g>
+            <g id="hide-task">
+                <rect style="stroke: none; fill: white" x="-30" y="-30" width="60" height="60"></rect>
+            </g>
+        </defs>
+
+        <g transform="translate(100, 20)" style="fill: none; stroke: black; stroke-width: 3" data-slide-steps="1-">
+            <g data-slide-steps="6-">
+                <g style="stroke: green">
+                    <use xlink:href="#future" x="100" y="60"></use>
+                    <use xlink:href="#task" x="100" y="60"></use>
+                </g>
+                <g style="stroke: red">
+                    <use xlink:href="#future" x="160" y="60"></use>
+                    <use xlink:href="#task" x="160" y="60"></use>
+                    <use xlink:href="#future" x="100" y="120"></use>
+                    <use xlink:href="#task" x="100" y="120"></use>
+                    <use xlink:href="#future" x="160" y="120"></use>
+                    <use xlink:href="#task" x="160" y="120"></use>
+                </g>
+                <use xlink:href="#executor" transform="translate(130,90),scale(1.6)"></use>
+            </g>
         </g>
     </svg>
 </div>
