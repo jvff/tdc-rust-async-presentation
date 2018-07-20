@@ -138,6 +138,28 @@ pub trait Stream {
 }
 ```
 
+### Enviando em fluxo
+
+- Representação de uma operação para enviar algo de forma assíncrona
+- O ítem representado agora é o tipo de ítem que pode ser enviado
+- `start_send` tenta enfileirar o envio de um ítem
+- Mas o ítem só é enviado de fato quando `poll_complete` indicar que a operação
+  de enviar todos os ítens enfileirados estiver concluída
+
+```
+pub trait Sink {
+    type SinkItem;
+	type SinkError;
+
+	fn start_send(
+		&mut self, 
+		item: Self::SinkItem
+	) -> Result<(), Self::SinkError>;
+
+	fn poll_complete(&mut self) -> Result<Async<()>, Self::SinkError>;
+}
+```
+
 ### Compondo uma operação atrás de outra
 
 - `map`: aplica uma função no ítem resultante do `Future`, transformando-o em
@@ -175,28 +197,6 @@ pub trait Stream {
 - `flatten` agora permite que `Stream`s sejam ítens, e são então encadeados ao
   fluxo de resultados final
 
-
-### Enviando em fluxo
-
-- Representação de uma operação para enviar algo de forma assíncrona
-- O ítem representado agora é o tipo de ítem que pode ser enviado
-- `start_send` tenta enfileirar o envio de um ítem
-- Mas o ítem só é enviado de fato quando `poll_complete` indicar que a operação
-  de enviar todos os ítens enfileirados estiver concluída
-
-```
-pub trait Sink {
-    type SinkItem;
-	type SinkError;
-
-	fn start_send(
-		&mut self, 
-		item: Self::SinkItem
-	) -> Result<(), Self::SinkError>;
-
-	fn poll_complete(&mut self) -> Result<Async<()>, Self::SinkError>;
-}
-```
 
 ### Compondo escritas em fluxo
 
