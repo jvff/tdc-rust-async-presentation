@@ -270,7 +270,7 @@ dependencies = [
 name = "client"
 version = "0.1.0"
 dependencies = [
- "presentrs 0.1.0",
+ "presentrs 0.1.0 (git+https://github.com/jvff/presentrs)",
  "yew 0.5.0 (git+https://github.com/DenisKolodin/yew)",
 ]
 
@@ -939,6 +939,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "presentrs"
 version = "0.1.0"
+source = "git+https://github.com/jvff/presentrs#4839b80291c73920266dbd98aec6fcea39481038"
 dependencies = [
  "actix-web 0.6.15 (registry+https://github.com/rust-lang/crates.io-index)",
  "comrak 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1197,7 +1198,7 @@ dependencies = [
 name = "server"
 version = "0.1.0"
 dependencies = [
- "presentrs 0.1.0",
+ "presentrs 0.1.0 (git+https://github.com/jvff/presentrs)",
 ]
 
 [[package]]
@@ -1940,6 +1941,7 @@ dependencies = [
 "checksum phf_generator 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)" = "05a079dd052e7b674d21cb31cbb6c05efd56a2cd2827db7692e2f1a507ebd998"
 "checksum phf_shared 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)" = "c2261d544c2bb6aa3b10022b0be371b9c7c64f762ef28c6f5d4f1ef6d97b5930"
 "checksum precomputed-hash 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "925383efa346730478fb4838dbe9137d2a47675ad789c546d150a6e1dd4ab31c"
+"checksum presentrs 0.1.0 (git+https://github.com/jvff/presentrs)" = "<none>"
 "checksum proc-macro2 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)" = "cd07deb3c6d1d9ff827999c7f9b04cdfd66b1b17ae508e14fe47b620f2282ae0"
 "checksum proc-macro2 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)" = "1b06e2f335f48d24442b35a19df506a835fb3547bc3c06ef27340da9acf5cae7"
 "checksum proc-macro2 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)" = "c65b1ea15bb859d922cade2d1765b4b88beac339cbfad545ef2d2ef8c8215ee6"

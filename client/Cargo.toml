@@ -4,5 +4,5 @@ version = "0.1.0"
 authors = ["Janito Vaqueiro Ferreira Filho <janito.vff@gmail.com>"]
 
 [dependencies]
-presentrs = { path = "/tmp/presentrs", features = ["client"] }
+presentrs = { git = "https://github.com/jvff/presentrs", features = ["client"] }
 yew = { git = "https://github.com/DenisKolodin/yew" }
