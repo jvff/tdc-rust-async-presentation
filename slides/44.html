@@ -1,18 +1,15 @@
 <div>
-    <h1>Comunicação usando UDP</h1>
+    <h1>Manipulando arquivos</h1>
 
     <ul>
-        <li data-slide-steps="1-"><code>UdpSocket</code> pode ser usado para comunicação UDP</li>
-        <li data-slide-steps="2-"><code>UdpSocket::bind</code> se associa a um endereço e retorna um <code>UpdSocket</code>
-            <ul>
-                <li data-slide-steps="3-"><code>UdpSocket::send_dgram</code> retorna um <code>Future</code> que enviará um pacote de dados</li>
-                <li data-slide-steps="4-"><code>UdbSocket::recv_dgram</code> retorna um <code>Future</code> que resultará em um pacote de
-                dados recebido</li>
-            </ul>
-        </li>
+        <li class="slide-31 slide-step-1"><code>tokio::fs</code> é muito semelhante a <code>std::fs</code>, mas é assíncrono</li>
+        <li class="slide-31 slide-step-2"><code>File::open</code> e <code>File::create</code> retornam <code>Future</code>s que quando executados irão
+        realizar suas devidas operações</li>
+        <li class="slide-31 slide-step-3"><code>File</code> implementa <code>AsyncRead</code> e <code>AsyncWrite</code>, permitindo leitura e escrita de
+        forma assíncrona também</li>
     </ul>
 
-    <svg viewBox="-300 -50 1000 100">
+    <svg viewBox="-100 0 800 100">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -45,18 +42,9 @@
                 <circle cx="0" cy="-10" r="3" style="fill: brown; stroke: none"></circle>
                 <line x1="0" y1="10" x2="0" y2="-5" style="stroke: brown; stroke-width: 5"></line>
             </g>
-            <g id="socket">
-                <path d="M-20 20 v -30 h 10 v -10 h 20 v 10 h 10 v 30 z" style="fill: none; stroke: black"></path>
-                <line x1="-10" y1="20" x2="-10" y2="12"></line>
-                <line x1="-5" y1="20" x2="-5" y2="12"></line>
-                <line x1="0" y1="20" x2="0" y2="12"></line>
-                <line x1="5" y1="20" x2="5" y2="12"></line>
-                <line x1="10" y1="20" x2="10" y2="12"></line>
-            </g>
-            <g id="udp">
-                <path d="M-20 20 v -30 h 10 v -10 h 20 v 10 h 10 v 30 z" style="fill: none; stroke: black"></path>
-                <line x1="-5" y1="20" x2="-5" y2="12"></line>
-                <line x1="5" y1="20" x2="5" y2="12"></line>
+            <g id="file">
+                <path d="M-20 -25 L 10 -25 L 20 -15 L 20 25 L -20 25 z" style="fill: none; stroke: black"></path>
+                <path d="M 10 -25 v 10 h 10" style="fill: none; stroke: black"></path>
             </g>
             <g id="fail">
                 <g style="stroke: red; stroke-width: 5">
@@ -170,20 +158,22 @@
                     <line x1="-20" y1="10" x2="20" y2="10"></line>
                 </g>
             </g>
-            <g id="listener">
-                <path d="M-15 -25 V 25 H 15" style="stroke: black; stroke-width: 8"></path>
-            </g>
         </defs>
 
-        <g transform="translate(0, 0)" style="fill: none; stroke: black; stroke-width: 3">
+        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
             <g data-slide-steps="2-">
-                <use xlink:href="#future" x="0" y="0"></use>
-                <g style="stroke-width: 4" transform="translate(80,0)">
+                <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(80,50)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
-                <use xlink:href="#udp" x="120" y="0"></use>
+                <use xlink:href="#file" x="120" y="50"></use>
             </g>
         </g>
     </svg>
+
+<pre><code><span data-slide-steps="4-">let escreve_arquivo =</span>
+    <span data-slide-steps="5-">tokio::fs::File::create("arquivo.txt")</span>
+        <span data-slide-steps="6-">.and_then(|arquivo| <span data-slide-steps="7-">tokio::io::write_all(arquivo, &amp;dados)</span>);</span>
+</code></pre>
 </div>

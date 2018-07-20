@@ -248,15 +248,20 @@ let resultado = sink1.send(item).wait();
 
 - Uma outra funcionalidade útil em `futures` é a criação de canais de
   comunicação entre tarefas
-- Dois tipos:
-  - `oneshot` permite enviar um único ítem de uma tarefa a outra
-    - O `oneshot::Receiver` implementa `Future` para receber esse ítem
-  - `mpsc` permite enviar vários ítens, sendo que várias podem receber mas
-    somente uma pode receber
-    - O `mpsc::Sender` implementa `Sink`
-    - O `mpsc::Receiver` implementa `Stream`
 - Muito útil para começar tarefas assíncronas separadas para possibilitar que
   cada uma seja executada em um *thread* separado
+
+### `oneshot`
+
+- `oneshot` permite enviar um único ítem de uma tarefa a outra
+  - O `oneshot::Receiver` implementa `Future` para receber esse ítem
+
+### `mpsc`
+
+- `mpsc` permite enviar vários ítens, sendo que várias podem enviar mas somente
+  uma pode receber
+  - `mpsc::Sender` implementa `Sink`
+  - `mpsc::Receiver` implementa `Stream`
 
 ## Tokio
 

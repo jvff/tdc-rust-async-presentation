@@ -1,16 +1,34 @@
 <div>
-    <h1>Entrada e saída padrão</h1>
+    <h1>Saída assíncrona</h1>
 
-    <ul>
-        <li class="slide-29 slide-step-1">As funções <code>tokio::io::stdout</code>, <code>stdin</code> e <code>stderr</code> permite utilizar a entrada
-        e as saídas padrão de forma assíncrona</li>
-        <li class="slide-29 slide-step-2">Precisa tomar cuidado para usá-los de forma concorrente</li>
-    </ul>
+<pre><code><span data-slide-steps="1-">pub trait AsyncWrite: Write {</span>
+    <span data-slide-steps="2-">fn poll_write(&amp;mut self, buf: &amp;[u8]) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
 
-    <svg style="width: 10%" viewBox="-50 -50 500 400">
-        <rect x="0" y="0" width="400" height="300" style="stroke: black; stroke-width: 8; fill: gray"></rect>
-        <rect x="0" y="20" width="400" height="280" style="stroke: none; fill: black"></rect>
-        <path d="M 30 50 l 30 30 l -30 30" style="stroke: lightgray; stroke-width: 7"></path>
-        <line x1="80" y1="110" x2="140" y2="110" style="stroke: lightgray; stroke-width: 7"></line>
-    </svg>
+    <span data-slide-steps="3-">fn poll_flush(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; { ... }</span>
+
+    <span data-slide-steps="4-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
+<span data-slide-steps="1-">}</span>
+
+<span data-slide-steps="5-">// Implementando AsyncWrite para MyWrite
+impl Write for MyWrite {
+    fn write(&amp;mut self, buf &amp;[u8]) -&gt; Result&lt;usize, tokio::io::Error&gt; {
+        // Se for bloquear, precisa preparar a tarefa para ser acordada quando
+        // for possível enviar mais dados, e depois retornar:
+
+        Err(ErrorKind::WouldBlock.into())
+    }
+
+    fn flush(&amp;mut self) -&gt; Result&lt;(), tokio::io::Error&gt; {
+        // Mesma necessidade aqui
+
+        Err(ErrorKind::WouldBlock.into())
+    }
+}
+
+impl AsyncWrite for MyWrite {</span>
+    <span data-slide-steps="6-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; {
+        Ok(Async::Ready(()))
+    }</span>
+<span data-slide-steps="5-">}</span>
+</code></pre>
 </div>

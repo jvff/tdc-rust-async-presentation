@@ -8,7 +8,7 @@
         cada uma seja executada em um <em>thread</em> separado</li>
     </ul>
 
-    <svg viewBox="0 0 1000 250">
+    <svg viewBox="-250 0 1000 250">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -120,85 +120,6 @@
 
                 <use xlink:href="#thread" x="0" y="80"></use>
                 <use xlink:href="#thread" x="180" y="80"></use>
-            </g>
-        </g>
-    </svg>
-
-    <ul>
-        <li data-slide-steps="3-"><code>oneshot</code> permite enviar um único ítem de uma tarefa a outra
-            <ul>
-                <li data-slide-steps="4-">O <code>oneshot::Receiver</code> implementa <code>Future</code> para receber esse ítem</li>
-            </ul>
-        </li>
-    </ul>
-
-    <svg viewBox="0 0 1000 100">
-        <g transform="translate(140, 00)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="3-">
-                <use xlink:href="#sender" x="80" y="50"></use>
-                <use xlink:href="#receiver" x="120" y="50"></use>
-            </g>
-            <g data-slide-steps="4-">
-                <use xlink:href="#hide-receiver" x="120" y="50"></use>
-                <use xlink:href="#future" x="140" y="50"></use>
-            </g>
-            <g data-slide-steps="5-">
-                <use xlink:href="#item" x="-50" y="50"></use>
-                <g style="stroke-width: 4" transform="translate(20,50)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-            </g>
-            <g data-slide-steps="6-">
-                <use xlink:href="#hide-item" x="-50" y="50"></use>
-                <use xlink:href="#hide-call" x="20" y="50"></use>
-                <use xlink:href="#hide-sender" x="80" y="50"></use>
-                <g style="stroke-width: 4" transform="translate(210,50)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#item" x="230" y="50"></use>
-            </g>
-        </g>
-    </svg>
-
-    <ul>
-        <li data-slide-steps="7-"><code>mpsc</code> permite enviar vários ítens, sendo que várias podem receber mas
-        somente uma pode receber
-            <ul>
-                <li data-slide-steps="8-">O <code>mpsc::Sender</code> implementa <code>Sink</code></li>
-                <li data-slide-steps="9-">O <code>mpsc::Receiver</code> implementa <code>Stream</code></li>
-            </ul>
-        </li>
-    </ul>
-
-    <svg viewBox="0 0 1000 100">
-        <g transform="translate(140, 00)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="7-">
-                <use xlink:href="#sender" x="80" y="50"></use>
-                <use xlink:href="#receiver" x="120" y="50"></use>
-            </g>
-            <g data-slide-steps="8-">
-                <use xlink:href="#hide-sender" x="80" y="50"></use>
-                <use xlink:href="#sink" x="60" y="50"></use>
-            </g>
-            <g data-slide-steps="9-">
-                <use xlink:href="#hide-receiver" x="120" y="50"></use>
-                <use xlink:href="#stream" x="140" y="50"></use>
-            </g>
-            <g data-slide-steps="10-">
-                <use xlink:href="#items" x="-60" y="50"></use>
-                <g style="stroke-width: 4" transform="translate(20,50)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-            </g>
-            <g data-slide-steps="11-">
-                <g style="stroke-width: 4" transform="translate(220,50)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#items" x="240" y="50"></use>
             </g>
         </g>
     </svg>

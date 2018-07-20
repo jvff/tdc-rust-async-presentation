@@ -1,203 +1,21 @@
 <div>
-    <h1>Encodificação</h1>
+    <h1>Operações de entrada e saída</h1>
 
     <ul>
-        <li data-slide-steps="1-">A <em>crate</em> <code>tokio-codec</code> auxilia na conversão de leitores e escritores em
-        fluxos.</li>
+        <li data-slide-steps="1-">Algumas funções facilitam a composição de operações, retornando <code>Future</code>s
+            <ul>
+                <li data-slide-steps="2-"><code>copy</code>: copia todos os dados de um leitor para um escritor</li>
+                <li data-slide-steps="3-"><code>flush</code>: envia todos os dados enfileirados</li>
+                <li data-slide-steps="4-"><code>read_exact</code>: lê um número determinado de bytes</li>
+                <li data-slide-steps="5-"><code>read_to_end</code>: lê todos os bytes de um leitor</li>
+                <li data-slide-steps="6-"><code>write_all</code>: escreve todos os bytes de um <em>buffer</em></li>
+                <li data-slide-steps="7-"><code>shutdown</code>: finaliza um escritor</li>
+            </ul>
+        </li>
+        <li data-slide-steps="8-">Uma função retorna um <code>Stream</code>
+            <ul>
+                <li data-slide-steps="9-"><code>lines</code>: lê linha por linha em forma de <code>String</code>s</li>
+            </ul>
+        </li>
     </ul>
-
-<pre><code><span data-slide-steps="2-">pub trait Encoder {</span>
-    <span data-slide-steps="3-">type Item;</span>
-    <span data-slide-steps="4-">type Error: From&lt;std::io::Error&gt;;</span>
-
-    <span data-slide-steps="5-">fn encode(
-        &amp;mut self,</span>
-        <span data-slide-steps="6-">item: Self::Item,</span>
-        <span data-slide-steps="7-">dst: &amp;mut BytesMut</span>
-    <span data-slide-steps="5-">) -&gt; Result&lt;(), Self::Error&gt;;</span>
-<span data-slide-steps="2-">}</span>
-</code></pre>
-
-    <svg viewBox="-200 0 1000 100">
-        <defs>
-            <g id="arrow-head">
-                <path d="M-20 -20 L0 0 L-20 20"></path>
-            </g>
-            <g id="small-arrow-head">
-                <path d="M-10 -10 L0 0 L-10 10"></path>
-            </g>
-            <g id="mini-arrow-head">
-                <path d="M-8 -8 L0 0 L-8 8"></path>
-            </g>
-            <g id="thread">
-                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"></path>
-            </g>
-            <g id="future">
-                <circle cx="0" cy="0" r="10"></circle>
-            </g>
-            <g id="stream">
-                <circle cx="0" cy="0" r="10"></circle>
-                <g style="stroke: none; fill: black">
-                    <circle cx="9" cy="10" r="2"></circle>
-                    <circle cx="15" cy="10" r="2"></circle>
-                    <circle cx="21" cy="10" r="2"></circle>
-                </g>
-            </g>
-            <g id="encoder">
-                <ellipse cx="-30" cy="0" rx="15" ry="30"></ellipse>
-                <!-- <ellipse cx="30" cy="0" rx="7" ry="10"/> -->
-                <path d="M-25 -28 Q 0 0 30 -10 A 7 10 180 0 1 30 10 Q 0 0 -25 28"></path>
-            </g>
-            <g id="decoder">
-                <ellipse cx="-30" cy="0" rx="7" ry="10"></ellipse>
-                <!-- <ellipse cx="30" cy="0" rx="7" ry="10"/> -->
-                <path d="M-28 -10 Q 0 0 30 -30 A 15 30 180 0 1 30 30 Q 0 0 -28 10"></path>
-            </g>
-            <g id="nothing">
-                <path d="M-5 -10 A 15 15 30 0 0 -5 10"></path>
-                <path d="M5 -10 A 15 15 30 0 1 5 10"></path>
-            </g>
-            <g id="item">
-                <circle cx="0" cy="-10" r="3" style="fill: brown; stroke: none"></circle>
-                <line x1="0" y1="10" x2="0" y2="-5" style="stroke: brown; stroke-width: 5"></line>
-            </g>
-            <g id="fail">
-                <g style="stroke: red; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-            </g>
-            <g id="task">
-                <rect x="-25" y="-25" width="50" height="50"></rect>
-            </g>
-            <g id="token">
-                <circle cx="0" cy="0" r="5"></circle>
-            </g>
-            <g id="event-loop">
-                <circle cx="0" cy="0" r="30"></circle>
-                <g style="stroke: none; fill: white">
-                    <circle cx="26" cy="15" r="5"></circle>
-                </g>
-                <g style="stroke: none; fill: white">
-                    <circle cx="-26" cy="15" r="5"></circle>
-                </g>
-                <g style="stroke: none; fill: white">
-                    <circle cx="0" cy="-30" r="5"></circle>
-                </g>
-                <g transform="translate(-5,-30)">
-                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
-                </g>
-                <g transform="rotate(120),translate(-5,-30)">
-                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
-                </g>
-                <g transform="rotate(240),translate(-5,-30)">
-                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
-                </g>
-            </g>
-            <g id="executor">
-                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"></rect>
-            </g>
-            <g id="timer">
-                <circle cx="0" cy="0" r="15"></circle>
-                <line x1="0" y1="0" x2="0" y2="-12"></line>
-            </g>
-            <g id="clock">
-                <circle cx="0" cy="0" r="25"></circle>
-                <line x1="0" y1="0" x2="0" y2="-20"></line>
-                <line x1="0" y1="0" x2="10" y2="-10"></line>
-            </g>
-            <g id="cpu">
-                <g style="fill: none; stroke: black; stroke-width: 3">
-                    <rect x="-12.5" y="-12.5" width="25" height="25"></rect>
-
-                    <line x1="-16" y1="0" x2="-20" y2="0"></line>
-                    <line x1="-16" y1="-12.5" x2="-20" y2="-12.5"></line>
-                    <line x1="-16" y1="-6.25" x2="-20" y2="-6.25"></line>
-                    <line x1="-16" y1="12.5" x2="-20" y2="12.5"></line>
-                    <line x1="-16" y1="6.25" x2="-20" y2="6.25"></line>
-
-                    <line x1="16" y1="0" x2="20" y2="0"></line>
-                    <line x1="16" y1="-12.5" x2="20" y2="-12.5"></line>
-                    <line x1="16" y1="-6.25" x2="20" y2="-6.25"></line>
-                    <line x1="16" y1="12.5" x2="20" y2="12.5"></line>
-                    <line x1="16" y1="6.25" x2="20" y2="6.25"></line>
-
-                    <line x1="0" y1="16" x2="0" y2="20"></line>
-                    <line x1="-12.5" y1="16" x2="-12.5" y2="20"></line>
-                    <line x1="-6.25" y1="16" x2="-6.25" y2="20"></line>
-                    <line x1="12.5" y1="16" x2="12.5" y2="20"></line>
-                    <line x1="6.25" y1="16" x2="6.25" y2="20"></line>
-
-                    <line x1="0" y1="-16" x2="0" y2="-20"></line>
-                    <line x1="-12.5" y1="-16" x2="-12.5" y2="-20"></line>
-                    <line x1="-6.25" y1="-16" x2="-6.25" y2="-20"></line>
-                    <line x1="12.5" y1="-16" x2="12.5" y2="-20"></line>
-                    <line x1="6.25" y1="-16" x2="6.25" y2="-20"></line>
-                </g>
-            </g>
-            <g id="db">
-                <g style="fill: none; stroke-width: 3">
-                    <ellipse cx="0" cy="-10" rx="25" ry="10"></ellipse>
-                    <path d="M-25 -10 v 20 a 25 10 180 1 0 50 0 v -20"></path>
-                </g>
-            </g>
-            <g id="net">
-                <g style="fill: none; stroke-width: 3">
-                    <circle cx="0" cy="0" r="25"></circle>
-                    <ellipse cx="0" cy="0" rx="10" ry="25"></ellipse>
-                    <line x1="-25" y1="0" x2="25" y2="0"></line>
-                    <path d="M-17.7 17.7 L17.7 17.7"></path>
-                    <path d="M-17.7 -17.7 L17.7 -17.7"></path>
-                </g>
-            </g>
-            <g id="hide-thread">
-                <rect style="stroke: none; fill: white" x="-40" y="-5" width="60" height="150"></rect>
-            </g>
-            <g id="hide-task">
-                <rect style="stroke: none; fill: white" x="-30" y="-30" width="60" height="60"></rect>
-            </g>
-            <g id="hide-future">
-                <circle cx="0" cy="0" r="15" style="stroke: none; fill: white"></circle>
-            </g>
-            <g id="hide-event-loop">
-                <rect style="stroke: none; fill: white" x="-70" y="-50" width="120" height="100"></rect>
-            </g>
-            <g id="etcetera">
-                <circle style="stroke: none; fill: black" cx="-10" cy="0" r="3"></circle>
-                <circle style="stroke: none; fill: black" cx="0" cy="0" r="3"></circle>
-                <circle style="stroke: none; fill: black" cx="10" cy="0" r="3"></circle>
-            </g>
-            <g id="equals">
-                <g style="stroke: gray; stroke-width: 10">
-                    <line x1="-20" y1="-10" x2="20" y2="-10"></line>
-                    <line x1="-20" y1="10" x2="20" y2="10"></line>
-                </g>
-            </g>
-        </defs>
-
-        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="2-">
-                <use xlink:href="#encoder" x="0" y="50"></use>
-            </g>
-            <g data-slide-steps="3-">
-                <use xlink:href="#item" x="-120" y="50"></use>
-            </g>
-            <g data-slide-steps="6-">
-                <g style="stroke-width: 4" transform="translate(-60,50)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-            </g>
-            <g data-slide-steps="7-">
-                <g style="stroke: black; stroke-width: 2; fill: black">
-                    <line x1="60" y1="50" x2="100" y2="50"></line>
-                    <circle cx="60" cy="50" r="3"></circle>
-                    <circle cx="70" cy="50" r="3"></circle>
-                    <circle cx="80" cy="50" r="3"></circle>
-                    <circle cx="90" cy="50" r="3"></circle>
-                    <circle cx="100" cy="50" r="3"></circle>
-                </g>
-            </g>
-        </g>
-    </svg>
 </div>
