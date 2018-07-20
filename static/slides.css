@@ -35,6 +35,14 @@ svg .active-in-slide-step {
     visibility: visible;
 }
 
+span.inactive-in-slide-step {
+    visibility: hidden;
+}
+
+span.active-in-slide-step {
+    visibility: visible;
+}
+
 code span.inactive-in-slide-step {
     color: gray;
 }

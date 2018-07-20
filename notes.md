@@ -82,9 +82,12 @@
 
 - Uma *crate* para programação assíncrona
 - Oferece primitivas para representar a programação assíncrona
+  - Executador
   - Tarefa
   - Operação
-  - Executador
+	- `Future`
+	- `Stream`
+	- `Sink`
 - Oferece ferramentas para facilitar a representação de uma operação complexa
 
 ### Tarefa
