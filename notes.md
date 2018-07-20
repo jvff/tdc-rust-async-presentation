@@ -112,7 +112,7 @@ pub trait Executor<F: Future<Item = (), Error = ()>> {
     pronta
 - `futures::task::current()` retorna a `Task` para acessar a tarefa atual
 
-### Operação
+### `Future`
 
 - Trait `futures::Future`
   - Representa uma operação assíncrona
@@ -123,7 +123,7 @@ pub trait Executor<F: Future<Item = (), Error = ()>> {
       se tornar disponível
     - Retorna `Async::NotReady` indicando que a tarefa pode pausar
 
-### Fluxos
+### `Stream`
 
 - Representação de operações que produzem vários ítens, um por vez
 - Pode falhar, mas isso **não** termina o fluxo
@@ -138,7 +138,7 @@ pub trait Stream {
 }
 ```
 
-### Enviando em fluxo
+### `Sink`
 
 - Representação de uma operação para enviar algo de forma assíncrona
 - O ítem representado agora é o tipo de ítem que pode ser enviado
