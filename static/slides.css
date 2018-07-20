@@ -45,10 +45,12 @@ span.active-in-slide-step {
 
 code span.inactive-in-slide-step {
     color: gray;
+    visibility: visible;
 }
 
 code span.active-in-slide-step {
     color: black;
+    visibility: visible;
 }
 
 li.inactive-in-slide-step {

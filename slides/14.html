@@ -1,45 +1,21 @@
 <div>
     <h1>Operação</h1>
 
-<pre><code>pub trait Future {
-    type Item;
-    type Error;
+<pre><code><span data-slide-steps="1">pub trait Future {</span>
+    <span data-slide-steps="6">type Item;</span>
+    <span data-slide-steps="4">type Error;</span>
 
-    fn poll(&amp;mut self) -&gt; Result&lt;Async&lt;Self::Item&gt;, Self::Error&gt;;
-}
+    <span data-slide-steps="2">fn poll(&amp;mut self) -&gt; </span><span data-slide-steps="3">Result&lt;</span><span data-slide-steps="5,7-">Async&lt;</span><span data-slide-steps="6">Self::Item</span><span data-slide-steps="5,7-">&gt;</span><span data-slide-steps="3">, </span><span data-slide-steps="4">Self::Error</span><span data-slide-steps="3">&gt;;</span>
+<span data-slide-steps="1">}</span>
 </code></pre>
 
-<pre><code>pub enum Async&lt;T&gt; {
-    Ready(T),
-    NotReady,
-}
+<pre><code><span data-slide-steps="5">pub enum Async&lt;T&gt; {</span>
+    <span data-slide-steps="6">Ready(T),</span>
+    <span data-slide-steps="7-">NotReady,</span>
+<span data-slide-steps="5">}</span>
 </code></pre>
 
-    <ul>
-        <li data-slide-steps="1-">Trait <code data-slide-steps="1-">futures::Future</code>
-            <ul>
-                <li data-slide-steps="2-">Representa uma operação assíncrona</li>
-                <li data-slide-steps="3-">Método <code data-slide-steps="3-">poll</code> é chamado para tentar avançar a operação</li>
-                <li data-slide-steps="4-">Quando terminado
-                    <ul>
-                        <li data-slide-steps="5-">Retorna um ítem em caso de sucesso</li>
-                        <li data-slide-steps="6-">Retorna um erro em caso de falha</li>
-                    </ul>
-                </li>
-                <li data-slide-steps="7-">Se não tiver terminado:
-                <ul>
-                <li data-slide-steps="8-"><strong>Precisa</strong>
-                    <ul>
-                        <li data-slide-steps="9-">Acessar a tarefa atual</li>
-                        <li data-slide-steps="10-">Agendá-la para ser acordada quando a operação estiver pronta</li>
-                        <li data-slide-steps="11-">Retorna <code>Async::NotReady</code></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-
-    <svg viewBox="0 -30 1000 300">
+    <svg viewBox="-100 -30 1000 300">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -88,28 +64,27 @@
         </defs>
 
         <g transform="translate(100, 50)" style="fill: none; stroke: black; stroke-width: 3" data-slide-steps="1-">
-            <use xlink:href="#future" x="220" y="65" data-slide-steps="2-"></use>
-            <g data-slide-steps="3-">
+            <use xlink:href="#future" x="220" y="65" data-slide-steps="1-"></use>
+            <g data-slide-steps="2-">
                 <use xlink:href="#user" style="stroke-width: 6" x="0" y="80"></use>
+            </g>
+            <g data-slide-steps="2-">
                 <g style="stroke: gray; stroke-width: 5" transform="translate(180,50)">
                     <use xlink:href="#arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-100" y2="0"></line>
                 </g>
             </g>
-            <g data-slide-steps="4-">
-                <use xlink:href="#user" style="stroke-width: 6" x="0" y="80"></use>
+            <g data-slide-steps="3-">
                 <g style="stroke: gray; stroke-width: 5" transform="translate(80,80),rotate(180)">
                     <use xlink:href="#arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-100" y2="0"></line>
                 </g>
             </g>
-            <use xlink:href="#ok" x="50" y="80" data-slide-steps="5-"></use>
-            <g data-slide-steps="6-">
-                <use xlink:href="#hide-result" x="50" y="80"></use>
+            <g data-slide-steps="4">
                 <use xlink:href="#fail" x="50" y="80"></use>
             </g>
-            <g data-slide-steps="7-">
-                <use xlink:href="#hide-result" x="50" y="80"></use>
+            <g data-slide-steps="6">
+                <use xlink:href="#ok" x="50" y="80"></use>
             </g>
             <g data-slide-steps="8-">
                 <g style="stroke: black; stroke-width: 5; stroke-dasharray: 6,6" transform="translate(360,65)">
@@ -123,10 +98,11 @@
                     <use xlink:href="#arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-100" y2="0"></line>
                 </g>
+            </g>
+            <g data-slide-steps="9">
                 <use xlink:href="#task" x="600" y="65"></use>
             </g>
             <g data-slide-steps="10-">
-                <use xlink:href="#hide-task" x="600" y="65"></use>
                 <use xlink:href="#task" style="stroke: blue" x="600" y="65"></use>
             </g>
             <g data-slide-steps="11-">
