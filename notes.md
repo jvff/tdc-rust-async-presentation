@@ -215,11 +215,14 @@ let resultado = sink1.send(item).wait();
 - se a operação retornar outra operação em forma de `Future`, este método compõe
   as duas em uma só operação
 
-### Compondo operações simultâneas
+### Método `Future::select`
 
-- `select`: retorna um `Future` que terminará quando qualquer um dos dois
-  `Future`s juntados terminar ou falhar
-- `join`: retorna um `Future` que só terminará quando os dois `Future`s juntados
+- retorna um `Future` que terminará quando qualquer um dos dois `Future`s
+  juntados terminar ou falhar
+
+### Método `Future::join`
+
+- retorna um `Future` que só terminará quando os dois `Future`s juntados
   terminarem ou quando um deles falhar
 
 ### Compondo operações simultâneas

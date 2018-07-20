@@ -1,20 +1,24 @@
 <div>
-    <h1>Decodificação</h1>
+    <h1>Encodificação</h1>
 
-<pre><code><span data-slide-steps="1-">pub trait Decoder {</span>
-    <span data-slide-steps="2-">type Item;</span>
-    <span data-slide-steps="3-">type Error: From&lt;Error&gt;;</span>
+    <ul>
+        <li data-slide-steps="1-">A <em>crate</em> <code>tokio-codec</code> auxilia na conversão de leitores e escritores em
+        fluxos.</li>
+    </ul>
 
-    <span data-slide-steps="4-">fn decode(
-        &amp;mut self, </span>
-        <span data-slide-steps="5-">src: &amp;mut BytesMut</span>
-    <span data-slide-steps="4-">) -&gt; Result&lt;</span><span data-slide-steps="6-">Option&lt;Self::Item&gt;</span><span data-slide-steps="4-">, Self::Error&gt;;</span>
+<pre><code><span data-slide-steps="2-">pub trait Encoder {</span>
+    <span data-slide-steps="3-">type Item;</span>
+    <span data-slide-steps="4-">type Error: From&lt;std::io::Error&gt;;</span>
 
-    <span data-slide-steps="1-">...
-}</span>
+    <span data-slide-steps="5-">fn encode(
+        &amp;mut self,</span>
+        <span data-slide-steps="6-">item: Self::Item,</span>
+        <span data-slide-steps="7-">dst: &amp;mut BytesMut</span>
+    <span data-slide-steps="5-">) -&gt; Result&lt;(), Self::Error&gt;;</span>
+<span data-slide-steps="2-">}</span>
 </code></pre>
 
-    <svg viewBox="-200 100 1000 100">
+    <svg viewBox="-200 0 1000 100">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -172,32 +176,26 @@
         </defs>
 
         <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="1-">
-                <use xlink:href="#decoder" x="0" y="150"></use>
-            </g>
             <g data-slide-steps="2-">
-                <use xlink:href="#item" x="120" y="150"></use>
+                <use xlink:href="#encoder" x="0" y="50"></use>
             </g>
-            <g data-slide-steps="5-">
-                <g style="stroke: black; stroke-width: 2; fill: black">
-                    <line x1="-50" y1="150" x2="-70" y2="150"></line>
-                    <circle cx="-50" cy="150" r="3"></circle>
-                    <circle cx="-60" cy="150" r="3"></circle>
-                    <circle cx="-70" cy="150" r="3"></circle>
-
-                    <line x1="-90" y1="150" x2="-140" y2="150"></line>
-                    <circle cx="-90" cy="150" r="3"></circle>
-                    <circle cx="-100" cy="150" r="3"></circle>
-                    <circle cx="-110" cy="150" r="3"></circle>
-                    <circle cx="-120" cy="150" r="3"></circle>
-                    <circle cx="-130" cy="150" r="3"></circle>
-                    <circle cx="-140" cy="150" r="3"></circle>
-                </g>
+            <g data-slide-steps="3-">
+                <use xlink:href="#item" x="-120" y="50"></use>
             </g>
             <g data-slide-steps="6-">
-                <g style="stroke-width: 4" transform="translate(110,150)">
+                <g style="stroke-width: 4" transform="translate(-60,50)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+            </g>
+            <g data-slide-steps="7-">
+                <g style="stroke: black; stroke-width: 2; fill: black">
+                    <line x1="60" y1="50" x2="100" y2="50"></line>
+                    <circle cx="60" cy="50" r="3"></circle>
+                    <circle cx="70" cy="50" r="3"></circle>
+                    <circle cx="80" cy="50" r="3"></circle>
+                    <circle cx="90" cy="50" r="3"></circle>
+                    <circle cx="100" cy="50" r="3"></circle>
                 </g>
             </g>
         </g>

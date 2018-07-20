@@ -3,6 +3,11 @@
     font-weight: bold;
 }
 
+#slide h1 code {
+    font-size: 26pt;
+    font-weight: bold;
+}
+
 #slide svg {
     width: 80%;
     margin-left: 10%;
