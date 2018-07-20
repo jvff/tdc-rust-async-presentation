@@ -1,44 +1,21 @@
 <div>
-    <h1>Operações de leitura e escrita foram movidas</h1>
+    <h1>Separação dos métodos de composição de operações</h1>
 
     <ul>
-        <li class="slide-40 slide-step-1">As representações para operações de leitura assíncrona e escrita assíncrona
-        agora estão na <em>crate</em> <code>futures</code></li>
+        <li data-slide-steps="1-">A <em>trait</em> <code>Future</code> ficou mais simples</li>
+        <li data-slide-steps="2-">Fica mais consolidada, mudando pouco (ou nada) entre versões</li>
+        <li data-slide-steps="3-">Os métodos de composição foram movidas para uma nova <em>trait</em> <code>FutureExt</code>
+            <ul>
+                <li data-slide-steps="4-"><code>map</code></li>
+                <li data-slide-steps="5-"><code>map_err</code></li>
+                <li data-slide-steps="6-"><code>and_then</code></li>
+                <li data-slide-steps="7-"><code>or_else</code></li>
+                <li data-slide-steps="8-"><code>then</code></li>
+                <li data-slide-steps="9-"><code>flatten</code></li>
+                <li data-slide-steps="10-">etc.</li>
+            </ul>
+        </li>
+        <li data-slide-steps="11-">Novos métodos podem ser adicionados sem alterar a <em>trait</em> <code>Future</code></li>
+        <li data-slide-steps="12-">A <em>trait</em> só é usada se uma composição for necessária</li>
     </ul>
-
-<pre><code><span data-slide-steps="2-">pub trait AsyncRead {
-    <span data-slide-steps="3-">fn poll_read(
-        &amp;mut self, 
-        cx: &amp;mut Context, 
-        buf: &amp;mut [u8]
-    ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt;;</span>
-
-    <span data-slide-steps="4-">unsafe fn initializer(&amp;self) -&gt; Initializer { ... }
-
-    fn poll_vectored_read(
-        &amp;mut self, 
-        cx: &amp;mut Context, 
-        vec: &amp;mut [&amp;mut IoVec]
-    ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
-}</span>
-</code></pre>
-
-<pre><code><span data-slide-steps="5-">pub trait AsyncWrite {
-    <span data-slide-steps="6-">fn poll_write(
-        &amp;mut self, 
-        cx: &amp;mut Context, 
-        buf: &amp;[u8]
-    ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt;;</span>
-
-    <span data-slide-steps="7-">fn poll_flush(&amp;mut self, cx: &amp;mut Context) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
-
-    <span data-slide-steps="8-">fn poll_close(&amp;mut self, cx: &amp;mut Context) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
-
-    <span data-slide-steps="9-">fn poll_vectored_write(
-        &amp;mut self, 
-        cx: &amp;mut Context, 
-        vec: &amp;[&amp;IoVec]
-    ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
-}</span>
-</code></pre>
 </div>

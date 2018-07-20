@@ -1,21 +1,52 @@
 <div>
-    <h1>Separação dos métodos de composição de operações</h1>
+    <h1>Facilitando operações de leitura e escrita</h1>
 
     <ul>
-        <li data-slide-steps="1-">A <em>trait</em> <code>Future</code> ficou mais simples</li>
-        <li data-slide-steps="2-">Fica mais consolidada, mudando pouco (ou nada) entre versões</li>
-        <li data-slide-steps="3-">Os métodos de composição foram movidas para uma nova <em>trait</em> <code>FutureExt</code>
-            <ul>
-                <li data-slide-steps="4-"><code>map</code></li>
-                <li data-slide-steps="5-"><code>map_err</code></li>
-                <li data-slide-steps="6-"><code>and_then</code></li>
-                <li data-slide-steps="7-"><code>or_else</code></li>
-                <li data-slide-steps="8-"><code>then</code></li>
-                <li data-slide-steps="9-"><code>flatten</code></li>
-                <li data-slide-steps="10-">etc.</li>
-            </ul>
-        </li>
-        <li data-slide-steps="11-">Novos métodos podem ser adicionados sem alterar a <em>trait</em> <code>Future</code></li>
-        <li data-slide-steps="12-">A <em>trait</em> só é usada se uma composição for necessária</li>
+        <li data-slide-steps="1-">E foram adicionados métodos genéricos para facilitar o uso das operações de
+        leitura e escrita</li>
+        <li data-slide-steps="2-">Todos transformam o tipo "primitivo" de leitura ou escrita assíncrona em uma
+        operação um pouco mais "alto nível" que implementa <code>Future</code></li>
     </ul>
+
+<pre><code><span data-slide-steps="3-">pub trait AsyncReadExt: AsyncRead {</span>
+    <span data-slide-steps="4-">fn copy_into&lt;W&gt;(self, writer: W) -&gt; CopyInto&lt;Self, W&gt;
+    where
+        W: AsyncWrite,
+    { ... }</span>
+
+    <span data-slide-steps="5-">fn read&lt;T&gt;(self, buf: T) -&gt; Read&lt;Self, T&gt;
+    where
+        T: AsMut&lt;[u8]&gt;,
+    { ... }</span>
+
+    <span data-slide-steps="6-">fn read_exact&lt;T&gt;(self, buf: T) -&gt; ReadExact&lt;Self, T&gt;
+    where
+        T: AsMut&lt;[u8]&gt;,
+    { ... }</span>
+
+    <span data-slide-steps="7-">fn read_to_end(self, buf: Vec&lt;u8&gt;) -&gt; ReadToEnd&lt;Self&gt; { ... }</span>
+
+    <span data-slide-steps="3-">...
+}</span>
+
+<span data-slide-steps="8-">impl&lt;T&gt; AsyncReadExt for T where
+    T: AsyncRead + ?Sized 
+{ ... }<span>
+</span></span></code></pre>
+
+<pre><code><span data-slide-steps="9-">pub trait AsyncWriteExt: AsyncWrite {</span>
+    <span data-slide-steps="10-">fn flush(self) -&gt; Flush&lt;Self&gt; { ... }</span>
+
+    <span data-slide-steps="11-">fn close(self) -&gt; Close&lt;Self&gt; { ... }</span>
+
+    <span data-slide-steps="12-">fn write_all&lt;T&gt;(self, buf: T) -&gt; WriteAll&lt;Self, T&gt;
+    where
+        T: AsRef&lt;[u8]&gt;,
+    { ... }</span>
+<span data-slide-steps="9-">}</span>
+
+<span data-slide-steps="13-">impl&lt;T&gt; AsyncWriteExt for T where
+    T: AsyncWrite + ?Sized
+{ ... }</span>
+</code></pre>
 </div>

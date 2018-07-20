@@ -123,15 +123,6 @@ pub trait Executor<F: Future<Item = (), Error = ()>> {
       se tornar disponível
     - Retorna `Async::NotReady` indicando que a tarefa pode pausar
 
-### Implementando operações
-
-- Na maioria dos casos não é preciso implementar um `Future` manualmente
-- Mesmo se necessário, geralmente é feito compondo outros `Future`s
-  - Basta tomar o cuidade de retornar `Async::NotReady` se e **somente se** pelo
-    menos um dos `Future`s usados internamente também tiver retornado
-    `Async::NotReady`
-    - (ou seja, algum `Future` interno se preparou para acordar a tarefa)
-
 ### Compondo uma operação atrás de outra
 
 - `map`: aplica uma função no ítem resultante do `Future`, transformando-o em

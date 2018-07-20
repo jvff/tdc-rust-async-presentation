@@ -1,24 +1,37 @@
 <div>
-    <h1>Introdução</h1>
+    <h1>Executador</h1>
 
     <ul>
-        <li data-slide-steps="1-">Tokio é uma <em>crate</em> complementar à crate <code>futures</code></li>
-        <li data-slide-steps="2-">Fornece implementações para os tipos abstratos de <code>futures</code></li>
+        <li data-slide-steps="2-">Responsável por avançar <code>Future</code>s chamando <code>poll</code> quando a tarefa receber um
+        evento</li>
+        <li data-slide-steps="11-">Cada executador roda em uma <em>thread</em> separada</li>
+        <li data-slide-steps="12-">Por padrão, um executador é criado para cada núcleo do processador </li>
+        <li data-slide-steps="13-"><code>tokio_executor::DefaultExecutor::current()</code> pode ser usado para se obter um
+        acesso ao executador padrão</li>
     </ul>
 
-    <svg viewBox="-100 -100 1000 300">
+    <svg viewBox="-100 0 1000 600">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
             </g>
-            <g id="mini-arrow-head">
-                <path d="M-8 -8 L0 0 L-8 8"></path>
+            <g id="small-arrow-head">
+                <path d="M-10 -10 L0 0 L-10 10"></path>
+            </g>
+            <g id="thread">
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"></path>
             </g>
             <g id="future">
                 <circle cx="0" cy="0" r="10"></circle>
             </g>
-            <g id="hide-future">
-                <circle cx="0" cy="0" r="15" style="stroke: none; fill: white"></circle>
+            <g id="ok">
+                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
+            </g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"></rect>
+            </g>
+            <g id="token">
+                <circle cx="0" cy="0" r="5"></circle>
             </g>
             <g id="event-loop">
                 <circle cx="0" cy="0" r="30"></circle>
@@ -93,56 +106,90 @@
                     <path d="M-17.7 -17.7 L17.7 -17.7"></path>
                 </g>
             </g>
+            <g id="hide-thread">
+                <rect style="stroke: none; fill: white" x="-40" y="-5" width="60" height="150"></rect>
+            </g>
+            <g id="hide-task">
+                <rect style="stroke: none; fill: white" x="-30" y="-30" width="60" height="60"></rect>
+            </g>
+            <g id="hide-future">
+                <circle cx="0" cy="0" r="15" style="stroke: none; fill: white"></circle>
+            </g>
+            <g id="hide-event-loop">
+                <rect style="stroke: none; fill: white" x="-70" y="-50" width="120" height="100"></rect>
+            </g>
+            <g id="etcetera">
+                <circle style="stroke: none; fill: black" cx="-10" cy="0" r="3"></circle>
+                <circle style="stroke: none; fill: black" cx="0" cy="0" r="3"></circle>
+                <circle style="stroke: none; fill: black" cx="10" cy="0" r="3"></circle>
+            </g>
         </defs>
 
         <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="1-">
+                <use xlink:href="#executor" x="0" y="50"></use>
+            </g>
+            <g data-slide-steps="2-">
+                <use xlink:href="#task" x="0" y="50"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+            </g>
             <g data-slide-steps="3-">
-                <use xlink:href="#event-loop" x="0" y="50"></use>
-            </g>
-            <g data-slide-steps="4-">
-                <use xlink:href="#executor" x="200" y="50"></use>
-            </g>
-            <g data-slide-steps="5-">
-                <use xlink:href="#future" x="430" y="30"></use>
-                <use xlink:href="#future" x="470" y="70"></use>
-                <use xlink:href="#future" x="400" y="70"></use>
-            </g>
-            <g data-slide-steps="6-">
-                <use xlink:href="#hide-future" x="430" y="30"></use>
-                <g style="stroke: blue">
-                    <use xlink:href="#future" x="430" y="30"></use>
-                    <use xlink:href="#net" transform="translate(430,-20),scale(0.8)"></use>
+                <use xlink:href="#hide-task" x="0" y="50"></use>
+                <use xlink:href="#task" x="0" y="50"></use>
+                <g style="fill: orange">
+                    <use xlink:href="#future" x="0" y="50"></use>
                 </g>
             </g>
+            <g data-slide-steps="4-">
+                <use xlink:href="#hide-task" x="0" y="50"></use>
+                <use xlink:href="#task" x="0" y="50"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+            </g>
+            <g data-slide-steps="5-">
+                <use xlink:href="#hide-task" x="0" y="50"></use>
+                <use xlink:href="#task" x="0" y="50"></use>
+                <g style="fill: orange">
+                    <use xlink:href="#future" x="0" y="50"></use>
+                </g>
+            </g>
+            <g data-slide-steps="6-">
+                <use xlink:href="#hide-task" x="0" y="50"></use>
+                <use xlink:href="#task" x="0" y="50"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+            </g>
             <g data-slide-steps="7-">
-                <use xlink:href="#hide-future" x="470" y="70"></use>
-                <g style="stroke: green">
-                    <use xlink:href="#future" x="470" y="70"></use>
-                    <use xlink:href="#db" transform="translate(500,110),scale(0.8)"></use>
+                <use xlink:href="#hide-task" x="0" y="50"></use>
+                <use xlink:href="#task" x="0" y="50"></use>
+                <g style="fill: orange">
+                    <use xlink:href="#future" x="0" y="50"></use>
                 </g>
             </g>
             <g data-slide-steps="8-">
-                <use xlink:href="#hide-future" x="400" y="70"></use>
-                <g style="stroke: red">
-                    <use xlink:href="#future" x="400" y="70"></use>
-                    <use xlink:href="#clock" transform="translate(360,110),scale(0.8)"></use>
-                </g>
+                <use xlink:href="#hide-task" x="0" y="50"></use>
+                <use xlink:href="#task" x="0" y="50"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+            </g>
+            <g data-slide-steps="9-">
+                <use xlink:href="#hide-task" x="0" y="50"></use>
+                <use xlink:href="#task" x="0" y="50"></use>
+                <use xlink:href="#ok" x="-5" y="50"></use>
+            </g>
+            <g data-slide-steps="10-">
+                <use xlink:href="#hide-task" x="0" y="50"></use>
+            </g>
+            <g data-slide-steps="11-">
+                <use xlink:href="#thread" x="0" y="120"></use>
+            </g>
+            <g data-slide-steps="12-">
+                <use xlink:href="#executor" x="100" y="50"></use>
+                <use xlink:href="#thread" x="100" y="120"></use>
+
+                <use xlink:href="#etcetera" x="200" y="50"></use>
+                <use xlink:href="#etcetera" x="200" y="190"></use>
+
+                <use xlink:href="#executor" x="300" y="50"></use>
+                <use xlink:href="#thread" x="300" y="120"></use>
             </g>
         </g>
     </svg>
-
-    <ul>
-        <li data-slide-steps="9-">Está em processo de reorganização
-        </li><li data-slide-steps="10-">Existem várias <em>crates</em>
-            <ul>
-                <li data-slide-steps="11-"><code>tokio-core</code></li>
-                <li data-slide-steps="12-"><code>tokio-timer</code></li>
-                <li data-slide-steps="13-"><code>tokio-io</code></li>
-                <li data-slide-steps="14-"><code>tokio-codec</code></li>
-            </ul>
-        </li>
-        <li data-slide-steps="15-">Existe uma <em>crate</em> principal com o objetivo de centralizar as
-        funcionalidades comuns</li>
-        
-    </ul>
 </div>

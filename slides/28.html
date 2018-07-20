@@ -1,14 +1,17 @@
 <div>
-    <h1>Temporizador</h1>
+    <h1>Limitar tempo de uma operação</h1>
 
     <ul>
-        <li data-slide-steps="1-">Controla operações de tempo</li>
-        <li data-slide-steps="2-"><code>Delay</code> é um <code>Future</code> que termina em um determinado instante</li>
-        <li data-slide-steps="3-"><code>Interval</code> é um <code>Stream</code> que produz um ítem por vez a um intervalo de tempo
-        determinado</li>
+        <li data-slide-steps="1-"><code>Deadline</code> é um <code>Future</code> que junto <code>Delay</code> com outro <code>Future</code>, para garantir
+        que a operação termine antes de um determinado instante
+            <ul>
+                <li data-slide-steps="8-">Equivalente a um <em>timeout</em></li>
+                <li data-slide-steps="9-">Poderia ser implementado como <code>future.select(Delay::new(instante))</code></li>
+            </ul>
+        </li>
     </ul>
 
-    <svg viewBox="-100 0 1000 100">
+    <svg viewBox="-100 0 1000 200">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -156,44 +159,74 @@
         </defs>
 
         <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="1-">
-                <use xlink:href="#clock" x="0" y="50"></use>
-            </g>
             <g data-slide-steps="2-">
-                <use xlink:href="#future" x="80" y="30"></use>
-                <g style="stroke-width: 4" transform="translate(160,30)">
+                <use xlink:href="#future" x="0" y="25"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(80,25)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
+                <use xlink:href="#item" x="110" y="25"></use>
             </g>
             <g data-slide-steps="3-">
-                <use xlink:href="#nothing" x="190" y="30"></use>
-            </g>
-            <g data-slide-steps="4-">
-                <use xlink:href="#stream" x="80" y="70"></use>
-                <g style="stroke-width: 4" transform="translate(160,70)">
+                <g style="stroke-width: 4" transform="translate(200,38)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
+                <use xlink:href="#item" x="230" y="38"></use>
             </g>
+
+            <g data-slide-steps="4-">
+                <use xlink:href="#equals" x="440" y="38"></use>
+                <use xlink:href="#future" x="520" y="38"></use>
+                <g style="stroke-width: 4" transform="translate(600,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#item" x="630" y="38"></use>
+            </g>
+        </g>
+
+        <g transform="translate(50, 100)" style="fill: none; stroke: black; stroke-width: 3">
             <g data-slide-steps="5-">
-                <use xlink:href="#timer" x="190" y="70"></use>
+                <use xlink:href="#future" x="0" y="25"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(80,50)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#nothing" x="110" y="50"></use>
             </g>
             <g data-slide-steps="6-">
-                <use xlink:href="#timer" x="225" y="70"></use>
-                <g transform="translate(225,70),rotate(45)">
-                    <line x1="0" y1="0" x2="0" y2="-8"></line>
+                <g style="stroke-width: 4" transform="translate(200,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
+                <use xlink:href="#fail" x="230" y="38"></use>
             </g>
+
             <g data-slide-steps="7-">
-                <use xlink:href="#timer" x="260" y="70"></use>
-                <g transform="translate(260,70),rotate(90)">
-                    <line x1="0" y1="0" x2="0" y2="-8"></line>
+                <use xlink:href="#equals" x="440" y="38"></use>
+                <use xlink:href="#future" x="520" y="38"></use>
+                <g style="stroke-width: 4" transform="translate(600,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
-            </g>
-            <g data-slide-steps="8-">
-                <use xlink:href="#etcetera" x="295" y="70"></use>
+                <use xlink:href="#fail" x="630" y="38"></use>
             </g>
         </g>
     </svg>
+
+<pre data-slide-steps="10-"><code>let operacao_com_timeout = operacao
+    .select(Delay::new(instante))
+    .and_then(|resultado| match resultado {
+        Ok(Either::Left((item, _))) =&gt; Ok(item),
+        Err(Either::Left((erro, _))) =&gt; Err(erro),
+
+        Ok(Either::Right((_, _))) =&gt; Err(Erro::Timeout)
+        Err(Either::Right((_, _))) =&gt; Err(Erro::Timeout),
+    });
+
+tokio::run(operacao_com_timeout)
+</code></pre>
 </div>
