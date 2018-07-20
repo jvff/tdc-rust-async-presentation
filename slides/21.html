@@ -1,8 +1,15 @@
 <div>
-    <h1>Compondo operações em fluxos</h1>
+    <h1>Método <code>Future::or_else</code></h1>
 
-    <pre data-slide-steps="1-"><code>map</code></pre>
-    <svg viewBox="0 0 1000 50">
+<pre><code class="reveal">
+<span data-slide-steps="8-">let future3 = </span><span data-slide-steps="1-">future1</span><span data-slide-steps="2-">.or_else(</span><span data-slide-steps="3-">|erro| {</span>
+                  <span data-slide-steps="6-">let future2 = <span data-slide-steps="4-">OperacaoAsync::new(erro)</span><span data-slide-steps="6-">;</span>
+
+                  <span data-slide-steps="7-">future2</span>
+              <span data-slide-steps="3-">})</span><span data-slide-steps="8-">;</span>
+</code></pre>
+
+    <svg viewBox="-100 -50 1000 150">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -13,24 +20,8 @@
             <g id="future">
                 <circle cx="0" cy="0" r="10"></circle>
             </g>
-            <g id="stream">
-                <circle cx="0" cy="0" r="10"></circle>
-                <g style="stroke: none; fill: black">
-                    <circle cx="9" cy="10" r="2"></circle>
-                    <circle cx="15" cy="10" r="2"></circle>
-                    <circle cx="21" cy="10" r="2"></circle>
-                </g>
-            </g>
             <g id="ok">
                 <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
-            </g>
-            <g id="oks">
-                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
-                <g style="stroke: none; fill: green">
-                    <circle cx="9" cy="10" r="2"></circle>
-                    <circle cx="15" cy="10" r="2"></circle>
-                    <circle cx="21" cy="10" r="2"></circle>
-                </g>
             </g>
             <g id="fail">
                 <g style="stroke: red; stroke-width: 5">
@@ -38,15 +29,13 @@
                     <path d="M10 -10 L -10 10"></path>
                 </g>
             </g>
-            <g id="fails">
-                <g style="stroke: red; stroke-width: 5">
+            <g id="result">
+                <g transform="translate(0,-10)">
+                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
+                </g>
+                <g transform="translate(0,10)" style="stroke: red; stroke-width: 5">
                     <path d="M-10 -10 L 10 10"></path>
                     <path d="M10 -10 L -10 10"></path>
-                </g>
-                <g style="stroke: none; fill: red">
-                    <circle cx="9" cy="10" r="2"></circle>
-                    <circle cx="15" cy="10" r="2"></circle>
-                    <circle cx="21" cy="10" r="2"></circle>
                 </g>
             </g>
             <g id="pending">
@@ -61,31 +50,6 @@
             <g id="ok2">
                 <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"></path>
             </g>
-            <g id="oks2">
-                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"></path>
-                <g style="stroke: none; fill: blue">
-                    <circle cx="9" cy="10" r="2"></circle>
-                    <circle cx="15" cy="10" r="2"></circle>
-                    <circle cx="21" cy="10" r="2"></circle>
-                </g>
-            </g>
-            <g id="fail2">
-                <g style="stroke: blue; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-            </g>
-            <g id="fails2">
-                <g style="stroke: blue; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-                <g style="stroke: none; fill: blue">
-                    <circle cx="9" cy="10" r="2"></circle>
-                    <circle cx="15" cy="10" r="2"></circle>
-                    <circle cx="21" cy="10" r="2"></circle>
-                </g>
-            </g>
             <g id="ok1fail2">
                 <g transform="translate(0,-10)">
                     <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
@@ -93,100 +57,6 @@
                 <g transform="translate(0,10)" style="stroke: blue; stroke-width: 5">
                     <path d="M-10 -10 L 10 10"></path>
                     <path d="M10 -10 L -10 10"></path>
-                </g>
-            </g>
-            <g id="ok1fail2s">
-                <g transform="translate(0,-10)">
-                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
-                </g>
-                <g transform="translate(0,10)" style="stroke: blue; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-                <g style="stroke: none; fill: green">
-                    <circle cx="9" cy="0" r="2"></circle>
-                    <circle cx="15" cy="0" r="2"></circle>
-                    <circle cx="21" cy="0" r="2"></circle>
-                </g>
-                <g style="stroke: none; fill: blue">
-                    <circle cx="9" cy="20" r="2"></circle>
-                    <circle cx="15" cy="20" r="2"></circle>
-                    <circle cx="21" cy="20" r="2"></circle>
-                </g>
-            </g>
-            <g id="ok2fail1">
-                <g transform="translate(0,-10)">
-                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"></path>
-                </g>
-                <g transform="translate(0,10)" style="stroke: red; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-            </g>
-            <g id="ok2fail1s">
-                <g transform="translate(0,-10)">
-                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"></path>
-                </g>
-                <g transform="translate(0,10)" style="stroke: red; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-                <g style="stroke: none; fill: blue">
-                    <circle cx="9" cy="0" r="2"></circle>
-                    <circle cx="15" cy="0" r="2"></circle>
-                    <circle cx="21" cy="0" r="2"></circle>
-                </g>
-                <g style="stroke: none; fill: red">
-                    <circle cx="9" cy="20" r="2"></circle>
-                    <circle cx="15" cy="20" r="2"></circle>
-                    <circle cx="21" cy="20" r="2"></circle>
-                </g>
-            </g>
-            <g id="results">
-                <g transform="translate(0,-10)">
-                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
-                </g>
-                <g transform="translate(0,10)" style="stroke: red; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-                <g style="stroke: none; fill: green">
-                    <circle cx="9" cy="0" r="2"></circle>
-                    <circle cx="15" cy="0" r="2"></circle>
-                    <circle cx="21" cy="0" r="2"></circle>
-                </g>
-                <g style="stroke: none; fill: red">
-                    <circle cx="9" cy="20" r="2"></circle>
-                    <circle cx="15" cy="20" r="2"></circle>
-                    <circle cx="21" cy="20" r="2"></circle>
-                </g>
-            </g>
-            <g id="result2">
-                <g transform="translate(0,-10)">
-                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"></path>
-                </g>
-                <g transform="translate(0,10)" style="stroke: blue; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-            </g>
-            <g id="results2">
-                <g transform="translate(0,-10)">
-                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"></path>
-                </g>
-                <g transform="translate(0,10)" style="stroke: blue; stroke-width: 5">
-                    <path d="M-10 -10 L 10 10"></path>
-                    <path d="M10 -10 L -10 10"></path>
-                </g>
-                <g style="stroke: none; fill: blue">
-                    <circle cx="9" cy="0" r="2"></circle>
-                    <circle cx="15" cy="0" r="2"></circle>
-                    <circle cx="21" cy="0" r="2"></circle>
-                </g>
-                <g style="stroke: none; fill: blue">
-                    <circle cx="9" cy="20" r="2"></circle>
-                    <circle cx="15" cy="20" r="2"></circle>
-                    <circle cx="21" cy="20" r="2"></circle>
                 </g>
             </g>
             <g id="equals">
@@ -198,114 +68,23 @@
         </defs>
 
         <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="1-">
+                <use xlink:href="#future" x="0" y="25"></use>
+            </g>
             <g data-slide-steps="2-">
-                <use xlink:href="#stream" x="0" y="25"></use>
                 <g style="stroke-width: 4" transform="translate(80,25)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
-                <use xlink:href="#oks" x="110" y="25"></use>
+                <use xlink:href="#fail" x="110" y="25"></use>
             </g>
             <g data-slide-steps="3-">
                 <use xlink:href="#transform" x="200" y="25"></use>
             </g>
             <g data-slide-steps="4-">
-                <use xlink:href="#oks2" x="230" y="25"></use>
+                <use xlink:href="#future" style="stroke: blue" x="230" y="25"></use>
             </g>
-
             <g data-slide-steps="5-">
-                <use xlink:href="#equals" x="440" y="25"></use>
-                <use xlink:href="#stream" x="520" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(600,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#oks2" x="630" y="25"></use>
-            </g>
-        </g>
-    </svg>
-
-    <pre data-slide-steps="6-"><code>map_err</code></pre>
-    <svg viewBox="0 0 1000 50">
-        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="7-">
-                <use xlink:href="#stream" x="0" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(80,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#fails" x="110" y="25"></use>
-            </g>
-            <g data-slide-steps="8-">
-                <use xlink:href="#transform" x="200" y="25"></use>
-            </g>
-            <g data-slide-steps="9-">
-                <use xlink:href="#fails2" x="230" y="25"></use>
-            </g>
-
-            <g data-slide-steps="10-">
-                <use xlink:href="#equals" x="440" y="25"></use>
-                <use xlink:href="#stream" x="520" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(600,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#fails2" x="630" y="25"></use>
-            </g>
-        </g>
-    </svg>
-
-    <pre data-slide-steps="11-"><code>and_then</code></pre>
-    <svg viewBox="0 0 1000 50">
-        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="12-">
-                <use xlink:href="#stream" x="0" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(80,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#oks" x="110" y="25"></use>
-            </g>
-            <g data-slide-steps="13-">
-                <use xlink:href="#transform" x="200" y="25"></use>
-            </g>
-            <g data-slide-steps="14-">
-                <use xlink:href="#future" style="stroke: blue" x="230" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(310,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#ok2fail1" x="340" y="25"></use>
-            </g>
-
-            <g data-slide-steps="15-">
-                <use xlink:href="#equals" x="440" y="25"></use>
-                <use xlink:href="#stream" x="520" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(600,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#ok2fail1s" x="630" y="25"></use>
-            </g>
-        </g>
-    </svg>
-
-    <pre data-slide-steps="16-"><code>or_else</code></pre>
-    <svg viewBox="0 0 1000 50">
-        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="17-">
-                <use xlink:href="#stream" x="0" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(80,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#fails" x="110" y="25"></use>
-            </g>
-            <g data-slide-steps="18-">
-                <use xlink:href="#transform" x="200" y="25"></use>
-            </g>
-            <g data-slide-steps="19-">
-                <use xlink:href="#future" style="stroke: blue" x="230" y="25"></use>
                 <g style="stroke-width: 4" transform="translate(310,25)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
@@ -313,81 +92,14 @@
                 <use xlink:href="#ok1fail2" x="340" y="25"></use>
             </g>
 
-            <g data-slide-steps="20-">
+            <g data-slide-steps="8-">
                 <use xlink:href="#equals" x="440" y="25"></use>
-                <use xlink:href="#stream" x="520" y="25"></use>
+                <use xlink:href="#future" x="520" y="25"></use>
                 <g style="stroke-width: 4" transform="translate(600,25)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
-                <use xlink:href="#ok1fail2s" x="630" y="25"></use>
-            </g>
-        </g>
-    </svg>
-
-    <pre data-slide-steps="21-"><code>then</code></pre>
-    <svg viewBox="0 0 1000 50">
-        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="22-">
-                <use xlink:href="#stream" x="0" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(80,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#results" x="110" y="25"></use>
-            </g>
-            <g data-slide-steps="23-">
-                <use xlink:href="#transform" x="200" y="25"></use>
-            </g>
-            <g data-slide-steps="24-">
-                <use xlink:href="#future" style="stroke: blue" x="230" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(310,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#result2" x="340" y="25"></use>
-            </g>
-
-            <g data-slide-steps="25-">
-                <use xlink:href="#equals" x="440" y="25"></use>
-                <use xlink:href="#stream" x="520" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(600,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#results2" x="630" y="25"></use>
-            </g>
-        </g>
-    </svg>
-
-    <pre data-slide-steps="26-"><code>flatten</code></pre>
-    <svg viewBox="0 0 1000 50">
-        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="27-">
-                <use xlink:href="#stream" x="0" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(80,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#oks" x="110" y="25"></use>
-                <use xlink:href="#stream" x="140" y="25"></use>
-            </g>
-            <g data-slide-steps="28-">
-                <g style="stroke-width: 4" transform="translate(220,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#results2" x="250" y="25"></use>
-            </g>
-
-            <g data-slide-steps="30-">
-                <use xlink:href="#equals" x="440" y="25"></use>
-                <use xlink:href="#stream" x="520" y="25"></use>
-                <g style="stroke-width: 4" transform="translate(600,25)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#results2" x="630" y="25"></use>
+                <use xlink:href="#ok1fail2" x="630" y="25"></use>
             </g>
         </g>
     </svg>

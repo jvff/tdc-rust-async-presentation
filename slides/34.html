@@ -1,24 +1,17 @@
 <div>
-    <h1>Encodificação</h1>
+    <h1>Limitar tempo de uma operação</h1>
 
     <ul>
-        <li data-slide-steps="1-">A <em>crate</em> <code>tokio-codec</code> auxilia na conversão de leitores e escritores em
-        fluxos.</li>
+        <li data-slide-steps="1-"><code>Deadline</code> é um <code>Future</code> que junto <code>Delay</code> com outro <code>Future</code>, para garantir
+        que a operação termine antes de um determinado instante
+            <ul>
+                <li data-slide-steps="8-">Equivalente a um <em>timeout</em></li>
+                <li data-slide-steps="9-">Poderia ser implementado como <code>future.select(Delay::new(instante))</code></li>
+            </ul>
+        </li>
     </ul>
 
-<pre><code><span data-slide-steps="2-">pub trait Encoder {</span>
-    <span data-slide-steps="3-">type Item;</span>
-    <span data-slide-steps="4-">type Error: From&lt;std::io::Error&gt;;</span>
-
-    <span data-slide-steps="5-">fn encode(
-        &amp;mut self,</span>
-        <span data-slide-steps="6-">item: Self::Item,</span>
-        <span data-slide-steps="7-">dst: &amp;mut BytesMut</span>
-    <span data-slide-steps="5-">) -&gt; Result&lt;(), Self::Error&gt;;</span>
-<span data-slide-steps="2-">}</span>
-</code></pre>
-
-    <svg viewBox="-200 0 1000 100">
+    <svg viewBox="-100 0 1000 200">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -42,16 +35,6 @@
                     <circle cx="15" cy="10" r="2"></circle>
                     <circle cx="21" cy="10" r="2"></circle>
                 </g>
-            </g>
-            <g id="encoder">
-                <ellipse cx="-30" cy="0" rx="15" ry="30"></ellipse>
-                <!-- <ellipse cx="30" cy="0" rx="7" ry="10"/> -->
-                <path d="M-25 -28 Q 0 0 30 -10 A 7 10 180 0 1 30 10 Q 0 0 -25 28"></path>
-            </g>
-            <g id="decoder">
-                <ellipse cx="-30" cy="0" rx="7" ry="10"></ellipse>
-                <!-- <ellipse cx="30" cy="0" rx="7" ry="10"/> -->
-                <path d="M-28 -10 Q 0 0 30 -30 A 15 30 180 0 1 30 30 Q 0 0 -28 10"></path>
             </g>
             <g id="nothing">
                 <path d="M-5 -10 A 15 15 30 0 0 -5 10"></path>
@@ -177,27 +160,73 @@
 
         <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
             <g data-slide-steps="2-">
-                <use xlink:href="#encoder" x="0" y="50"></use>
-            </g>
-            <g data-slide-steps="3-">
-                <use xlink:href="#item" x="-120" y="50"></use>
-            </g>
-            <g data-slide-steps="6-">
-                <g style="stroke-width: 4" transform="translate(-60,50)">
+                <use xlink:href="#future" x="0" y="25"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(80,25)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
+                <use xlink:href="#item" x="110" y="25"></use>
             </g>
-            <g data-slide-steps="7-">
-                <g style="stroke: black; stroke-width: 2; fill: black">
-                    <line x1="60" y1="50" x2="100" y2="50"></line>
-                    <circle cx="60" cy="50" r="3"></circle>
-                    <circle cx="70" cy="50" r="3"></circle>
-                    <circle cx="80" cy="50" r="3"></circle>
-                    <circle cx="90" cy="50" r="3"></circle>
-                    <circle cx="100" cy="50" r="3"></circle>
+            <g data-slide-steps="3-">
+                <g style="stroke-width: 4" transform="translate(200,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
+                <use xlink:href="#item" x="230" y="38"></use>
+            </g>
+
+            <g data-slide-steps="4-">
+                <use xlink:href="#equals" x="440" y="38"></use>
+                <use xlink:href="#future" x="520" y="38"></use>
+                <g style="stroke-width: 4" transform="translate(600,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#item" x="630" y="38"></use>
+            </g>
+        </g>
+
+        <g transform="translate(50, 100)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="5-">
+                <use xlink:href="#future" x="0" y="25"></use>
+                <use xlink:href="#future" x="0" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(80,50)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#nothing" x="110" y="50"></use>
+            </g>
+            <g data-slide-steps="6-">
+                <g style="stroke-width: 4" transform="translate(200,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#fail" x="230" y="38"></use>
+            </g>
+
+            <g data-slide-steps="7-">
+                <use xlink:href="#equals" x="440" y="38"></use>
+                <use xlink:href="#future" x="520" y="38"></use>
+                <g style="stroke-width: 4" transform="translate(600,38)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#fail" x="630" y="38"></use>
             </g>
         </g>
     </svg>
+
+<pre data-slide-steps="10-"><code>let operacao_com_timeout = operacao
+    .select(Delay::new(instante))
+    .and_then(|resultado| match resultado {
+        Ok(Either::Left((item, _))) =&gt; Ok(item),
+        Err(Either::Left((erro, _))) =&gt; Err(erro),
+
+        Ok(Either::Right((_, _))) =&gt; Err(Erro::Timeout)
+        Err(Either::Right((_, _))) =&gt; Err(Erro::Timeout),
+    });
+
+tokio::run(operacao_com_timeout)
+</code></pre>
 </div>

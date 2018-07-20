@@ -1,14 +1,97 @@
 <div>
-    <h1>Compondo operações simultâneas</h1>
+    <h1>Método <code>Future::and_then</code></h1>
 
-    <p data-slide-steps="1-">O tipo do erro deve ser o mesmo para as duas operações</p>
+<pre><code class="reveal">
+<span data-slide-steps="8-">let future3 = </span><span data-slide-steps="1-">future1</span><span data-slide-steps="2-">.and_then(</span><span data-slide-steps="3-">|item| {</span>
+                  <span data-slide-steps="6-">let future2 = </span><span data-slide-steps="4-">OperacaoAsync::new(item)</span><span data-slide-steps="6-">;</span>
 
-<pre data-slide-steps="2-"><code>operacao1
-    .map_err(|erro1| NovoErro::from(erro1))
-    .join(
-        operacao2
-            .map_err(|erro2| NovoErro::from(erro2))
-    )
+                  <span data-slide-steps="7-">future2</span>
+              <span data-slide-steps="3-">})</span><span data-slide-steps="8-">;</span>
 </code></pre>
 
+    <svg viewBox="-100 -50 1000 150">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
+            </g>
+            <g id="mini-arrow-head">
+                <path d="M-8 -8 L0 0 L-8 8"></path>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"></circle>
+            </g>
+            <g id="ok">
+                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
+            </g>
+            <g id="fail">
+                <g style="stroke: red; stroke-width: 5">
+                    <path d="M-10 -10 L 10 10"></path>
+                    <path d="M10 -10 L -10 10"></path>
+                </g>
+            </g>
+            <g id="pending">
+                <circle cx="0" cy="0" r="10" style="stroke: none; fill: orange">
+            </circle></g>
+            <g id="hide-result">
+                <rect x="-20" y="-20" width="40" height="40" style="fill: white; stroke: none"></rect>
+            </g>
+            <g id="transform">
+                <path d="M0 0 l -20 -20 v 10 h -30 v 20 h 30 v 10 z"></path>
+            </g>
+            <g id="ok2">
+                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"></path>
+            </g>
+            <g id="ok2fail1">
+                <g transform="translate(0,-10)">
+                    <path d="M-8 0 L 0 8 L 16 -8" style="stroke: blue; stroke-width: 5"></path>
+                </g>
+                <g transform="translate(0,10)" style="stroke: red; stroke-width: 5">
+                    <path d="M-10 -10 L 10 10"></path>
+                    <path d="M10 -10 L -10 10"></path>
+                </g>
+            </g>
+            <g id="equals">
+                <g style="stroke: gray; stroke-width: 10">
+                    <line x1="-20" y1="-10" x2="20" y2="-10"></line>
+                    <line x1="-20" y1="10" x2="20" y2="10"></line>
+                </g>
+            </g>
+        </defs>
+
+        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="1-">
+                <use xlink:href="#future" x="0" y="25"></use>
+            </g>
+            <g data-slide-steps="2-">
+                <g style="stroke-width: 4" transform="translate(80,25)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#ok" x="110" y="25"></use>
+            </g>
+            <g data-slide-steps="3-">
+                <use xlink:href="#transform" x="200" y="25"></use>
+            </g>
+            <g data-slide-steps="4-">
+                <use xlink:href="#future" style="stroke: blue" x="230" y="25"></use>
+            </g>
+            <g data-slide-steps="5-">
+                <g style="stroke-width: 4" transform="translate(310,25)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#ok2fail1" x="340" y="25"></use>
+            </g>
+
+            <g data-slide-steps="8-">
+                <use xlink:href="#equals" x="440" y="25"></use>
+                <use xlink:href="#future" x="520" y="25"></use>
+                <g style="stroke-width: 4" transform="translate(600,25)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#ok2fail1" x="630" y="25"></use>
+            </g>
+        </g>
+    </svg>
 </div>

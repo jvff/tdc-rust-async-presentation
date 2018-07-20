@@ -184,22 +184,36 @@ for resultado in stream1.wait() {
 let resultado = sink1.send(item).wait();
 ```
 
-### Compondo uma operação atrás de outra
+### Método `Future::map`
 
-- `map`: aplica uma função no ítem resultante do `Future`, transformando-o em
-  outro tipo
-- `map_err`: aplica uma função no erro resultante do `Future`, transformando-o
-  em outro
-- `and_then`: aplica uma função no ítem resultante do `Future`, e em seguida 
-  roda o novo `Future` retornado pela função (somente se o `Future` inicial for
-  bem sucedido)
-- `or_else`: aplica uma função no erro resultanto do `Future`, e em seguida
-  roda o novo `Future` retornado pela função (somente se o `Future` inicial não
-  for bem sucedido)
-- `then`: aplica uma função no resultado do `Future`, e em seguida roda o
-  novo `Future` retornado pela função
-- `flatten`: se a operação retornar outra operação em forma de `Future`, este
-  método compõe as duas em uma só operação
+- aplica uma função no ítem resultante do `Future`, transformando-o em outro
+  tipo
+
+### Método `Future::map_err`
+
+- aplica uma função no erro resultante do `Future`, transformando-o em outro
+
+### Método `Future::and_then`
+
+- aplica uma função no ítem resultante do `Future`, e em seguida roda o novo
+  `Future` retornado pela função (somente se o `Future` inicial for bem
+  sucedido)
+
+### Método `Future::or_else`
+
+- aplica uma função no erro resultanto do `Future`, e em seguida roda o novo
+  `Future` retornado pela função (somente se o `Future` inicial não for bem
+  sucedido)
+
+### Método `Future::then`
+
+- aplica uma função no resultado do `Future`, e em seguida roda o novo `Future`
+  retornado pela função
+
+### Método `Future::flatten`
+
+- se a operação retornar outra operação em forma de `Future`, este método compõe
+  as duas em uma só operação
 
 ### Compondo operações simultâneas
 

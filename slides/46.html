@@ -1,42 +1,10 @@
 <div>
-    <h1>Envio em fluxo fica um pouco mais complexo</h1>
+    <h1>Futures 0.2</h1>
 
     <ul>
-        <li data-slide-steps="1-">Mais métodos
-            <ul>
-                <li data-slide-steps="2-"><code>poll_ready</code> precisa ser chamado antes para verificar se o <code>Sink</code> está
-                pronto para começar a enviar um ítem</li>
-                <li data-slide-steps="3-"><code>start_send</code> enfileira o envio de um ítem</li>
-                <li data-slide-steps="4-">Mas o ítem só é enviado de fato quando <code>poll_flush</code> indicar que a operação
-                de enviar todos os ítens enfileirados estiver concluída</li>
-                <li data-slide-steps="5-"><code>poll_close</code> tenta enviar os ítens restantes e fechar o fluxo</li>
-            </ul>
-        </li>
+        <li data-slide-steps="1-">Nova versão já disponível</li>
+        <li data-slide-steps="2-">Reestruturação para ficar mais compreensível</li>
+        <li data-slide-steps="3-">Separação para evolução mais rápida dos módulos</li>
+        <li data-slide-steps="4-">Preparação para <code class="slide-41 slide-step-4">async</code> e <code class="slide-41 slide-step-4">await</code></li>
     </ul>
-
-<pre><code><span data-slide-steps="1-">pub trait Sink {
-    type SinkItem;
-    type SinkError;</span>
-
-    <span data-slide-steps="2-">fn poll_ready(
-        &amp;mut self, 
-        cx: &amp;mut Context
-    ) -&gt; Result&lt;Async&lt;()&gt;, Self::SinkError&gt;;</span>
-
-    <span data-slide-steps="3-">fn start_send(
-        &amp;mut self, 
-        item: Self::SinkItem
-    ) -&gt; Result&lt;(), Self::SinkError&gt;;</span>
-
-    <span data-slide-steps="4-">fn poll_flush(
-        &amp;mut self, 
-        cx: &amp;mut Context
-    ) -&gt; Result&lt;Async&lt;()&gt;, Self::SinkError&gt;;</span>
-
-    <span data-slide-steps="5-">fn poll_close(
-        &amp;mut self, 
-        cx: &amp;mut Context
-    ) -&gt; Result&lt;Async&lt;()&gt;, Self::SinkError&gt;;</span>
-<span data-slide-steps="1-">}</span>
-</code></pre>
 </div>
