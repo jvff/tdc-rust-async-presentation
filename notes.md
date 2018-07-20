@@ -184,33 +184,33 @@ for resultado in stream1.wait() {
 let resultado = sink1.send(item).wait();
 ```
 
-### Método `Future::map`
+### Método `map`
 
 - aplica uma função no ítem resultante do `Future`, transformando-o em outro
   tipo
 
-### Método `Future::map_err`
+### Método `map_err`
 
 - aplica uma função no erro resultante do `Future`, transformando-o em outro
 
-### Método `Future::and_then`
+### Método `and_then`
 
 - aplica uma função no ítem resultante do `Future`, e em seguida roda o novo
   `Future` retornado pela função (somente se o `Future` inicial for bem
   sucedido)
 
-### Método `Future::or_else`
+### Método `or_else`
 
 - aplica uma função no erro resultanto do `Future`, e em seguida roda o novo
   `Future` retornado pela função (somente se o `Future` inicial não for bem
   sucedido)
 
-### Método `Future::then`
+### Método `then`
 
 - aplica uma função no resultado do `Future`, e em seguida roda o novo `Future`
   retornado pela função
 
-### Método `Future::flatten`
+### Método `flatten`
 
 - se a operação retornar outra operação em forma de `Future`, este método compõe
   as duas em uma só operação
@@ -229,15 +229,6 @@ let resultado = sink1.send(item).wait();
 
 - O tipo do erro deve ser o mesmo para as duas operações
   - `map_err` pode ser utilizado para igualar os tipos
-
-### Compondo operações em fluxos
-
-- Operações em fluxo também podem ser compostas
-- `map`, `map_err`, `and_then`, `or_else`, `then`: são análogos mas operam em
-  cada resultado do fluxo
-- `flatten` agora permite que `Stream`s sejam ítens, e são então encadeados ao
-  fluxo de resultados final
-
 
 ### Compondo escritas em fluxo
 
