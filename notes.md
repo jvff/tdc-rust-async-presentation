@@ -123,6 +123,21 @@ pub trait Executor<F: Future<Item = (), Error = ()>> {
       se tornar disponível
     - Retorna `Async::NotReady` indicando que a tarefa pode pausar
 
+### Fluxos
+
+- Representação de operações que produzem vários ítens, um por vez
+- Pode falhar, mas isso **não** termina o fluxo
+- Versão assíncrona do `Iterator`
+
+```
+pub trait Stream {
+    type Item;
+	type Error;
+
+	fn poll_next(&mut self) -> Result<Async<Option<Self::Item>>, Self::Error>;
+}
+```
+
 ### Compondo uma operação atrás de outra
 
 - `map`: aplica uma função no ítem resultante do `Future`, transformando-o em
@@ -151,21 +166,6 @@ pub trait Executor<F: Future<Item = (), Error = ()>> {
 
 - O tipo do erro deve ser o mesmo para as duas operações
   - `map_err` pode ser utilizado para igualar os tipos
-
-### Fluxos
-
-- Representação de operações que produzem vários ítens, um por vez
-- Pode falhar, mas isso **não** termina o fluxo
-- Versão assíncrona do `Iterator`
-
-```
-pub trait Stream {
-    type Item;
-	type Error;
-
-	fn poll_next(&mut self) -> Result<Async<Option<Self::Item>>, Self::Error>;
-}
-```
 
 ### Compondo operações em fluxos
 
