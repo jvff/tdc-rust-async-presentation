@@ -6,7 +6,7 @@ run: all
 	target/debug/server
 	
 client:
-	cargo web deploy -p client
+	cargo-web deploy -p client
 	cp -a static/* target/deploy/
 	cp -a slides target/deploy/
 
