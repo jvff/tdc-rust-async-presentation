@@ -311,13 +311,49 @@ let resultado = sink1.send(item).wait();
 - `Interval` é um `Stream` que produz um ítem por vez a um intervalo de tempo
   determinado
 
-### Limitar tempo de uma operação
+### `Deadline`
 
 - `Deadline` é um `Future` que junto `Delay` com outro `Future`, para garantir
   que a operação termine antes de um determinado instante
   - Seria equivalente a um *timeout*
   - Poderia ser implementado como `future.select(Delay::new(instante))`, mas sem
     precisar lidar com um resultado duplo
+
+### Entrada e saída padrão
+
+- As funções `tokio::io::stdout`, `stdin` e `stderr` permite utilizar a entrada
+  e as saídas padrão de forma assíncrona
+- Precisa tomar cuidado para usá-los de forma concorrente
+
+### Manipulando arquivos
+
+- `tokio::fs` é muito semelhante a `std::fs`, mas é assíncrono
+- `File::open` e `File::create` retornam `Future`s que quando executados irão
+  realizar suas devidas operações
+- `File` implementa `AsyncRead` e `AsyncWrite`, permitindo leitura e escrita de
+  forma assíncrona também
+
+```
+let escreve_arquivo = tokio::fs::File::create("arquivo.txt")
+	.and_then(|arquivo| tokio::io::write_all(arquivo, &dados));
+```
+
+### Comunicação na rede
+
+- `tokio::net` oferece ferramentas para comunicação através da rede
+- `TcpStream` possibilita comunicação através do protocolo TCP
+  - `TcpStream::connect` retorna um `Future` que se resolverá quando a conexão 
+    estiver estabelecida
+  - `TcpStream` implementa `AsyncRead` e `AsyncWrite
+- `TcpListener` pode ser usado para esparar conexões de clientes
+  - `TcpListener::incoming` retorna um `Stream` de `TcpStream`s
+
+### Comunicação usando UDP
+
+- `UdpSocket` pode ser usado para comunicação UDP
+  - `UdpSocket::send_dgram` retorna um `Future` que enviará um pacote de dados
+  - `UdbSocket::recv_dgram` retorna um `Future` que resultará em um pacote de
+    dados recebido
 
 ### Entrada assíncrona
 
@@ -350,12 +386,6 @@ let resultado = sink1.send(item).wait();
 - Uma função retorna um `Stream`
   - `lines`: lê linha por linha em forma de `String`s
 
-### Entrada e saída padrão
-
-- As funções `tokio::io::stdout`, `stdin` e `stderr` permite utilizar a entrada
-  e as saídas padrão de forma assíncrona
-- Precisa tomar cuidado para usá-los de forma concorrente
-
 ### Encodificação
 
 - A *crate* `tokio-codec` auxilia na conversão de leitores e escritores em
@@ -375,36 +405,6 @@ let resultado = sink1.send(item).wait();
   possibilita gerar um último ítem especial se necessário
 - O método `Decoder::framed` ou `AsyncRead::framed` transforma um canal
   assíncrono em um fluxo assíncrono usando a codificação especificada
-
-### Manipulando arquivos
-
-- `tokio::fs` é muito semelhante a `std::fs`, mas é assíncrono
-- `File::open` e `File::create` retornam `Future`s que quando executados irão
-  realizar suas devidas operações
-- `File` implementa `AsyncRead` e `AsyncWrite`, permitindo leitura e escrita de
-  forma assíncrona também
-
-```
-let escreve_arquivo = tokio::fs::File::create("arquivo.txt")
-	.and_then(|arquivo| tokio::io::write_all(arquivo, &dados));
-```
-
-### Comunicação na rede
-
-- `tokio::net` oferece ferramentas para comunicação através da rede
-- `TcpStream` possibilita comunicação através do protocolo TCP
-  - `TcpStream::connect` retorna um `Future` que se resolverá quando a conexão 
-    estiver estabelecida
-  - `TcpStream` implementa `AsyncRead` e `AsyncWrite
-- `TcpListener` pode ser usado para esparar conexões de clientes
-  - `TcpListener::incoming` retorna um `Stream` de `TcpStream`s
-
-### Comunicação usando UDP
-
-- `UdpSocket` pode ser usado para comunicação UDP
-  - `UdpSocket::send_dgram` retorna um `Future` que enviará um pacote de dados
-  - `UdbSocket::recv_dgram` retorna um `Future` que resultará em um pacote de
-    dados recebido
 
 ## Futuro
 

@@ -1,25 +1,21 @@
 <div>
-    <h1>Decodificação</h1>
+    <h1>Operações de entrada e saída</h1>
 
-<pre><code><span data-slide-steps="1-">pub trait Decoder {</span>
-    type Item;
-    type Error: From&lt;Error&gt;;
-
-    <span data-slide-steps="2-">fn decode(
-        &amp;mut self,
-        src: &amp;mut BytesMut
-    ) -&gt; Result&lt;Option&lt;Self::Item&gt;, Self::Error&gt;;</span>
-
-    <span data-slide-steps="3-">fn decode_eof(
-        &amp;mut self, 
-        buf: &amp;mut BytesMut
-    ) -&gt; Result&lt;Option&lt;Self::Item&gt;, Self::Error&gt; { ... }</span>
-
-    <span data-slide-steps="4-">fn framed&lt;T&gt;(self, io: T) -&gt; Framed&lt;T, Self&gt;
-        where
-        Self: Encoder,
-        T: AsyncRead + AsyncWrite,
-    { ... }</span>
-<span data-slide-steps="1-">}</span>
-</code></pre>
+    <ul>
+        <li data-slide-steps="1-">Algumas funções facilitam a composição de operações, retornando <code>Future</code>s
+            <ul>
+                <li data-slide-steps="2-"><code>copy</code>: copia todos os dados de um leitor para um escritor</li>
+                <li data-slide-steps="3-"><code>flush</code>: envia todos os dados enfileirados</li>
+                <li data-slide-steps="4-"><code>read_exact</code>: lê um número determinado de bytes</li>
+                <li data-slide-steps="5-"><code>read_to_end</code>: lê todos os bytes de um leitor</li>
+                <li data-slide-steps="6-"><code>write_all</code>: escreve todos os bytes de um <em>buffer</em></li>
+                <li data-slide-steps="7-"><code>shutdown</code>: finaliza um escritor</li>
+            </ul>
+        </li>
+        <li data-slide-steps="8-">Uma função retorna um <code>Stream</code>
+            <ul>
+                <li data-slide-steps="9-"><code>lines</code>: lê linha por linha em forma de <code>String</code>s</li>
+            </ul>
+        </li>
+    </ul>
 </div>
