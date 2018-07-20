@@ -1,14 +1,17 @@
 <div>
-    <h1>Compondo operações simultâneas</h1>
+    <h1>Como ter o mesmo tipo de erro</h1>
 
-    <p data-slide-steps="1-">O tipo do erro deve ser o mesmo para as duas operações</p>
+<pre><code class="reveal">
+<span data-slide-steps="10-">let future1_ = </span><span data-slide-steps="6-">future1</span><span data-slide-steps="7-">.map_err(</span><span data-slide-steps="8-">|erro1|</span> <span data-slide-steps="9-">NovoErro::from(erro1))</span><span data-slide-steps="10-">;</span>
+<span data-slide-steps="16-">let future2_ = </span><span data-slide-steps="12-">future2</span><span data-slide-steps="13-">.map_err(</span><span data-slide-steps="14-">|erro2|</span> <span data-slide-steps="15-">NovoErro::from(erro2))</span><span data-slide-steps="16-">;</span>
 
-<pre data-slide-steps="2-"><code>operacao1
-    .map_err(|erro1| NovoErro::from(erro1))
-    .join(
-        operacao2
-            .map_err(|erro2| NovoErro::from(erro2))
-    )
+<span data-slide-steps="4-">let future3 = </span><span data-slide-steps="1-">future1</span><span data-slide-steps="11-">_</span><span data-slide-steps="2-">.join(</span><span data-slide-steps="3-">future2</span><span data-slide-steps="17-">_</span><span data-slide-steps="3-">)</span><span data-slide-steps="4-">; </span><span data-slide-steps="5-17">// Erro</span>
+</code></pre>
+
+<pre><code class="reveal">
+<span data-slide-steps="19-">future1</span>
+    <span data-slide-steps="22-">.map_err(|erro1| NovoErro::from(erro1))</span>
+    <span data-slide-steps="20-">.join(</span><span data-slide-steps="21-">future2</span><span data-slide-steps="23-">.map_err(|erro2| NovoErro::from(erro2))</span><span data-slide-steps="20-">)</span>
 </code></pre>
 
 </div>

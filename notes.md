@@ -225,7 +225,7 @@ let resultado = sink1.send(item).wait();
 - retorna um `Future` que só terminará quando os dois `Future`s juntados
   terminarem ou quando um deles falhar
 
-### Compondo operações simultâneas
+### Como ter o mesmo tipo de erro
 
 - O tipo do erro deve ser o mesmo para as duas operações
   - `map_err` pode ser utilizado para igualar os tipos
