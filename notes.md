@@ -160,6 +160,30 @@ pub trait Sink {
 }
 ```
 
+### Como transformar operações assíncronas em síncronas
+
+- A `thread` irá bloquear, ou seja, irá parar e outra tarefa **não** será
+  executada até a operação terminar
+- O jeito mais simples é através do `Future::wait()`
+
+```
+let resultado = future1.wait();
+```
+
+- `Streams::wait()` transforma o `Stream` em um `Iterator`
+
+```
+for resultado in stream1.wait() {
+	// ...
+}
+```
+
+- Para o `Sink`, é precisa transformá-lo em um `Future`
+
+```
+let resultado = sink1.send(item).wait();
+```
+
 ### Compondo uma operação atrás de outra
 
 - `map`: aplica uma função no ítem resultante do `Future`, transformando-o em

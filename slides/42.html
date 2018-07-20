@@ -1,29 +1,16 @@
 <div>
-    <h1>Contexto evidente</h1>
+    <h1>Tokio 0.2</h1>
 
-<ul>
-    <li data-slide-steps="1-">Agora fica mais claro que uma operação assíncrona está diretamente associada ao contexto
-    de uma tarefa</li>
-</ul>
-
-<pre><code><span data-slide-steps="2-">pub trait Future {
-    type Item;
-    type Error;
-
-    fn poll(
-        &amp;mut self,</span> 
-        <span data-slide-steps="3-">cx: &amp;mut Context</span>
-    <span data-slide-steps="2-">) -&gt; Result&lt;Async&lt;Self::Item&gt;, Self::Error&gt;;
-}<span>
-</span></span></code></pre>
-
-<pre><code><span data-slide-steps="4-">pub trait Stream {
-    type Item;
-    type Error;
-
-    fn poll_next(
-        &amp;mut self, </span>
-        <span data-slide-steps="5-">cx: &amp;mut Context</span>
-    <span data-slide-steps="4-">) -&gt; Result&lt;Async&lt;Option&lt;Self::Item&gt;&gt;, Self::Error&gt;;
-}</span>
-</code></pre></div>
+    <ul>
+        <li data-slide-steps="1-">Ainda não disponível</li>
+        <li data-slide-steps="2-">Funcionalidades novas ainda estão sendo introduzidas na versão 0.1</li>
+        <li data-slide-steps="3-">Migração para <code class="slide-42 slide-step-3">Futures</code> 0.2</li>
+        <li data-slide-steps="4-">Mudança recente de direção
+            <ul>
+                <li data-slide-steps="5-">Foco nas funcionalidades mais abrangentes</li>
+                <li data-slide-steps="6-"><code class="slide-42 slide-step-6">tokio_proto</code> receberá menos atenção</li>
+            </ul>
+        </li>
+        <li data-slide-steps="7-">Separação para evoluir mais rapidamente</li>
+    </ul>
+</div>

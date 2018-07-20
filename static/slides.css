@@ -53,6 +53,16 @@ code span.active-in-slide-step {
     visibility: visible;
 }
 
+code.reveal span.inactive-in-slide-step {
+    color: gray;
+    visibility: hidden;
+}
+
+code.reveal span.active-in-slide-step {
+    color: black;
+    visibility: visible;
+}
+
 li.inactive-in-slide-step {
     visibility: hidden;
 }
