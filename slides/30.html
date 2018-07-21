@@ -1,15 +1,15 @@
 <div>
-    <h1>Canal <code>mpsc</code></h1>
+    <h1>Canal <code>oneshot</code></h1>
 
     <ul>
-        <li data-slide-steps="1-"><code>mpsc</code> permite enviar vários ítens</li>
-        <li data-slide-steps="1-">Várias tarefas podem enviar mas somente uma pode receber
-        <li data-slide-steps="3-"><code>mpsc::Sender</code> implementa <code>Sink</code></li>
-        <li data-slide-steps="4-"><code>mpsc::Receiver</code> implementa <code>Stream</code></li>
+        <li data-slide-steps="1-"><code>oneshot</code> permite enviar um único item de uma tarefa a outra
+            <ul>
+                <li data-slide-steps="5-"><code>oneshot::Receiver</code> implementa <code>Future</code> para receber esse item</li>
+            </ul>
         </li>
     </ul>
 
-    <svg viewBox="-250 0 1000 100">
+    <svg viewBox="-250 -50 1000 200">
         <defs>
             <g id="arrow-head">
                 <path d="M-20 -20 L0 0 L-20 20"></path>
@@ -102,55 +102,37 @@
         </defs>
 
         <g transform="translate(140, 00)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="1">
+            <g data-slide-steps="1-3">
                 <use xlink:href="#sender" x="80" y="50"></use>
             </g>
-            <g data-slide-steps="2">
-                <use xlink:href="#sender" x="80" y="35"></use>
-                <use xlink:href="#sender" x="80" y="65"></use>
-            </g>
-            <g data-slide-steps="1-3">
+            <g data-slide-steps="1-4">
                 <use xlink:href="#receiver" x="120" y="50"></use>
             </g>
-            <g data-slide-steps="3-">
-                <use xlink:href="#sink" x="60" y="35"></use>
-                <use xlink:href="#sink" x="60" y="65"></use>
-            </g>
-            <g data-slide-steps="4-">
-                <use xlink:href="#stream" x="140" y="50"></use>
-            </g>
             <g data-slide-steps="5-">
-                <use xlink:href="#items" x="-60" y="35"></use>
-                <g style="stroke-width: 4" transform="translate(20,35)">
-                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
-                    <line x1="0" y1="0" x2="-50" y2="0"></line>
-                </g>
-                <use xlink:href="#items" x="-60" y="65"></use>
-                <g style="stroke-width: 4" transform="translate(20,65)">
+                <use xlink:href="#future" x="140" y="50"></use>
+            </g>
+            <g data-slide-steps="3">
+                <use xlink:href="#item" x="-50" y="50"></use>
+                <g style="stroke-width: 4" transform="translate(20,50)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
             </g>
-            <g data-slide-steps="7-">
-                <g style="stroke-width: 4" transform="translate(220,50)">
+            <g data-slide-steps="6-">
+                <g style="stroke-width: 4" transform="translate(210,50)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
-                <use xlink:href="#items" x="240" y="50"></use>
+                <use xlink:href="#item" x="230" y="50"></use>
             </g>
         </g>
     </svg>
 
 <pre><code class="reveal">
-<span data-slide-steps="1-">let (sender, receiver) = mpsc::unbounded();</span>
+<span data-slide-steps="2-">let (sender, receiver) = oneshot::channel();</span>
 
-<span data-slide-steps="2-">let sender2 = sender.clone();</span>
+<span data-slide-steps="3-">sender.send(item);</span>
 
-<span data-slide-steps="5-">sender.send(item1).wait();</span>
-<span data-slide-steps="6-">sender2.send(item2).wait();</span>
-
-<span data-slide-steps="7-">for item in receiver.wait() {
-    // ...
-}</span>
+<span data-slide-steps="6-">let resultado = receiver.wait();</span>
 </code></pre>
 </div>

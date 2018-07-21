@@ -1,15 +1,8 @@
 <div>
-    <h1>Comunicação usando UDP</h1>
+    <h1>Comunicação na rede</h1>
 
     <ul>
-        <li data-slide-steps="1-"><code>UdpSocket</code> pode ser usado para comunicação UDP</li>
-        <li data-slide-steps="2-"><code>UdpSocket::bind</code> se associa a um endereço e retorna um <code>UpdSocket</code>
-            <ul>
-                <li data-slide-steps="3-"><code>UdpSocket::send_dgram</code> retorna um <code>Future</code> que enviará um pacote de dados</li>
-                <li data-slide-steps="4-"><code>UdbSocket::recv_dgram</code> retorna um <code>Future</code> que resultará em um pacote de
-                dados recebido</li>
-            </ul>
-        </li>
+        <li data-slide-steps="1-"><code>tokio::net</code> oferece ferramentas para comunicação através da rede</li>
     </ul>
 
     <svg viewBox="-300 -50 1000 100">
@@ -176,13 +169,80 @@
         </defs>
 
         <g transform="translate(0, 0)" style="fill: none; stroke: black; stroke-width: 3">
-            <g data-slide-steps="2-">
+            <g data-slide-steps="1-">
+                <g transform="scale(1.5)">
+                    <use xlink:href="#net" x="0" y="0"></use>
+                </g>
+            </g>
+        </g>
+    </svg>
+
+    <ul>
+        <li data-slide-steps="2-"><code>TcpStream</code> possibilita comunicação através do protocolo TCP
+            <ul>
+                <li data-slide-steps="3-"><code>TcpStream::connect</code> retorna um <code>Future</code> que se resolverá quando a conexão
+                estiver estabelecida</li>
+                <li data-slide-steps="4-"><code>TcpStream</code> implementa <code>AsyncRead</code> e <code>AsyncWrite</code></li>
+            </ul>
+        </li>
+    </ul>
+
+    <svg viewBox="-300 -50 1000 100">
+        <g transform="translate(0, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="3-">
                 <use xlink:href="#future" x="0" y="0"></use>
                 <g style="stroke-width: 4" transform="translate(80,0)">
                     <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
                     <line x1="0" y1="0" x2="-50" y2="0"></line>
                 </g>
-                <use xlink:href="#udp" x="120" y="0"></use>
+                <use xlink:href="#socket" x="120" y="0"></use>
+            </g>
+        </g>
+    </svg>
+
+    <ul>
+        <li data-slide-steps="5-"><code>TcpListener</code> pode ser usado para esperar conexões de clientes
+            <ul>
+                <li data-slide-steps="6-"><code>TcpListener::incoming</code> retorna um <code>Stream</code> de <code>TcpStream</code>s</li>
+            </ul>
+        </li>
+    </ul>
+
+    <svg viewBox="-300 -50 1000 100">
+        <g transform="translate(0, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="5-">
+                <use xlink:href="#future" x="0" y="0"></use>
+                <g style="stroke-width: 4" transform="translate(80,0)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#listener" x="120" y="0"></use>
+            </g>
+            <g data-slide-steps="6-">
+                <g style="stroke-width: 4" transform="translate(210,0)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+                <use xlink:href="#stream" x="240" y="0"></use>
+            </g>
+            <g data-slide-steps="7-">
+                <use xlink:href="#future" x="0" y="0"></use>
+                <g style="stroke-width: 4" transform="translate(330,0)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-50" y2="0"></line>
+                </g>
+            </g>
+            <g data-slide-steps="8-">
+                <use xlink:href="#socket" x="370" y="0"></use>
+            </g>
+            <g data-slide-steps="9-">
+                <use xlink:href="#socket" x="420" y="0"></use>
+            </g>
+            <g data-slide-steps="10-">
+                <use xlink:href="#socket" x="470" y="0"></use>
+            </g>
+            <g data-slide-steps="11-">
+                <use xlink:href="#etcetera" x="520" y="0"></use>
             </g>
         </g>
     </svg>
