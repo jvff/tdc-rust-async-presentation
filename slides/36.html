@@ -6,7 +6,6 @@
         que a operação termine antes de um determinado instante
             <ul>
                 <li data-slide-steps="8-">Equivalente a um <em>timeout</em></li>
-                <li data-slide-steps="9-">Poderia ser implementado como <code>future.select(Delay::new(instante))</code></li>
             </ul>
         </li>
     </ul>
@@ -216,17 +215,4 @@
             </g>
         </g>
     </svg>
-
-<pre data-slide-steps="10-"><code>let operacao_com_timeout = operacao
-    .select(Delay::new(instante))
-    .and_then(|resultado| match resultado {
-        Ok(Either::Left((item, _))) =&gt; Ok(item),
-        Err(Either::Left((erro, _))) =&gt; Err(erro),
-
-        Ok(Either::Right((_, _))) =&gt; Err(Erro::Timeout)
-        Err(Either::Right((_, _))) =&gt; Err(Erro::Timeout),
-    });
-
-tokio::run(operacao_com_timeout)
-</code></pre>
 </div>
