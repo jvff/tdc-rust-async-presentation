@@ -75,3 +75,9 @@ li.inactive-in-slide-step {
 li.active-in-slide-step {
     visibility: visible;
 }
+
+td {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 16px;
+}
