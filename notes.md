@@ -294,7 +294,7 @@ let resultado = sink1.send(item).wait();
 
 ### Laço de eventos
 
-- Chamado `Reactor`
+- Chamado de `Reactor`
 - Registro de todas as operações assíncronas em andamento
 - Responsável por aguardar por eventos e acordar tarefas com base neles
 - Pode ser acessado através de um `Handle`, necessário para registrar novas
