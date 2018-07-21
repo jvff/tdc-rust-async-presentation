@@ -345,7 +345,7 @@ let escreve_arquivo = tokio::fs::File::create("arquivo.txt")
   - `TcpStream::connect` retorna um `Future` que se resolverá quando a conexão 
     estiver estabelecida
   - `TcpStream` implementa `AsyncRead` e `AsyncWrite
-- `TcpListener` pode ser usado para esparar conexões de clientes
+- `TcpListener` pode ser usado para esparer conexões de clientes
   - `TcpListener::incoming` retorna um `Stream` de `TcpStream`s
 
 ### Comunicação usando UDP
