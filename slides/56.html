@@ -1,17 +1,18 @@
 <div>
-    <h1>Macros <code>async</code> e <code>await!</code></h1>
+    <h1>Sem <code>async</code> e <code>await!</code></h1>
 
-    <ul>
-        <li data-slide-steps="1-">A grande expectativa para o futuro da programação assíncrona em Rust é a
-        funcionalidade de <code>async/await</code></li>
-        <li data-slide-steps="2-">Um conjunto de mudanças na linguagem
-            <ul>
-                <li data-slide-steps="3-">Geradores</li>
-                <li data-slide-steps="4-">Representação de dados imóveis</li>
-                <li data-slide-steps="5-">Macros procedurais</li>
-            </ul>
-        </li>
-        <li data-slide-steps="6-">Resultará nas macros <code>async</code> e <code>await!</code>, que possibilitam escrever código mais
-        simples</li>
-    </ul>
+<pre><code><span data-slide-steps="1-">pub fn enviar_dado(dado: Dado) -&gt; impl Future&lt;Item = (), Error = Erro&gt; {</span>
+    <span data-slide-steps="2-">TcpStream::connect(ENDERECO_SERVIDOR)</span>
+        <span data-slide-steps="3-">.map_err(Erro::from)<span>
+        <span data-slide-steps="4-">.and_then(|tcp_stream| {</span>
+            <span data-slide-steps="5-">let fluxo  = tcp_stream.framed(Codificacao);</span>
+            <span data-slide-steps="6-">fluxo.send(dado)</span>
+                <span data-slide-steps="7-">.map_err(Erro::from)</span>
+                <span data-slide-steps="8-">.and_then(|fluxo| {</span>
+                    <span data-slide-steps="9-">io::shutdown(fluxo)</span>
+                        <span data-slide-steps="10-">.map_err(Erro::from)</span>
+                <span data-slide-steps="8-">})</span>
+        <span data-slide-steps="4-">})</span>
+<span data-slide-steps="7-">}</span>
+</span></span></code></pre>
 </div>
