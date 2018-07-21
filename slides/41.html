@@ -1,5 +1,5 @@
 <div>
-    <h1>Entrada assíncrona</h1>
+    <h1>Entrada e saída assíncrona</h1>
 
     <ul>
         <li data-slide-steps="1-"><code>tokio::io</code> oferece ferramentas para leitura e escrita assíncrona</li>
@@ -10,17 +10,14 @@
 
     <span class="slide-step2">...</span>
 <span data-slide-steps="2-">}</span>
+</code></pre>
 
-<span data-slide-steps="4-">// Implementando AsyncRead para MyRead
-impl Read for MyRead {
-    fn read(&amp;mut self, buf &amp;mut [u8]) -&gt; Result&lt;usize, tokio::io::Error&gt; {
-        // Se for bloquear, precisa preparar a tarefa para ser acordada quando
-        // mais dados estiverem disponíveis, e depois retornar:
+<pre><code><span data-slide-steps="4-">pub trait AsyncWrite: Write {</span>
+    <span data-slide-steps="5-">fn poll_write(&amp;mut self, buf: &amp;[u8]) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
 
-        Err(ErrorKind::WouldBlock.into())
-    }
-}
+    <span data-slide-steps="6-">fn poll_flush(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt; { ... }</span>
 
-impl AsyncRead for MyRead {}</span>
+    <span data-slide-steps="7-">fn shutdown(&amp;mut self) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
+<span data-slide-steps="4-">}</span>
 </code></pre>
 </div>
