@@ -22,23 +22,4 @@
     ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
 }</span>
 </code></pre>
-
-<pre><code><span data-slide-steps="5-">pub trait AsyncWrite {
-    <span data-slide-steps="6-">fn poll_write(
-        &amp;mut self, 
-        cx: &amp;mut Context, 
-        buf: &amp;[u8]
-    ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt;;</span>
-
-    <span data-slide-steps="7-">fn poll_flush(&amp;mut self, cx: &amp;mut Context) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
-
-    <span data-slide-steps="8-">fn poll_close(&amp;mut self, cx: &amp;mut Context) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
-
-    <span data-slide-steps="9-">fn poll_vectored_write(
-        &amp;mut self, 
-        cx: &amp;mut Context, 
-        vec: &amp;[&amp;IoVec]
-    ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
-}</span>
-</code></pre>
 </div>
