@@ -11,4 +11,4 @@ client:
 	cp -a slides target/deploy/
 
 server:
-	cargo build -p server
+	cargo build -p server --release
