@@ -22,4 +22,4 @@ Com isso, um container rodando o site será criado, e então é possível abrir 
 site acessando o endereço do container no endereço
 [http://localhost:8080/index.html].
 
-[http://localhost:8080/index.html]: [http://localhost:8080/index.html]
+[http://localhost:8080/index.html]: http://localhost:8080/index.html
