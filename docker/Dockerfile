@@ -1,4 +1,4 @@
-FROM "ubuntu:18.04"
+FROM "ubuntu:18.04" as builder
 
 RUN apt-get update && apt-get install -y \
     curl \
@@ -36,6 +36,13 @@ ENV PATH="/opt/cargo-web/target/release:${PATH}"
 
 RUN make
 
+FROM ubuntu:18.04
+
+WORKDIR /opt/tdc-async-rust
+
+COPY --from=builder /opt/tdc-async-rust/target/release/server /opt/tdc-async-rust/target/release/
+COPY --from=builder /opt/tdc-async-rust/target/deploy/ /opt/tdc-async-rust/target/deploy/
+
 EXPOSE 8080
 
-CMD /opt/tdc-async-rust/target/debug/server
+CMD ["/opt/tdc-async-rust/target/release/server"]
