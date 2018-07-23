@@ -16,7 +16,7 @@ O jeito mais fácil para rodar os slides é através de uma imagem Docker. Na pa
 `docker` é possível rodar os comandos:
 
 docker build -t tdc-async-rust .
-docker run --rm -it -p 8080 tdc-async-rust
+docker run --rm -it -p 8080:8080 tdc-async-rust
 
 Com isso, um container rodando o site será criado, e então é possível abrir o
 site acessando o endereço do container no endereço
