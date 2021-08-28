@@ -2,7 +2,8 @@
 name = "client"
 version = "0.1.0"
 authors = ["Janito Vaqueiro Ferreira Filho <janito.vff@gmail.com>"]
+edition = "2018"
 
 [dependencies]
-presentrs = { git = "https://github.com/jvff/presentrs", features = ["client"] }
-yew = { git = "https://github.com/DenisKolodin/yew" }
+presentrs = { git = "https://github.com/jvff/presentrs" }
+yew = "0.18"
