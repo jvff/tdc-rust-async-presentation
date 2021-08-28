@@ -15,13 +15,19 @@ fn main() {
     create_dir(&output_dir);
     create_dir(&slides_dir);
 
-    notes.animate_steps().expect("Failed to animate slide steps");
-    notes.generate_html(output_dir).expect("Failed to generate notes file");
+    notes
+        .animate_steps()
+        .expect("Failed to animate slide steps");
+    notes
+        .generate_html(output_dir)
+        .expect("Failed to generate notes file");
 
     let mut slides =
         Slides::from_notes(&notes).expect("Failed to generate slides");
 
-    slides.load_from("../slides").expect("Failed to load slides");
+    slides
+        .load_from("../slides")
+        .expect("Failed to load slides");
     slides.write_to(slides_dir).expect("Failed to write slides");
 }
 
