@@ -1,9 +1,12 @@
 extern crate presentrs;
 
-use std::fs;
-use std::path::{Path, PathBuf};
-
-use presentrs::{Notes, Slides};
+use {
+    presentrs::{Notes, Slides},
+    std::{
+        fs,
+        path::{Path, PathBuf},
+    },
+};
 
 fn main() {
     let output_dir = PathBuf::from("../dist");
