@@ -9,6 +9,8 @@ fn main() {
     let output_dir = PathBuf::from("../dist");
     let slides_dir = output_dir.join("slides");
 
+    println!("cargo:rerun-if-changed={}", output_dir.display());
+
     let mut notes =
         Notes::from_markdown("../notes.md").expect("Failed to read notes");
 
