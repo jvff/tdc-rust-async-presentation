@@ -5,5 +5,5 @@ authors = ["Janito Vaqueiro Ferreira Filho <janito.vff@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-presentrs = { git = "https://github.com/jvff/presentrs", rev = "d98804c" }
+presentrs = { git = "https://github.com/jvff/presentrs", rev = "14240b7" }
 yew = "0.18"
