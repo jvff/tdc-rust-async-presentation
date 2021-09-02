@@ -30,10 +30,18 @@ fn main() {
     let mut slides =
         Slides::from_notes(&notes).expect("Failed to generate slides");
 
-    slides
-        .load_from("../slides")
-        .expect("Failed to load slides");
-    slides.write_to(slides_dir).expect("Failed to write slides");
+    for locale in ["pt"] {
+        slides
+            .load_from(&format!("../slides/{}", locale))
+            .expect("Failed to load slides");
+
+        let mut path = slides_dir.clone();
+        path.push(locale);
+
+        create_dir(&path);
+
+        slides.write_to(path).expect("Failed to write slides");
+    }
 }
 
 fn create_dir<P: AsRef<Path>>(directory: P) {
