@@ -1,5 +1,7 @@
-use presentrs::Presentrs;
+use presentrs::{Presentrs, Properties};
 
 fn main() {
-    yew::start_app::<Presentrs>();
+    let properties = Properties::default().with_locales([]);
+
+    yew::start_app_with_props::<Presentrs>(properties);
 }

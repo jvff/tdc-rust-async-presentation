@@ -7,10 +7,11 @@ edition = "2018"
 [dependencies]
 axum = "0.2"
 hyper = "0.14"
+presentrs = { git = "https://github.com/jvff/presentrs", rev = "8627169" }
 tokio = { version = "1", features = ["full"] }
-tower-http = { version = "0.1", features = ["fs", "trace"] }
+tower-http = { version = "0.1", features = ["trace"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.2", features = ["fmt"] }
 
 [build-dependencies]
-presentrs = { git = "https://github.com/jvff/presentrs" }
+presentrs = { git = "https://github.com/jvff/presentrs", rev = "8627169" }
