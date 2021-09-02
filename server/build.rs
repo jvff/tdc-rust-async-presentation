@@ -30,7 +30,7 @@ fn main() {
     let mut slides =
         Slides::from_notes(&notes).expect("Failed to generate slides");
 
-    for locale in ["pt"] {
+    for locale in ["en", "pt"] {
         slides
             .load_from(&format!("../slides/{}", locale))
             .expect("Failed to load slides");

@@ -1,0 +1,15 @@
+<div>
+    <h1><code>AsyncWriteExt</code></h1>
+
+<pre><code><span data-slide-steps="1-">pub trait AsyncWriteExt: AsyncWrite {</span>
+    <span data-slide-steps="2-">fn flush(self) -&gt; Flush&lt;Self&gt; { ... }</span>
+
+    <span data-slide-steps="3-">fn close(self) -&gt; Close&lt;Self&gt; { ... }</span>
+
+    <span data-slide-steps="4-">fn write_all&lt;T&gt;(self, buf: T) -&gt; WriteAll&lt;Self, T&gt;
+    where
+        T: AsRef&lt;[u8]&gt;,
+    { ... }</span>
+<span data-slide-steps="1-">}</span>
+</code></pre>
+</div>

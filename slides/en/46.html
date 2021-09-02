@@ -1,0 +1,25 @@
+<div>
+    <h1>Decoding</h1>
+
+<pre><code><span data-slide-steps="1-">pub trait Decoder {</span>
+    type Item;
+    type Error: From&lt;Error&gt;;
+
+    <span data-slide-steps="2-">fn decode(
+        &amp;mut self,
+        src: &amp;mut BytesMut
+    ) -&gt; Result&lt;Option&lt;Self::Item&gt;, Self::Error&gt;;</span>
+
+    <span data-slide-steps="3-">fn decode_eof(
+        &amp;mut self, 
+        buf: &amp;mut BytesMut
+    ) -&gt; Result&lt;Option&lt;Self::Item&gt;, Self::Error&gt; { ... }</span>
+
+    <span data-slide-steps="4-">fn framed&lt;T&gt;(self, io: T) -&gt; Framed&lt;T, Self&gt;
+        where
+        Self: Encoder,
+        T: AsyncRead + AsyncWrite,
+    { ... }</span>
+<span data-slide-steps="1-">}</span>
+</code></pre>
+</div>

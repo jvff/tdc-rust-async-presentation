@@ -1,0 +1,20 @@
+<div>
+    <h1>Tasks are clearer</h1>
+
+    <ul>
+        <li data-slide-steps="1-">Struct <code>futures::task::Context</code>
+            <ul>
+                <li data-slide-steps="2-">Represents a task's context</li>
+                <li data-slide-steps="3-"><code>Context::executor() -&gt; &amp;mut Executor</code> provides access to the task's executor</li>
+                <li data-slide-steps="4-"><code>Context::spawn(...)</code> schedules a new operation on the executor</li>
+                <li data-slide-steps="5-"><code>Context::waker() -&gt; &amp;Waker</code> provides access to the mechanism to awake the task</li>
+            </ul>
+        </li>
+        <li data-slide-steps="6-">Struct <code>futures::task::Waker</code>
+            <ul>
+                <li data-slide-steps="7-"><code>Waker::wake()</code></li>
+                <li data-slide-steps="8-">Replaces <code>Task::notify()</code></li>
+            </ul>
+        </li>
+    </ul>
+</div>

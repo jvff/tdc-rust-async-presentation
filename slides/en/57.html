@@ -1,0 +1,21 @@
+<div>
+    <h1>The methods for composing operations have been split off</h1>
+
+    <ul>
+        <li data-slide-steps="1-">The <code>Future</code> trait became simpler</li>
+        <li data-slide-steps="2-">It is more stable, with minimal (or no) changes between versions</li>
+        <li data-slide-steps="3-">The methods for composing operations were moved into a new <code>FutureExt</code> trait
+            <ul>
+                <li data-slide-steps="4-"><code>map</code></li>
+                <li data-slide-steps="5-"><code>map_err</code></li>
+                <li data-slide-steps="6-"><code>and_then</code></li>
+                <li data-slide-steps="7-"><code>or_else</code></li>
+                <li data-slide-steps="8-"><code>then</code></li>
+                <li data-slide-steps="9-"><code>flatten</code></li>
+                <li data-slide-steps="10-">etc.</li>
+            </ul>
+        </li>
+        <li data-slide-steps="11-">New methods can be added without changing the <code>Future</code> trait</li>
+        <li data-slide-steps="12-">The trait can only be used if composing is needed</li>
+    </ul>
+</div>

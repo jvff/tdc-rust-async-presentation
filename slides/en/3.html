@@ -1,0 +1,64 @@
+<div>
+    <h1>Tasks in a program</h1>
+
+    <svg viewBox="0 -200 1000 700">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
+            </g>
+            <g id="user">
+                <circle cx="0" cy="-100" r="20"></circle>
+                <line x1="-20" y1="0" x2="0" y2="-60"></line>
+                <line x1="20" y1="0" x2="0" y2="-60"></line>
+                <line x1="0" y1="-80" x2="0" y2="20"></line>
+                <line x1="0" y1="20" x2="-20" y2="100"></line>
+                <line x1="0" y1="20" x2="20" y2="100"></line>
+            </g>
+        </defs>
+
+        <g style="fill: none; stroke: black; stroke-width: 10; stroke-linecap: round" transform="translate(250, 20)">
+            <rect x="0" y="0" width="430" height="230"></rect>
+        </g>
+        <g style="fill: none; stroke: black; stroke-width: 3" transform="translate(250, 20)" data-slide-steps="2-">
+            <rect x="30" y="30" width="70" height="70"></rect>
+            <rect x="30" y="130" width="70" height="70"></rect>
+            <rect x="130" y="30" width="70" height="70"></rect>
+            <rect x="130" y="130" width="70" height="70"></rect>
+            <rect x="230" y="30" width="70" height="70"></rect>
+            <rect x="230" y="130" width="70" height="70"></rect>
+            <rect x="330" y="30" width="70" height="70"></rect>
+            <rect x="330" y="130" width="70" height="70"></rect>
+        </g>
+        <g style="fill: none; stroke: black; stroke-width: 10; stroke-linecap: round" transform="translate(80, 150)" data-slide-steps="3-">
+            <use xlink:href="#user"></use>
+        </g>
+        <g style="fill: none; stroke: gray; stroke-width: 10" transform="translate(290,80)" data-slide-steps="3-">
+            <use xlink:href="#arrow-head"></use>
+            <line x1="0" y1="0" x2="-150" y2="0"></line>
+        </g>
+        <g style="fill: none; stroke: black; stroke-width: 8; stroke-linecap: round" transform="translate(415, -40)" data-slide-steps="4-">
+            <circle cx="0" cy="-100" r="50"></circle>
+            <line x1="0" y1="-100" x2="0" y2="-130"></line>
+            <line x1="0" y1="-100" x2="20" y2="-110"></line>
+        </g>
+        <g style="fill: none; stroke: gray; stroke-width: 10" transform="translate(415,60),rotate(90)" data-slide-steps="4-">
+            <use xlink:href="#arrow-head"></use>
+            <line x1="0" y1="0" x2="-130" y2="0"></line>
+        </g>
+        <g style="fill: none; stroke: black; stroke-width: 8; stroke-linecap: round" transform="translate(800, 150),scale(0.8)" data-slide-steps="5-">
+            <path d="M0 0 q -30 -20 10 -40 q 10 -60 60 -30 q 30 -70 80 -20 q 60 -20 60 50 q 50 30 0 40 z"></path>
+        </g>
+        <g style="fill: none; stroke: gray; stroke-width: 10" transform="translate(640,80),rotate(180)" data-slide-steps="5-">
+            <use xlink:href="#arrow-head"></use>
+            <line x1="0" y1="0" x2="-150" y2="0"></line>
+        </g>
+        <g style="fill: none; stroke: black; stroke-width: 8; stroke-linecap: round" transform="translate(515, 500)" data-slide-steps="6-">
+            <ellipse cx="0" cy="-100" rx="50" ry="20"></ellipse>
+            <path d="M-50 -100 v 45 a 50 20 180 1 0 100 0 v -45"></path>
+        </g>
+        <g style="fill: none; stroke: gray; stroke-width: 10" transform="translate(515,210),rotate(-90)" data-slide-steps="6-">
+            <use xlink:href="#arrow-head"></use>
+            <line x1="0" y1="0" x2="-150" y2="0"></line>
+        </g>
+    </svg>
+</div>

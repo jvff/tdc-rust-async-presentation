@@ -1,0 +1,15 @@
+<div>
+    <h1>With <code>async</code> and <code>await!</code></h1>
+
+<pre><code><span data-slide-steps="1-">#[async]
+pub fn send_data(data: Data) -&gt; Result&lt;(), Erro&gt; {</span>
+    <span data-slide-steps="2-">let tcp_stream = await!(TcpStream::connect(SERVER_ADDRESS))?;</span>
+    <span data-slide-steps="3-">let stream = tcp_stream.framed(Encoding);</span>
+
+    <span data-slide-steps="4-">let stream = await!(stream.send(data))?;</span>
+    <span data-slide-steps="5-">await!(io::shutdown(stream))?;</span>
+
+    <span data-slide-steps="6-">Ok(())</span>
+<span data-slide-steps="7-">}</span>
+</code></pre>
+</div>

@@ -1,0 +1,123 @@
+<div>
+    <h1>Introduction</h1>
+
+    <ul>
+        <li data-slide-steps="1-">A <em data-slide-steps="1-">crate</em> for asynchronous programming</li>
+        <li data-slide-steps="2-">Offers some primitives to represent asynchronous programming
+            <ul>
+                <li data-slide-steps="3-">Executor</li>
+                <li data-slide-steps="4-">Task</li>
+                <li data-slide-steps="5-">Operation
+                    <span data-slide-steps="6-">(<code>Future</code>, </span>
+                    <span data-slide-steps="7-"><code>Stream</code>, </span>
+                    <span data-slide-steps="8-"><code>Sink</code>)</span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <svg viewBox="-500 0 1000 150">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
+            </g>
+            <g id="mini-arrow-head">
+                <path d="M-8 -8 L0 0 L-8 8"></path>
+            </g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"></rect>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"></circle>
+            </g>
+            <g id="stream">
+                <circle cx="0" cy="0" r="10"></circle>
+                <g style="stroke: none; fill: black">
+                    <circle cx="9" cy="10" r="2"></circle>
+                    <circle cx="15" cy="10" r="2"></circle>
+                    <circle cx="21" cy="10" r="2"></circle>
+                </g>
+            </g>
+            <g id="sink">
+                <circle cx="0" cy="0" r="10"></circle>
+                <g style="stroke: none; fill: black">
+                    <circle cx="-9" cy="-10" r="2"></circle>
+                    <circle cx="-15" cy="-10" r="2"></circle>
+                    <circle cx="-21" cy="-10" r="2"></circle>
+                </g>
+            </g>
+            <g id="executor">
+                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"></rect>
+            </g>
+        </defs>
+
+        <g transform="translate(0, 50)" style="fill: none; stroke: black; stroke-width: 3" data-slide-steps="1-">
+            <use xlink:href="#executor" x="-200" y="20" data-slide-steps="3-"></use>
+            <use xlink:href="#task" x="0" y="20" data-slide-steps="4-"></use>
+            <use xlink:href="#future" x="200" y="20" data-slide-steps="5-"></use>
+            <use xlink:href="#stream" x="200" y="-20" data-slide-steps="7-"></use>
+            <use xlink:href="#sink" x="200" y="60" data-slide-steps="8-"></use>
+        </g>
+    </svg>
+
+    <ul>
+        <li data-slide-steps="9-">Offers tools to connect operations</li>
+        <li data-slide-steps="10-">Forming new operations</li>
+        <li data-slide-steps="11-">To be used in a task</li>
+        <li data-slide-steps="12-">That is executed by an executor</li>
+    </ul>
+
+
+    <svg viewBox="-200 25 1000 200">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
+            </g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"></rect>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"></circle>
+            </g>
+            <g id="executor">
+                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"></rect>
+            </g>
+        </defs>
+
+        <g transform="translate(100, 50)" style="fill: none; stroke: black; stroke-width: 3" data-slide-steps="1-">
+            <g data-slide-steps="9-">
+                <use xlink:href="#future" x="20" y="20"></use>
+                <use xlink:href="#sink" x="-20" y="60"></use>
+                <use xlink:href="#stream" x="60" y="60"></use>
+                <use xlink:href="#future" x="20" y="100"></use>
+
+                <g style="stroke: green" transform="translate(-10,50),rotate(135)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-30" y2="0"></line>
+                </g>
+                <g style="stroke: green" transform="translate(50,50),rotate(45)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-30" y2="0"></line>
+                </g>
+                <g style="stroke: blue" transform="translate(30,90),rotate(135)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-30" y2="0"></line>
+                </g>
+                <g style="stroke: red" transform="translate(10,90),rotate(45)">
+                    <use xlink:href="#mini-arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-30" y2="0"></line>
+                </g>
+            </g>
+            <g data-slide-steps="10-">
+                <circle cx="20" cy="60" r="70" data-slide-steps="10-"></circle>
+                <g style="stroke: gray; stroke-width: 10" transform="translate(230,60)">
+                    <use xlink:href="#arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-100" y2="0"></line>
+                </g>
+                <use xlink:href="#future" x="320" y="60"></use>
+            </g>
+            <use xlink:href="#task" x="320" y="60" data-slide-steps="11-"></use>
+            <use xlink:href="#executor" x="320" y="60" data-slide-steps="12-"></use>
+        </g>
+    </svg>
+</div>

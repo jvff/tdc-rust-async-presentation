@@ -1,0 +1,140 @@
+<div>
+    <h1>Introduction</h1>
+
+    <ul>
+        <li data-slide-steps="1-">Tokio is a crate that's complementary to <code>futures</code></li>
+        <li data-slide-steps="2-">Provides concrete implementations for some abstract types from <code>futures</code>
+            <ul>
+                <li data-slide-steps="3-">Executor</li>
+                <li data-slide-steps="4-">Event loop</li>
+                <li data-slide-steps="5-">Asynchronous operations</li>
+            </ul>
+        </li>
+    </ul>
+
+    <svg viewBox="-100 -100 1000 300">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
+            </g>
+            <g id="mini-arrow-head">
+                <path d="M-8 -8 L0 0 L-8 8"></path>
+            </g>
+            <g id="future">
+                <circle cx="0" cy="0" r="10"></circle>
+            </g>
+            <g id="hide-future">
+                <circle cx="0" cy="0" r="15" style="stroke: none; fill: white"></circle>
+            </g>
+            <g id="event-loop">
+                <circle cx="0" cy="0" r="30"></circle>
+                <g style="stroke: none; fill: white">
+                    <circle cx="26" cy="15" r="5"></circle>
+                </g>
+                <g style="stroke: none; fill: white">
+                    <circle cx="-26" cy="15" r="5"></circle>
+                </g>
+                <g style="stroke: none; fill: white">
+                    <circle cx="0" cy="-30" r="5"></circle>
+                </g>
+                <g transform="translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+                <g transform="rotate(120),translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+                <g transform="rotate(240),translate(-5,-30)">
+                    <path d="M-10 -10 L0 0 l-10 10" transform="rotate(-25)"></path>
+                </g>
+            </g>
+            <g id="executor">
+                <rect x="-45" y="-45" width="90" height="90" rx="20" ry="20"></rect>
+            </g>
+            <g id="clock">
+                <circle cx="0" cy="0" r="25"></circle>
+                <line x1="0" y1="0" x2="0" y2="-20"></line>
+                <line x1="0" y1="0" x2="10" y2="-10"></line>
+            </g>
+            <g id="cpu">
+                <g style="fill: none; stroke: black; stroke-width: 3">
+                    <rect x="-12.5" y="-12.5" width="25" height="25"></rect>
+
+                    <line x1="-16" y1="0" x2="-20" y2="0"></line>
+                    <line x1="-16" y1="-12.5" x2="-20" y2="-12.5"></line>
+                    <line x1="-16" y1="-6.25" x2="-20" y2="-6.25"></line>
+                    <line x1="-16" y1="12.5" x2="-20" y2="12.5"></line>
+                    <line x1="-16" y1="6.25" x2="-20" y2="6.25"></line>
+
+                    <line x1="16" y1="0" x2="20" y2="0"></line>
+                    <line x1="16" y1="-12.5" x2="20" y2="-12.5"></line>
+                    <line x1="16" y1="-6.25" x2="20" y2="-6.25"></line>
+                    <line x1="16" y1="12.5" x2="20" y2="12.5"></line>
+                    <line x1="16" y1="6.25" x2="20" y2="6.25"></line>
+
+                    <line x1="0" y1="16" x2="0" y2="20"></line>
+                    <line x1="-12.5" y1="16" x2="-12.5" y2="20"></line>
+                    <line x1="-6.25" y1="16" x2="-6.25" y2="20"></line>
+                    <line x1="12.5" y1="16" x2="12.5" y2="20"></line>
+                    <line x1="6.25" y1="16" x2="6.25" y2="20"></line>
+
+                    <line x1="0" y1="-16" x2="0" y2="-20"></line>
+                    <line x1="-12.5" y1="-16" x2="-12.5" y2="-20"></line>
+                    <line x1="-6.25" y1="-16" x2="-6.25" y2="-20"></line>
+                    <line x1="12.5" y1="-16" x2="12.5" y2="-20"></line>
+                    <line x1="6.25" y1="-16" x2="6.25" y2="-20"></line>
+                </g>
+            </g>
+            <g id="db">
+                <g style="fill: none; stroke-width: 3">
+                    <ellipse cx="0" cy="-10" rx="25" ry="10"></ellipse>
+                    <path d="M-25 -10 v 20 a 25 10 180 1 0 50 0 v -20"></path>
+                </g>
+            </g>
+            <g id="net">
+                <g style="fill: none; stroke-width: 3">
+                    <circle cx="0" cy="0" r="25"></circle>
+                    <ellipse cx="0" cy="0" rx="10" ry="25"></ellipse>
+                    <line x1="-25" y1="0" x2="25" y2="0"></line>
+                    <path d="M-17.7 17.7 L17.7 17.7"></path>
+                    <path d="M-17.7 -17.7 L17.7 -17.7"></path>
+                </g>
+            </g>
+        </defs>
+
+        <g transform="translate(50, 0)" style="fill: none; stroke: black; stroke-width: 3">
+            <g data-slide-steps="3-">
+                <use xlink:href="#executor" x="0" y="50"></use>
+            </g>
+            <g data-slide-steps="4-">
+                <use xlink:href="#event-loop" x="200" y="50"></use>
+            </g>
+            <g data-slide-steps="5-">
+                <use xlink:href="#future" x="430" y="30"></use>
+                <use xlink:href="#future" x="470" y="70"></use>
+                <use xlink:href="#future" x="400" y="70"></use>
+            </g>
+            <g data-slide-steps="6-">
+                <use xlink:href="#hide-future" x="430" y="30"></use>
+                <g style="stroke: blue">
+                    <use xlink:href="#future" x="430" y="30"></use>
+                    <use xlink:href="#net" transform="translate(430,-20),scale(0.8)"></use>
+                </g>
+            </g>
+            <g data-slide-steps="7-">
+                <use xlink:href="#hide-future" x="470" y="70"></use>
+                <g style="stroke: green">
+                    <use xlink:href="#future" x="470" y="70"></use>
+                    <use xlink:href="#db" transform="translate(500,110),scale(0.8)"></use>
+                </g>
+            </g>
+            <g data-slide-steps="8-">
+                <use xlink:href="#hide-future" x="400" y="70"></use>
+                <g style="stroke: red">
+                    <use xlink:href="#future" x="400" y="70"></use>
+                    <use xlink:href="#clock" transform="translate(360,110),scale(0.8)"></use>
+                </g>
+            </g>
+        </g>
+    </svg>
+</div>
+

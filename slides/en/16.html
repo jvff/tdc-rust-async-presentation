@@ -1,0 +1,149 @@
+<div>
+    <h1><code>Sink</code></h1>
+
+<pre><code><span data-slide-steps="1">pub trait Sink {</span>
+    <span data-slide-steps="">type SinkItem;</span>
+    <span data-slide-steps="">type SinkError;</span>
+
+    <span data-slide-steps="2,4,6-11">fn start_send(
+        &amp;mut self, </span>
+        <span data-slide-steps="3,6-11">item: Self::SinkItem</span>
+    <span data-slide-steps="2,4,6-11">)</span> <span data-slide-steps="5,6-11">-&gt; Result&lt;</span><span data-slide-steps="6-11">()</span>, <span data-slide-steps="12">Self::SinkError</span><span data-slide-steps="5,6-11">&gt;;</span>
+
+    <span data-slide-steps="13,15-16">fn poll_complete(&amp;mut self)</span> <span data-slide-steps="14,16">-&gt; Result&lt;Async&lt;()&gt;,</span> <span data-slide-steps="0">Self::SinkError</span><span data-slide-steps="14,16">&gt;;</span>
+}
+</code></pre>
+
+    <svg viewBox="0 -30 1000 300">
+        <defs>
+            <g id="arrow-head">
+                <path d="M-20 -20 L0 0 L-20 20"></path>
+            </g>
+            <g id="mini-arrow-head">
+                <path d="M-8 -8 L0 0 L-8 8"></path>
+            </g>
+            <g id="thread">
+                <path d="M0 0 q 10 10 -10 20 t 0 20 0 20 0 20 0 20 0 20 0 20"></path>
+            </g>
+            <g id="task">
+                <rect x="-25" y="-25" width="50" height="50"></rect>
+            </g>
+            <g id="sink">
+                <circle cx="0" cy="0" r="10"></circle>
+                <g style="stroke: none; fill: black">
+                    <circle cx="-9" cy="-10" r="2"></circle>
+                    <circle cx="-15" cy="-10" r="2"></circle>
+                    <circle cx="-21" cy="-10" r="2"></circle>
+                </g>
+            </g>
+            <g id="item">
+                <circle cx="0" cy="0" r="5" style="stroke: none"></circle>
+            </g>
+            <g id="hide-item">
+                <circle cx="0" cy="0" r="7" style="stroke: none; fill: white"></circle>
+            </g>
+            <g id="hide-calls">
+                <rect style="stroke: none; fill: white" x="-30" y="-30" width="120" height="60"></rect>
+            </g>
+            <g id="user">
+                <circle cx="0" cy="-100" r="20"></circle>
+                <line x1="-20" y1="0" x2="0" y2="-60"></line>
+                <line x1="20" y1="0" x2="0" y2="-60"></line>
+                <line x1="0" y1="-80" x2="0" y2="20"></line>
+                <line x1="0" y1="20" x2="-20" y2="100"></line>
+                <line x1="0" y1="20" x2="20" y2="100"></line>
+            </g>
+            <g id="ok">
+                <path d="M-8 0 L 0 8 L 16 -8" style="stroke: green; stroke-width: 5"></path>
+            </g>
+            <g id="fail">
+                <g style="stroke: red; stroke-width: 5">
+                    <path d="M-10 -10 L 10 10"></path>
+                    <path d="M10 -10 L -10 10"></path>
+                </g>
+            </g>
+            <g id="pending">
+                <circle cx="0" cy="0" r="10" style="stroke: none; fill: orange">
+            </circle></g>
+            <g id="hide-result">
+                <rect x="-20" y="-20" width="40" height="40" style="fill: white; stroke: none"></rect>
+            </g>
+        </defs>
+
+        <g transform="translate(100, 50)" style="fill: none; stroke: black; stroke-width: 3">
+            <use xlink:href="#sink" x="220" y="65" data-slide-steps="1-"></use>
+            <use xlink:href="#user" style="stroke-width: 6" x="0" y="80" data-slide-steps="2-"></use>
+
+            <g data-slide-steps="2-4,7,9,11">
+                <g style="stroke: brown; stroke-width: 5" transform="translate(180,50)">
+                    <use xlink:href="#arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-100" y2="0"></line>
+                </g>
+            </g>
+            <g data-slide-steps="3">
+                <g transform="translate(180,50)">
+                    <use xlink:href="#item" x="-50" y="-10" style="fill: red"></use>
+                </g>
+            </g>
+            <g data-slide-steps="4-13">
+                <use xlink:href="#item" style="fill: red" x="220" y="40"></use>
+            </g>
+            <g data-slide-steps="5-6,8,10,12">
+                <g style="stroke: brown; stroke-width: 5" transform="translate(80,50),rotate(180)">
+                    <use xlink:href="#arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-100" y2="0"></line>
+                </g>
+            </g>
+            <g data-slide-steps="6,8,10">
+                <use xlink:href="#ok" x="60" y="50"></use>
+            </g>
+            <g data-slide-steps="7">
+                <g transform="translate(180,50)">
+                    <use xlink:href="#item" x="-50" y="-10" style="fill: blue"></use>
+                </g>
+            </g>
+            <g data-slide-steps="8-13">
+                <use xlink:href="#item" style="fill: blue" x="220" y="30"></use>
+            </g>
+            <g data-slide-steps="9">
+                <g transform="translate(180,50)">
+                    <use xlink:href="#item" x="-50" y="-10" style="fill: green"></use>
+                </g>
+            </g>
+            <g data-slide-steps="10-13">
+                <use xlink:href="#item" style="fill: green" x="220" y="20"></use>
+            </g>
+            <g data-slide-steps="11">
+                <g transform="translate(180,50)">
+                    <use xlink:href="#item" x="-50" y="-10" style="fill: orange"></use>
+                </g>
+            </g>
+            <g data-slide-steps="12">
+                <use xlink:href="#fail" x="40" y="50"></use>
+                <use xlink:href="#item" x="60" y="50" style="fill: orange"></use>
+            </g>
+            <g data-slide-steps="13,15">
+                <g style="stroke: gray; stroke-width: 5" transform="translate(180,50)">
+                    <use xlink:href="#arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-100" y2="0"></line>
+                </g>
+            </g>
+            <g data-slide-steps="14,16">
+                <g style="stroke: gray; stroke-width: 5" transform="translate(80,50),rotate(180)">
+                    <use xlink:href="#arrow-head" x="0" y="0"></use>
+                    <line x1="0" y1="0" x2="-100" y2="0"></line>
+                </g>
+            </g>
+            <g data-slide-steps="14-15">
+                <use xlink:href="#item" style="fill: blue" x="220" y="40"></use>
+                <use xlink:href="#item" style="fill: green" x="220" y="30"></use>
+            </g>
+            <g data-slide-steps="14">
+                <use xlink:href="#pending" x="60" y="50"></use>
+            </g>
+            <g data-slide-steps="16">
+                <use xlink:href="#ok" x="60" y="50"></use>
+            </g>
+        </g>
+    </svg>
+</div>

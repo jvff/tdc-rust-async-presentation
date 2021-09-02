@@ -1,0 +1,21 @@
+<div>
+    <h1>Input and output operations</h1>
+
+    <ul>
+        <li data-slide-steps="1-">Some helper functions allow composing operations, returning <code>Future</code>s
+            <ul>
+                <li data-slide-steps="2-"><code>copy</code>: copies all of the data from a reader into a writer</li>
+                <li data-slide-steps="3-"><code>flush</code>: sends all of the queued data</li>
+                <li data-slide-steps="4-"><code>read_exact</code>: reads a certain number of bytes</li>
+                <li data-slide-steps="5-"><code>read_to_end</code>: reads all of the bytes from a reader</li>
+                <li data-slide-steps="6-"><code>write_all</code>: writes all of the bytes in a provided buffer</li>
+                <li data-slide-steps="7-"><code>shutdown</code>: closes a writer</li>
+            </ul>
+        </li>
+        <li data-slide-steps="8-">A function that retorns a <code>Stream</code>
+            <ul>
+                <li data-slide-steps="9-"><code>lines</code>: reads line by line, producing <code>String</code>s</li>
+            </ul>
+        </li>
+    </ul>
+</div>

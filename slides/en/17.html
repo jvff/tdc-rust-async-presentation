@@ -1,0 +1,20 @@
+<div>
+    <h1>How to transform asynchronous operations into synchronous operations</h1>
+
+<pre><code class="reveal">
+<span data-slide-steps="3-">let result = </span><span data-slide-steps="1-">future1</span><span data-slide-steps="2-">.wait();</span>
+</code></pre>
+
+<pre><code class="reveal">
+<span data-slide-steps="6-">for result in </span><span data-slide-steps="4-">stream1</span><span data-slide-steps="5-">.wait()</span><span data-slide-steps="6-"> {
+    // ...
+}</span>
+</code></pre>
+
+<pre><code class="reveal">
+<span data-slide-steps="9-">let future_that_sends = </span><span data-slide-steps="7-">sink1</span><span data-slide-steps="8-">.send(item)</span><span data-slide-steps="9-">;</span>
+<span data-slide-steps="12-">let result = </span><span data-slide-steps="10-">future_that_sends</span><span data-slide-steps="11-">.wait();</span>
+
+<span data-slide-steps="16-">let result = </span><span data-slide-steps="13-">sink1</span><span data-slide-steps="14-">.send(item)</span><span data-slide-steps="15-">.wait();</span>
+</code></pre>
+</div>

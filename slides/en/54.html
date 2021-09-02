@@ -1,0 +1,26 @@
+<div>
+    <h1>Read and write operations have been moved</h1>
+
+    <ul>
+        <li class="slide-40 slide-step-1">The traits to represent read and write operations are now in the <code>futures</code> crate</li>
+    </ul>
+
+<pre><code><span data-slide-steps="1-">pub trait AsyncWrite {
+    <span data-slide-steps="2-">fn poll_write(
+        &amp;mut self, 
+        cx: &amp;mut Context, 
+        buf: &amp;[u8]
+    ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt;;</span>
+
+    <span data-slide-steps="3-">fn poll_flush(&amp;mut self, cx: &amp;mut Context) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
+
+    <span data-slide-steps="4-">fn poll_close(&amp;mut self, cx: &amp;mut Context) -&gt; Result&lt;Async&lt;()&gt;, Error&gt;;</span>
+
+    <span data-slide-steps="5-">fn poll_vectored_write(
+        &amp;mut self, 
+        cx: &amp;mut Context, 
+        vec: &amp;[&amp;IoVec]
+    ) -&gt; Result&lt;Async&lt;usize&gt;, Error&gt; { ... }</span>
+}</span>
+</code></pre>
+</div>
