@@ -1001,7 +1001,7 @@ checksum = "925383efa346730478fb4838dbe9137d2a47675ad789c546d150a6e1dd4ab31c"
 [[package]]
 name = "presentrs"
 version = "0.2.0"
-source = "git+https://github.com/jvff/presentrs?rev=14240b7#14240b7126be865ddb82291b7f4cf0a463c929f6"
+source = "git+https://github.com/jvff/presentrs?rev=270e6f8#270e6f816b2206b9dfca2ae51de4bfb8cef3ea21"
 dependencies = [
  "axum",
  "comrak",
