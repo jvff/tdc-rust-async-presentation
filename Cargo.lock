@@ -1001,7 +1001,7 @@ checksum = "925383efa346730478fb4838dbe9137d2a47675ad789c546d150a6e1dd4ab31c"
 [[package]]
 name = "presentrs"
 version = "0.2.0"
-source = "git+https://github.com/jvff/presentrs?rev=270e6f8#270e6f816b2206b9dfca2ae51de4bfb8cef3ea21"
+source = "git+https://github.com/jvff/presentrs?rev=0c9b426#0c9b4267e5e93538bb9d8541251655eb65157c1a"
 dependencies = [
  "axum",
  "comrak",
@@ -1013,6 +1013,7 @@ dependencies = [
  "once_cell",
  "tokio",
  "tower-http",
+ "tracing",
  "wasm-bindgen",
  "web-sys",
  "yew",
